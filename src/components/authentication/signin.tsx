@@ -7,7 +7,7 @@ interface SignInProps {
     signUp: () => void;
 }
 
-const SignIn: React.FC<SignInProps> = ({ signUp }) => {
+const SignIn = ({ signUp }: SignInProps) => {
     return (
         <div>
             <div className='flex items-center justify-center flex-col'>

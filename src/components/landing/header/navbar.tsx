@@ -1,8 +1,11 @@
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
 import { Button } from '../../ui/button';
 import Link from 'next/link';
+import AuthPopup from '@/components/authentication/authPopup';
 
 const Navbar = () => {
+    const [showAuthPopup, setShowAuthPopup] = useState<boolean>(false);
     return (
         <nav className='flex items-center gap-5'>
             <ul className='flex items-center gap-5'>
@@ -16,7 +19,8 @@ const Navbar = () => {
                     </li>
                 ))}
             </ul>
-            <Button size={'lg'}>Get Started</Button>
+            <Button onClick={() => setShowAuthPopup(true)} size={'lg'}>Get Started</Button>
+            <AuthPopup open={showAuthPopup} onClose={() => setShowAuthPopup(false)} />
         </nav>
     );
 };

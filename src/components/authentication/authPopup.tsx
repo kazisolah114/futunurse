@@ -19,9 +19,9 @@ const AuthPopup: React.FC<AuthPopupProps> = ({ open, onClose }) => {
                 </DialogHeader>
                 {
                     authForm === 'signin' ?
-                        <SignIn signUp={() => setAuthForm('signup')} />
+                        <SignIn signUpInstead={() => setAuthForm('signup')} onClose={onClose} />
                         :
-                        <SignUp signIn={() => setAuthForm('signin')} />
+                        <SignUp signInInstead={() => setAuthForm('signin')} onClose={onClose} />
                 }
             </DialogContent>
         </Dialog>

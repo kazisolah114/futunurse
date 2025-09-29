@@ -3,6 +3,8 @@ import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { signIn } from 'next-auth/react';
+import GoogleIcon from "../../../public/icons/google.png";
+import Image from 'next/image';
 
 interface SignInProps {
     signUpInstead: () => void;
@@ -45,7 +47,8 @@ const SignIn = ({ signUpInstead, onClose }: SignInProps) => {
                 <h5 className='font-bold text-lg text-gray-900 uppercase'>Welcome Back</h5>
                 <p className='text-gray-700 text-sm'>Sign in to your account to continue your nursing journey</p>
             </div>
-            <form onSubmit={handleSubmit} className='mt-6 space-y-4'>
+            <Button onClick={() => signIn("google", { callbackUrl: "/dashboard" })} variant={'outline'} className='w-full my-6'><Image src={GoogleIcon || null} alt={"google-icon"} width={30} height={30} /> Continue with Google</Button>
+            <form onSubmit={handleSubmit} className=' space-y-4'>
                 <div className='space-y-2'>
                     <Label htmlFor='email'>Email</Label>
                     <Input type='email' placeholder='student@nursing.edu' required

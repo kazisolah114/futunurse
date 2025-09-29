@@ -11,7 +11,7 @@ const Header = () => {
     return (
         <header className='border-b pb-4 mb-4 p-4'>
             <div className='flex justify-end items-center gap-3'>
-                <Avatar onClick={() => redirect("/dashboard/profile")} className='w-9 h-9'>
+                <Avatar onClick={() => redirect("/dashboard/profile")} className='w-9 h-9 cursor-pointer'>
                     <AvatarImage src={user?.image as string} />
                     <AvatarFallback>{userNameAbbr}</AvatarFallback>
                 </Avatar>

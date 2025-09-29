@@ -5,6 +5,7 @@ import { Button } from '../ui/button';
 import { signIn } from 'next-auth/react';
 import GoogleIcon from "../../../public/icons/google.png";
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 interface SignInProps {
     signUpInstead: () => void;
@@ -17,6 +18,7 @@ type FormData = {
 }
 
 const SignIn = ({ signUpInstead, onClose }: SignInProps) => {
+    const router = useRouter();
     const [formData, setFormData] = useState<FormData>({
         email: '',
         password: ''
@@ -34,6 +36,7 @@ const SignIn = ({ signUpInstead, onClose }: SignInProps) => {
         } else {
             alert("Sign in successful!");
             console.log("User authenticated!");
+            router.push("/dashboard");
             setFormData({
                 email: '',
                 password: ''

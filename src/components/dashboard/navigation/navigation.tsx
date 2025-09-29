@@ -13,12 +13,15 @@ const Navigation = () => {
         { name: 'Profile', href: '/dashboard/profile', icon: <User size={20} /> },
     ]
     return (
-        <nav className='col-span-2 p-4 min-h-screen bg-teal-600 rounded-r-4xl flex flex-col justify-between items-start'>
-            <ul className='flex flex-col gap-4 text-white font-medium'>
-                {navs.map((nav, index) => (
-                    <li key={index}><Link href={nav.href} className='flex items-center gap-2'>{nav.icon} {nav.name}</Link></li>
-                ))}
-            </ul>
+        <nav className='col-span-2 p-4 min-h-screen min-w-full bg-teal-600 rounded-r-4xl flex flex-col justify-between items-start'>
+            <div className='w-full'>
+                <Link href="/" className='flex items-center gap-2 text-white border-b pb-4 mb-4'><h2 className='font-bold text-3xl'>FutuNurse</h2></Link>
+                <ul className='flex flex-col gap-4 text-white font-medium'>
+                    {navs.map((nav, index) => (
+                        <li key={index}><Link href={nav.href} className='flex items-center gap-2'>{nav.icon} {nav.name}</Link></li>
+                    ))}
+                </ul>
+            </div>
             <Button onClick={() => signOut({ callbackUrl: '/' })} className='border w-full'><LucideArrowLeft size={20} /> Logout</Button>
         </nav>
     );

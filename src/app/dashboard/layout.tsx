@@ -10,9 +10,11 @@ const DashboardLayout = ({ children }: LayoutProps) => {
     return (
         <main className='grid grid-cols-12 min-h-screen'>
             <Navigation />
-            <div className='col-span-10 p-4'>
-            <Header />
-            { children }
+            <div className='col-span-10'>
+                <Header />
+                <div className='px-4'>
+                    {children}
+                </div>
             </div>
         </main>
     );

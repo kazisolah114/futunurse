@@ -7,7 +7,7 @@ const Dashboard = async () => {
     console.log("session:", session);
     return (
         <div>
-            Welcome to your Dashboard
+            Welcome Dashboard
         </div>
     );
 };

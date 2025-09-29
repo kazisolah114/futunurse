@@ -3,6 +3,7 @@ import { signIn } from 'next-auth/react';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
+import { useRouter } from 'next/navigation';
 
 interface SignUpProps {
     signInInstead: () => void;
@@ -17,6 +18,8 @@ type FormData = {
 }
 
 const SignUp = ({ signInInstead, onClose }: SignUpProps) => {
+    const router = useRouter();
+    const [loading, setLoading] = useState<boolean>(false);
     const [formData, setFormData] = useState<FormData>({
         fullName: '',
         email: '',
@@ -25,7 +28,7 @@ const SignUp = ({ signInInstead, onClose }: SignUpProps) => {
     });
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("data", formData);
+        setLoading(true);
         // User sign up logic:
         const res = fetch('http://localhost:3000/api/auth/signup', {
             method: "POST",
@@ -35,8 +38,10 @@ const SignUp = ({ signInInstead, onClose }: SignUpProps) => {
             body: JSON.stringify(formData)
         });
         const data = await res.then(res => res.json());
-        console.log("data", data);
-        if(!data?.success) return;
+        if (!data?.success) {
+            setLoading(false);
+            return;
+        };
 
         setFormData({
             fullName: '',
@@ -55,6 +60,7 @@ const SignUp = ({ signInInstead, onClose }: SignUpProps) => {
         if (signInRes?.ok === false) {
             console.log(signInRes.error);
         } else {
+            router.push("/dashboard");
             console.log("User authenticated!");
             onClose();
         }
@@ -94,7 +100,7 @@ const SignUp = ({ signInInstead, onClose }: SignUpProps) => {
                         onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                     />
                 </div>
-                <Button size={'lg'} className='w-full mt-4'>Sign Up</Button>
+                <Button size={'lg'} className='w-full mt-4'>{loading ? 'Loading...' : 'Sign Up'}</Button>
             </form>
             <p className='text-gray-700 text-center text-sm mt-3'>Already have an account? <Button variant={'link'} onClick={signInInstead}>Sign In</Button></p>
         </div>

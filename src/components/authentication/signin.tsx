@@ -19,12 +19,14 @@ type FormData = {
 
 const SignIn = ({ signUpInstead, onClose }: SignInProps) => {
     const router = useRouter();
+    const [loading, setLoading] = useState<boolean>(false);
     const [formData, setFormData] = useState<FormData>({
         email: '',
         password: ''
     });
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading(true);
         const signInRes = await signIn("credentials", {
             redirect: false,
             email: formData.email,
@@ -33,6 +35,7 @@ const SignIn = ({ signUpInstead, onClose }: SignInProps) => {
         console.log(signInRes)
         if (signInRes?.ok === false) {
             console.log(signInRes.error);
+            setLoading(false);
         } else {
             alert("Sign in successful!");
             console.log("User authenticated!");
@@ -66,7 +69,7 @@ const SignIn = ({ signUpInstead, onClose }: SignInProps) => {
                         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                     />
                 </div>
-                <Button size={'lg'} className='w-full mt-4'>Sign In</Button>
+                <Button size={'lg'} className='w-full mt-4'>{loading ? 'Loading...' : 'Sign In'}</Button>
             </form>
             <p className='text-gray-700 text-center text-sm mt-3'>Don&apos; have an account? <Button variant={'link'} onClick={signUpInstead}>Sign Up</Button></p>
         </div>

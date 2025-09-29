@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connectDB } from "@/lib/mongoose";
@@ -7,7 +7,7 @@ import bcrypt from "bcryptjs";
 import { configDotenv } from "dotenv";
 configDotenv();
 
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -68,6 +68,9 @@ const handler = NextAuth({
         }
     },
     secret: process.env.NEXTAUTH_SECRET
-})
+};
 
-export {handler as GET, handler as POST};
+// Export NextAuth handler for GET and POST
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };

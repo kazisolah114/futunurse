@@ -9,7 +9,7 @@ import React from 'react';
 const Navigation = () => {
     const navs = [
         { name: 'Dashboard', href: '/dashboard', icon: <Home size={20} /> },
-        { name: 'Care Plans', href: '/dashboard/care-plan', icon: <Stethoscope size={20} /> },
+        { name: 'Care Plans', href: '/dashboard/care-plans', icon: <Stethoscope size={20} /> },
         { name: 'NCLEX Coach', href: '/dashboard/nclex', icon: <Book size={20} /> },
         { name: 'Profile', href: '/dashboard/profile', icon: <User size={20} /> },
     ]

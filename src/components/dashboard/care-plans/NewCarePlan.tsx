@@ -9,16 +9,27 @@ export const NewCarePlan = () => {
     return (
         <div>
             <NewPlanStage currentStage={currentStage} />
-            <Tabs defaultValue="manual" className='mt-7 rounded-md'>
-                <TabsList>
-                    <TabsTrigger value={"manual"} className='w-44 text-sm'>Manual Entry</TabsTrigger>
-                    <TabsTrigger value={"template"} className='w-44 text-sm'>Use Template</TabsTrigger>
-                </TabsList>
-                <TabsContent value={"manual"}>
-                    <PatientForm currentStage={currentStage} setCurrentStage={setCurrentStage} />
-                </TabsContent>
-                <TabsContent value={"template"}>Template content</TabsContent>
-            </Tabs>
+            {currentStage === 1 ?
+                (
+                    <Tabs defaultValue="manual" className='rounded-md'>
+                        <TabsList>
+                            <TabsTrigger value={"manual"} className='w-44 text-sm'>Manual Entry</TabsTrigger>
+                            <TabsTrigger value={"template"} className='w-44 text-sm'>Use Template</TabsTrigger>
+                        </TabsList>
+                        <TabsContent value={"manual"}>
+                            <PatientForm currentStage={currentStage} setCurrentStage={setCurrentStage} />
+                        </TabsContent>
+                        <TabsContent value={"template"}>Template content</TabsContent>
+                    </Tabs>
+                )
+                :
+                currentStage === 2 ?
+                    (
+                        <div>Generating Plan...</div>
+                    )
+                    :
+                    <div>Review and Edit Plan</div>
+            }
         </div>
     );
 };

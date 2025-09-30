@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import NewPlanStage from './components/NewPlanStage';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import PatientForm from './components/PatientForm';
+import GeneratingPlanAnimation from './components/GeneratingPlanAnimation';
+import ReviewAndEditPlan from './components/ReviewAndEditPlan';
 
 export const NewCarePlan = () => {
     const [currentStage, setCurrentStage] = useState<number>(1);
@@ -25,10 +27,10 @@ export const NewCarePlan = () => {
                 :
                 currentStage === 2 ?
                     (
-                        <div>Generating Plan...</div>
+                        <GeneratingPlanAnimation setCurrentStage={setCurrentStage} />
                     )
                     :
-                    <div>Review and Edit Plan</div>
+                    <ReviewAndEditPlan />
             }
         </div>
     );

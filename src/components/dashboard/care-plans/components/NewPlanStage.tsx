@@ -1,14 +1,18 @@
-"use client";
+
 import { Check, Computer, PencilLine, User } from 'lucide-react';
 import React, { useState } from 'react';
 
-const NewPlanStage = () => {
+interface stageProps {
+    currentStage: number;
+}
+
+const NewPlanStage = ({ currentStage }: stageProps) => {
     const stages = [
         { id: 1, label: "Patient Intake", icon: <User size={18} /> },
         { id: 2, label: "AI Generation", icon: <Computer size={18} /> },
         { id: 3, label: "Review & Edit", icon: <PencilLine size={18} /> }
     ]
-    const [currentStage, setCurrentStage] = useState<number>(1);
+    // const [currentStage, setCurrentStage] = useState<number>(1);
     return (
         <div className='flex items-center'>
             {

@@ -12,7 +12,7 @@ const DashboardLayout = ({ children }: LayoutProps) => {
             <Navigation />
             <div className='col-span-10'>
                 <Header />
-                <div className='px-4'>
+                <div className='p-4'>
                     {children}
                 </div>
             </div>

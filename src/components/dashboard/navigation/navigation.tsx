@@ -15,7 +15,7 @@ const Navigation = () => {
     ]
     const pathname = usePathname();
     return (
-        <nav className='col-span-2 p-4 min-h-screen min-w-full bg-teal-600 rounded-r-3xl flex flex-col justify-between items-start'>
+        <nav className='col-span-2 p-4 max-h-screen sticky top-0 left-0 bg-teal-600 rounded-r-3xl flex flex-col justify-between items-start'>
             <div className='w-full'>
                 <Link href="/dashboard" className='flex items-center gap-2 text-white border-b pb-4 mb-4'><h2 className='font-bold text-3xl'>FutuNurse</h2></Link>
                 <ul className='flex flex-col gap-3 text-white font-medium'>

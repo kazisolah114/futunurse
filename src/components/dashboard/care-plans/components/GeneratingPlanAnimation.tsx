@@ -3,22 +3,20 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface GeneratingPlanProps {
+  currentStage: number;
   setCurrentStage: Dispatch<SetStateAction<number>>;
 }
 
-const GeneratingPlanAnimation = ({ setCurrentStage }: GeneratingPlanProps) => {
+const GeneratingPlanAnimation = ({ currentStage, setCurrentStage }: GeneratingPlanProps) => {
   const [show, setShow] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShow(false); // trigger fade-out
-      setTimeout(() => {
-        setCurrentStage((prev) => prev + 1); // move stage after fade-out
-      }, 1000); // 1s fade duration
-    }, 20000); // wait 6s
-
-    return () => clearTimeout(timer);
-  }, [setCurrentStage]);
+    if (currentStage === 2) {
+      setShow(true)
+    } else {
+      setShow(false)
+    }
+  }, [currentStage])
 
   return (
     <AnimatePresence>

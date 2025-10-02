@@ -5,9 +5,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import PatientForm from './components/PatientForm';
 import GeneratingPlanAnimation from './components/GeneratingPlanAnimation';
 import ReviewAndEditPlan from './components/ReviewAndEditPlan';
+import { ToastContainer } from "react-toastify";
 
 export const NewCarePlan = () => {
     const [currentStage, setCurrentStage] = useState<number>(1);
+    const [carePlan, setCarePlan] = useState<[]>([]);
     return (
         <div>
             <NewPlanStage currentStage={currentStage} />
@@ -19,7 +21,7 @@ export const NewCarePlan = () => {
                             <TabsTrigger value={"template"} className='w-44 text-sm'>Use Template</TabsTrigger>
                         </TabsList>
                         <TabsContent value={"manual"}>
-                            <PatientForm currentStage={currentStage} setCurrentStage={setCurrentStage} />
+                            <PatientForm currentStage={currentStage} setCurrentStage={setCurrentStage} setCarePlan={setCarePlan} />
                         </TabsContent>
                         <TabsContent value={"template"}>Template content</TabsContent>
                     </Tabs>
@@ -27,11 +29,12 @@ export const NewCarePlan = () => {
                 :
                 currentStage === 2 ?
                     (
-                        <GeneratingPlanAnimation setCurrentStage={setCurrentStage} />
+                        <GeneratingPlanAnimation currentStage={currentStage} setCurrentStage={setCurrentStage} />
                     )
                     :
-                    <ReviewAndEditPlan />
+                    <ReviewAndEditPlan diagnoses={carePlan} />
             }
+            <ToastContainer />
         </div>
     );
 };

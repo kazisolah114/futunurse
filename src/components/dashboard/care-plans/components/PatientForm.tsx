@@ -4,65 +4,86 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import axios from "axios";
+import { toast } from 'react-toastify';
 
 interface PatientFormProps {
     currentStage: number;
     setCurrentStage: Dispatch<SetStateAction<number>>;
+    setCarePlan: Dispatch<SetStateAction<[]>>
 }
 
 interface IPatient {
     // Patient Demographics
-    name: string;
-    age: string;
+    name: string | null;
+    age: number | null;
     gender: "male" | "female" | null;
     specialty: "medical surgical" | "pediatrics" | "OB/GYN" | "phsychiatric" | "critical care" | "community health" | null;
-    mrn: string,
-    primaryDiagnoses: string,
-    secondaryDiagnoses: string,
+    mrn: string | null,
+    primaryDiagnoses: string | null,
+    secondaryDiagnoses: string | null,
     // Patient Vitals & Assesment
     vitals: {
-        temperature: string,
-        bloodPressure: string,
-        heartRate: string,
-        respiratoryRate: string,
-        oxygenSaturation: string,
-        painLevel: string
+        temperature: number | null,
+        bloodPressure: string | null,
+        heartRate: string | null,
+        respiratoryRate: string | null,
+        oxygenSaturation: string | null,
+        painLevel: number | null
     },
-    labResults: string,
-    physicalFindings: string,
-    currentMedications: string,
-    allergies: string
+    labResults: string | null,
+    physicalFindings: string | null,
+    currentMedications: string | null,
+    allergies: string | null
 }
 
-const PatientForm = ({ currentStage, setCurrentStage }: PatientFormProps) => {
+const PatientForm = ({ currentStage, setCurrentStage, setCarePlan }: PatientFormProps) => {
     const [patientData, setPatientData] = useState<IPatient>({
         // Patient Demographics
-        name: '',
-        age: '',
+        name: null,
+        age: null,
         gender: null,
         specialty: null,
-        mrn: '',
-        primaryDiagnoses: '',
-        secondaryDiagnoses: '',
+        mrn: null,
+        primaryDiagnoses: null,
+        secondaryDiagnoses: null,
         // Patient Vitals & Assesment
         vitals: {
-            temperature: "",
-            bloodPressure: "",
-            heartRate: "",
-            respiratoryRate: "",
-            oxygenSaturation: "",
-            painLevel: ""
+            temperature: null,
+            bloodPressure: null,
+            heartRate: null,
+            respiratoryRate: null,
+            oxygenSaturation: null,
+            painLevel: null
         },
-        labResults: "",
-        physicalFindings: "",
-        currentMedications: "",
-        allergies: ""
+        labResults: null,
+        physicalFindings: null,
+        currentMedications: null,
+        allergies: null
     })
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(e);
-        console.log("Patient Data:", patientData);
-    }
+        setCurrentStage(2);
+        try {
+            const response = await axios.post(
+                "http://localhost:3000/api/care-plan/create-care-plan",
+                patientData
+            );
+            console.log(response)
+            if (response.status === 200) {
+                setCarePlan(response.data?.care_plan?.diagnoses || []);
+                setCurrentStage(3);
+            } else {
+                setCurrentStage(1)
+            }
+        } catch (err) {
+            console.error(err);
+            toast.error("Failed to generate care plan! Please try again");
+            setCurrentStage(1)
+        }
+    };
+
     return (
         <form onSubmit={handleSubmit} className='mt-2 border rounded-md p-6 w-full'>
             <div className='space-y-3'>
@@ -74,15 +95,15 @@ const PatientForm = ({ currentStage, setCurrentStage }: PatientFormProps) => {
                     <div className='space-y-1.5'>
                         <Label htmlFor='name' className='text-sm text-gray-700'>Patient name</Label>
                         <Input type="text" placeholder='Mike Anderson' id="name" required
-                            value={patientData.name}
+                            value={patientData.name || ''}
                             onChange={(e) => setPatientData({ ...patientData, name: e.target.value })}
                         />
                     </div>
                     <div className='space-y-1.5'>
                         <Label htmlFor='age' className='text-sm text-gray-700'>Patient age</Label>
-                        <Input type="string" placeholder='55' id="age" required
-                            value={patientData.age}
-                            onChange={(e) => setPatientData({ ...patientData, age: e.target.value })}
+                        <Input type="number" placeholder='55' id="age" required
+                            value={patientData.age || ''}
+                            onChange={(e) => setPatientData({ ...patientData, age: Number(e.target.value) })}
                         />
                     </div>
                     <div className='space-y-1.5 w-full'>
@@ -120,8 +141,8 @@ const PatientForm = ({ currentStage, setCurrentStage }: PatientFormProps) => {
                     </div>
                     <div className='space-y-1.5'>
                         <Label htmlFor='mrn' className='text-sm text-gray-700'>MRN</Label>
-                        <Input type="text" placeholder='e.g., 2858146' id="mrn" required
-                            value={patientData.mrn}
+                        <Input type="text" placeholder='e.g., 2858146' id="mrn"
+                            value={patientData.mrn || ''}
                             onChange={(e) => setPatientData({ ...patientData, mrn: e.target.value })}
                         />
                     </div>
@@ -129,14 +150,14 @@ const PatientForm = ({ currentStage, setCurrentStage }: PatientFormProps) => {
                 <div className='space-y-1.5'>
                     <Label htmlFor='primary-diagnoses' className='text-sm text-gray-700'>Primary Diagnoses</Label>
                     <Input type="text" placeholder='e.g., Congestive Heart Failure, COPD Exacerbation' id="primary-diagnoses" required
-                        value={patientData.primaryDiagnoses}
+                        value={patientData.primaryDiagnoses || ''}
                         onChange={(e) => setPatientData({ ...patientData, primaryDiagnoses: e.target.value })}
                     />
                 </div>
                 <div className='space-y-1.5'>
                     <Label htmlFor='secondary-diagnoses' className='text-sm text-gray-700'>Secondary Diagnoses</Label>
-                    <Input type="text" placeholder='List secondary diagnoses separated by commas' id="secondary-diagnoses" required
-                        value={patientData.secondaryDiagnoses}
+                    <Input type="text" placeholder='List secondary diagnoses separated by commas' id="secondary-diagnoses"
+                        value={patientData.secondaryDiagnoses || ''}
                         onChange={(e) => setPatientData({ ...patientData, secondaryDiagnoses: e.target.value })}
                     />
                 </div>
@@ -150,61 +171,61 @@ const PatientForm = ({ currentStage, setCurrentStage }: PatientFormProps) => {
                 <div className='space-y-2'>
                     <Label className='text-sm text-gray-700'>Current Vital Signs</Label>
                     <div className='grid grid-cols-3 max-sm:grid-cols-1 max-md:grid-cols-2 gap-3'>
-                        <Input type="text" placeholder='Temp (F)'
-                            value={patientData.vitals.temperature}
-                            onChange={(e) => setPatientData({ ...patientData, vitals: { ...patientData.vitals, temperature: e.target.value } })}
+                        <Input type="number" placeholder='Temp (F)'
+                            value={patientData.vitals.temperature || ''}
+                            onChange={(e) => setPatientData({ ...patientData, vitals: { ...patientData.vitals, temperature: Number(e.target.value) } })}
                         />
                         <Input type="text" placeholder='BP (mmHg)'
-                            value={patientData.vitals.bloodPressure}
+                            value={patientData.vitals.bloodPressure || ''}
                             onChange={(e) => setPatientData({ ...patientData, vitals: { ...patientData.vitals, bloodPressure: e.target.value } })}
                         />
                         <Input type="text" placeholder='HR (bpm)'
-                            value={patientData.vitals.heartRate}
+                            value={patientData.vitals.heartRate || ''}
                             onChange={(e) => setPatientData({ ...patientData, vitals: { ...patientData.vitals, heartRate: e.target.value } })} />
                         <Input type="text" placeholder='RR (/min)'
-                            value={patientData.vitals.respiratoryRate}
+                            value={patientData.vitals.respiratoryRate || ''}
                             onChange={(e) => setPatientData({ ...patientData, vitals: { ...patientData.vitals, respiratoryRate: e.target.value } })}
                         />
                         <Input type="text" placeholder='SpO₂ (%)'
-                            value={patientData.vitals.oxygenSaturation}
+                            value={patientData.vitals.oxygenSaturation || ''}
                             onChange={(e) => setPatientData({ ...patientData, vitals: { ...patientData.vitals, oxygenSaturation: e.target.value } })}
                         />
-                        <Input type="text" placeholder='Pain (0-10)'
-                            value={patientData.vitals.painLevel}
-                            onChange={(e) => setPatientData({ ...patientData, vitals: { ...patientData.vitals, painLevel: e.target.value } })}
+                        <Input type="number" placeholder='Pain (0-10)' min={0} max={10}
+                            value={patientData.vitals.painLevel || ''}
+                            onChange={(e) => setPatientData({ ...patientData, vitals: { ...patientData.vitals, painLevel: Number(e.target.value) } })}
                         />
                     </div>
                 </div>
                 <div className='space-y-1.5'>
                     <Label htmlFor='labresult' className='text-sm text-gray-700'>Laboratory Results</Label>
                     <Textarea id="labresult" placeholder='Enter relevant lab values (CBC, BMP, ABG, etc.)'
-                        value={patientData.labResults}
+                        value={patientData.labResults || ''}
                         onChange={(e) => setPatientData({ ...patientData, labResults: e.target.value })}
                     />
                 </div>
                 <div className='space-y-1.5'>
                     <Label htmlFor='physical-findings' className='text-sm text-gray-700'>Physical Assesment Findings</Label>
                     <Textarea id="physical-findings" placeholder='Enter head-to-toe assesment findings, symptom, patient complaints...'
-                        value={patientData.physicalFindings}
+                        value={patientData.physicalFindings || ''}
                         onChange={(e) => setPatientData({ ...patientData, physicalFindings: e.target.value })}
                     />
                 </div>
                 <div className='space-y-1.5'>
                     <Label htmlFor='current-medications' className='text-sm text-gray-700'>Current Medications</Label>
-                    <Input type="text" placeholder='List current medications with doses separated by commas' id="current-medications" required
-                        value={patientData.currentMedications}
+                    <Input type="text" placeholder='List current medications with doses separated by commas' id="current-medications"
+                        value={patientData.currentMedications || ''}
                         onChange={(e) => setPatientData({ ...patientData, currentMedications: e.target.value })}
                     />
                 </div>
                 <div className='space-y-1.5'>
                     <Label htmlFor='allergies' className='text-sm text-gray-700'>Allergies</Label>
-                    <Input type="text" placeholder='List known allergies separated by commas' id="allergies" required
-                        value={patientData.allergies}
+                    <Input type="text" placeholder='List known allergies separated by commas' id="allergies"
+                        value={patientData.allergies || ''}
                         onChange={(e) => setPatientData({ ...patientData, allergies: e.target.value })}
                     />
                 </div>
             </div>
-            <Button onClick={() => setCurrentStage(2)} className='w-full h-12 text-base mt-7'>Generate Care Plan</Button>
+            <Button type="submit" className='w-full h-12 text-base mt-7'>Generate Care Plan</Button>
         </form>
     );
 };

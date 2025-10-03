@@ -32,7 +32,7 @@ export const NewCarePlan = () => {
                         <GeneratingPlanAnimation currentStage={currentStage} setCurrentStage={setCurrentStage} />
                     )
                     :
-                    <ReviewAndEditPlan diagnoses={carePlan} />
+                    <ReviewAndEditPlan diagnoses={carePlan} setCurrentStage={setCurrentStage} />
             }
             <ToastContainer />
         </div>

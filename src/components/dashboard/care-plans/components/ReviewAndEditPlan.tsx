@@ -1,32 +1,18 @@
 "use client"
+import { Diagnosis } from "@/components/types/PatientCarePlan"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import axios from "axios"
 import { FileText, AlertCircle, TrendingUp, Target, Stethoscope, CheckCircle2, GraduationCap, BookOpen, Clock } from "lucide-react"
+import { Dispatch, SetStateAction, useState } from "react"
+import { toast } from "react-toastify"
 
-type Interventions = {
-    action: string
-    rationale: string
-}
-type Goals = {
-    shortTerm: string
-    longTerm: string
-}
-type Diagnosis = {
-    nandaLabel: string
-    statement: string
-    definingCharacteristics: string[]
-    relatedFactors: string[]
-    priority: "High" | "Medium" | "Low"
-    goals: Goals
-    interventions: Interventions[]
-    evaluationCriteria: string[]
-    patientEducation: string
-    references: string[]
-}
 interface ReviewAndEditPlanProps {
     diagnoses: Diagnosis[]
+    setCurrentStage: Dispatch<SetStateAction<number>>
 }
 
-const ReviewAndEditPlan = ({ diagnoses }: ReviewAndEditPlanProps) => {
+const ReviewAndEditPlan = ({ diagnoses, setCurrentStage }: ReviewAndEditPlanProps) => {
 
     const getPriorityColor = (priority: "High" | "Medium" | "Low") => {
         switch (priority) {
@@ -36,6 +22,26 @@ const ReviewAndEditPlan = ({ diagnoses }: ReviewAndEditPlanProps) => {
                 return "bg-amber-100 text-amber-800 border-amber-300"
             case "Low":
                 return "bg-teal-100 text-teal-800 border-teal-300"
+        }
+    }
+
+    const [saveLoading, setSaveLoading] = useState<boolean>(false);
+    const handleSavePlan = async () => {
+        try {
+            setSaveLoading(true);
+            const response = await axios.post("http://localhost:3000/api/care-plan/save-care-plan", {
+                body: diagnoses
+            });
+            setSaveLoading(false);
+            console.log(response);
+            if(response.status === 200) {
+                toast.success("Care plan saved!");
+                setCurrentStage(1);
+            }
+        } catch (error) {
+            console.log(error)
+            setSaveLoading(false);
+            toast.error("Failed to save care plan!");
         }
     }
 
@@ -241,6 +247,12 @@ const ReviewAndEditPlan = ({ diagnoses }: ReviewAndEditPlanProps) => {
                     </div>
                     <div>Student Review & Modifications Required</div>
                 </div>
+            </div>
+
+            <div className="mt-5 flex items-center gap-4">
+                <Button onClick={() => handleSavePlan()} className="flex-1" size={'lg'}>{saveLoading ? 'Loading...' : 'Save Care Plan'}</Button>
+                <Button variant={'outline'} size={'lg'}>Create New Plan</Button>
+                <Button variant={'outline'} size={'lg'}>Download as PDF</Button>
             </div>
         </div>
     )

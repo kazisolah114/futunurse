@@ -27,9 +27,9 @@ export const authOptions: NextAuthOptions = {
                     password: string,
                     fullName: string
                 } | null;
-                if(!user) return null;
+                if (!user) return null;
                 const isValid = user?.password && (await bcrypt.compare(credentials!.password, user.password));
-                if(!isValid) return null;
+                if (!isValid) return null;
                 return {
                     id: user._id.toString(),
                     email: user.email,
@@ -42,25 +42,26 @@ export const authOptions: NextAuthOptions = {
         strategy: "jwt"
     },
     callbacks: {
-        async signIn({ user, account, profile}) {
-            if(account?.provider === "google") {
-                await connectDB();
-                await User.findOneAndUpdate(
+        async signIn({ user, account }) {
+            await connectDB();
+            if (account?.provider === "google") {
+                const dbUser = await User.findOneAndUpdate(
                     { email: user.email },
                     { $setOnInsert: { email: user.email, fullName: user.name } },
                     { upsert: true, new: true, setDefaultsOnInsert: true }
-                )
+                );
+                user.id = dbUser._id.toString();
             }
             return true;
         },
         async jwt({ token, user }) {
-            if(user) {
+            if (user) {
                 token.id = user.id;
             }
             return token;
         },
         async session({ session, token }) {
-            if(session.user) {
+            if (session.user) {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 (session.user as any).id = token.id;
             }

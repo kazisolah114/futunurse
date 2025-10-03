@@ -1,10 +1,11 @@
-import { Diagnosis } from "@/components/types/PatientCarePlan";
+import { Diagnosis, IPatient } from "@/components/types/PatientCarePlan";
 import mongoose, { Document, Types } from "mongoose";
 import IUser from "../User/UserModel";
 
 export interface ICarePlan extends Document {
-    user: Types.ObjectId | typeof IUser,
-    carePlans: Diagnosis[]
+    user: Types.ObjectId | typeof IUser;
+    patient: IPatient;
+    diagnoses: Diagnosis[]
 }
 
 const PatientCarePlanSchema = new mongoose.Schema<ICarePlan>({
@@ -13,7 +14,72 @@ const PatientCarePlanSchema = new mongoose.Schema<ICarePlan>({
         ref: "User",
         required: true
     },
-    carePlans: [
+    patient: {
+        name: {
+            type: String,
+            required: true
+        },
+        age: {
+            type: Number,
+            required: true
+        },
+        gender: {
+            type: String,
+            enum: ["male", "female"]
+        },
+        specialty: {
+            type: String,
+            enum: ["medical surgical", "pediatrics", "OB/GYN", "phsychiatric", "critical care", "community health"]
+        },
+        mrn: {
+            type: String,
+            default: null
+        },
+        primaryDiagnoses: {
+            type: String,
+            required: true
+        },
+        secondaryDiagnoses: {
+            type: String
+        },
+        vitals: {
+            temperature: {
+                type: Number
+            },
+            bloodPressure: {
+                type: String
+            },
+            heartRate: {
+                type: String
+            },
+            respiratoryRate: {
+                type: String
+            },
+            oxygenSaturation: {
+                type: String
+            },
+            painLevel: {
+                type: Number
+            }
+        },
+        labResults: {
+            type: String,
+            required: false
+        },
+        physicalFindings: {
+            type: String,
+            required: false
+        },
+        currentMedications: {
+            type: String,
+            required: false
+        },
+        allergies: {
+            type: String,
+            required: false
+        }
+    },
+    diagnoses: [
         {
             nandaLabel: {
                 type: String,
@@ -68,4 +134,4 @@ const PatientCarePlanSchema = new mongoose.Schema<ICarePlan>({
     ]
 }, { timestamps: true })
 
-export default mongoose.models.CarePlan || mongoose.model<ICarePlan>("CarePlan", PatientCarePlanSchema);
+export const CarePlan = mongoose.models.CarePlan || mongoose.model<ICarePlan>("CarePlan", PatientCarePlanSchema);

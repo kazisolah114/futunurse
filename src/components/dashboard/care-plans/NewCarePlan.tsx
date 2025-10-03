@@ -6,10 +6,34 @@ import PatientForm from './components/PatientForm';
 import GeneratingPlanAnimation from './components/GeneratingPlanAnimation';
 import ReviewAndEditPlan from './components/ReviewAndEditPlan';
 import { ToastContainer } from "react-toastify";
+import { IPatient } from '@/components/types/PatientCarePlan';
 
 export const NewCarePlan = () => {
     const [currentStage, setCurrentStage] = useState<number>(1);
-    const [carePlan, setCarePlan] = useState<[]>([]);
+    const [patientData, setPatientData] = useState<IPatient>({
+        // Patient Demographics
+        name: null,
+        age: null,
+        gender: null,
+        specialty: null,
+        mrn: null,
+        primaryDiagnoses: null,
+        secondaryDiagnoses: null,
+        // Patient Vitals & Assesment
+        vitals: {
+            temperature: null,
+            bloodPressure: null,
+            heartRate: null,
+            respiratoryRate: null,
+            oxygenSaturation: null,
+            painLevel: null
+        },
+        labResults: null,
+        physicalFindings: null,
+        currentMedications: null,
+        allergies: null
+    })
+    const [diagnoses, setDiagnoses] = useState<[]>([]);
     return (
         <div>
             <NewPlanStage currentStage={currentStage} />
@@ -21,7 +45,7 @@ export const NewCarePlan = () => {
                             <TabsTrigger value={"template"} className='w-44 text-sm cursor-pointer'>Use Template</TabsTrigger>
                         </TabsList>
                         <TabsContent value={"manual"}>
-                            <PatientForm currentStage={currentStage} setCurrentStage={setCurrentStage} setCarePlan={setCarePlan} />
+                            <PatientForm currentStage={currentStage} setCurrentStage={setCurrentStage} patientData={patientData} setPatientData={setPatientData} setDiagnoses={setDiagnoses} />
                         </TabsContent>
                         <TabsContent value={"template"}>Template content</TabsContent>
                     </Tabs>
@@ -32,7 +56,7 @@ export const NewCarePlan = () => {
                         <GeneratingPlanAnimation currentStage={currentStage} setCurrentStage={setCurrentStage} />
                     )
                     :
-                    <ReviewAndEditPlan diagnoses={carePlan} setCurrentStage={setCurrentStage} />
+                    <ReviewAndEditPlan patientData={patientData} setPatientData={setPatientData} diagnoses={diagnoses} setCurrentStage={setCurrentStage} />
             }
             <ToastContainer />
         </div>

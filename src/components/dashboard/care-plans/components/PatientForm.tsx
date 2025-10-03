@@ -6,61 +6,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import axios from "axios";
 import { toast } from 'react-toastify';
+import { IPatient } from '@/components/types/PatientCarePlan';
 
 interface PatientFormProps {
     currentStage: number;
     setCurrentStage: Dispatch<SetStateAction<number>>;
-    setCarePlan: Dispatch<SetStateAction<[]>>
+    patientData: IPatient;
+    setPatientData: Dispatch<SetStateAction<IPatient>>;
+    setDiagnoses: Dispatch<SetStateAction<[]>>
 }
 
-interface IPatient {
-    // Patient Demographics
-    name: string | null;
-    age: number | null;
-    gender: "male" | "female" | null;
-    specialty: "medical surgical" | "pediatrics" | "OB/GYN" | "phsychiatric" | "critical care" | "community health" | null;
-    mrn: string | null,
-    primaryDiagnoses: string | null,
-    secondaryDiagnoses: string | null,
-    // Patient Vitals & Assesment
-    vitals: {
-        temperature: number | null,
-        bloodPressure: string | null,
-        heartRate: string | null,
-        respiratoryRate: string | null,
-        oxygenSaturation: string | null,
-        painLevel: number | null
-    },
-    labResults: string | null,
-    physicalFindings: string | null,
-    currentMedications: string | null,
-    allergies: string | null
-}
-
-const PatientForm = ({ currentStage, setCurrentStage, setCarePlan }: PatientFormProps) => {
-    const [patientData, setPatientData] = useState<IPatient>({
-        // Patient Demographics
-        name: null,
-        age: null,
-        gender: null,
-        specialty: null,
-        mrn: null,
-        primaryDiagnoses: null,
-        secondaryDiagnoses: null,
-        // Patient Vitals & Assesment
-        vitals: {
-            temperature: null,
-            bloodPressure: null,
-            heartRate: null,
-            respiratoryRate: null,
-            oxygenSaturation: null,
-            painLevel: null
-        },
-        labResults: null,
-        physicalFindings: null,
-        currentMedications: null,
-        allergies: null
-    })
+const PatientForm = ({ currentStage, setCurrentStage, patientData, setPatientData, setDiagnoses }: PatientFormProps) => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -72,7 +28,7 @@ const PatientForm = ({ currentStage, setCurrentStage, setCarePlan }: PatientForm
             );
             console.log(response)
             if (response.status === 200) {
-                setCarePlan(response.data?.care_plan?.diagnoses || []);
+                setDiagnoses(response.data?.care_plan?.diagnoses || []);
                 setCurrentStage(3);
             } else {
                 setCurrentStage(1)

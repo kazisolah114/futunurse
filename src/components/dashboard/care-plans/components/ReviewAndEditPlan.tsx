@@ -1,5 +1,5 @@
 "use client"
-import { Diagnosis } from "@/components/types/PatientCarePlan"
+import { Diagnosis, IPatient } from "@/components/types/PatientCarePlan"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import axios from "axios"
@@ -8,11 +8,13 @@ import { Dispatch, SetStateAction, useState } from "react"
 import { toast } from "react-toastify"
 
 interface ReviewAndEditPlanProps {
-    diagnoses: Diagnosis[]
+    patientData: IPatient;
+    setPatientData: Dispatch<SetStateAction<IPatient>>;
+    diagnoses: Diagnosis[];
     setCurrentStage: Dispatch<SetStateAction<number>>
 }
 
-const ReviewAndEditPlan = ({ diagnoses, setCurrentStage }: ReviewAndEditPlanProps) => {
+const ReviewAndEditPlan = ({ patientData, setPatientData, diagnoses, setCurrentStage }: ReviewAndEditPlanProps) => {
 
     const getPriorityColor = (priority: "High" | "Medium" | "Low") => {
         switch (priority) {
@@ -30,13 +32,36 @@ const ReviewAndEditPlan = ({ diagnoses, setCurrentStage }: ReviewAndEditPlanProp
         try {
             setSaveLoading(true);
             const response = await axios.post("http://localhost:3000/api/care-plan/save-care-plan", {
-                body: diagnoses
+                body: { diagnoses, patientData }
             });
             setSaveLoading(false);
             console.log(response);
-            if(response.status === 200) {
+            if (response.status === 201) {
                 toast.success("Care plan saved!");
                 setCurrentStage(1);
+                setPatientData({
+                    // Patient Demographics
+                    name: null,
+                    age: null,
+                    gender: null,
+                    specialty: null,
+                    mrn: null,
+                    primaryDiagnoses: null,
+                    secondaryDiagnoses: null,
+                    // Patient Vitals & Assesment
+                    vitals: {
+                        temperature: null,
+                        bloodPressure: null,
+                        heartRate: null,
+                        respiratoryRate: null,
+                        oxygenSaturation: null,
+                        painLevel: null
+                    },
+                    labResults: null,
+                    physicalFindings: null,
+                    currentMedications: null,
+                    allergies: null
+                })
             }
         } catch (error) {
             console.log(error)

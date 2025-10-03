@@ -170,7 +170,7 @@ const PatientForm = ({ currentStage, setCurrentStage, setCarePlan }: PatientForm
                 </div>
                 <div className='space-y-2'>
                     <Label className='text-sm text-gray-700'>Current Vital Signs</Label>
-                    <div className='grid grid-cols-3 max-sm:grid-cols-1 max-md:grid-cols-2 gap-3'>
+                    <div className='grid grid-cols-3 max-md:grid-cols-2 gap-3'>
                         <Input type="number" placeholder='Temp (F)'
                             value={patientData.vitals.temperature || ''}
                             onChange={(e) => setPatientData({ ...patientData, vitals: { ...patientData.vitals, temperature: Number(e.target.value) } })}

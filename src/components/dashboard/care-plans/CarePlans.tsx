@@ -1,9 +1,26 @@
+"use client";
 import { Button } from '@/components/ui/button';
+import axios from 'axios';
 import { Download, File, Plus, Star } from 'lucide-react';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export const CarePlans = () => {
+    const [carePlans, setCarePlans] = useState<[] | null>([])
+    useEffect(() => {
+        const handleGetCarePlans = async () => {
+            const response = await axios.get("http://localhost:3000/api/care-plan/get-care-plans", {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            if(response.status === 200) {
+                setCarePlans(response.data?.carePlans);
+            }
+        };
+        handleGetCarePlans();
+    }, []);
+    console.log("Care Plans:", carePlans);
     return (
         <div className='flex md:items-center md:justify-between max-md:flex-col max-md:gap-8'>
             <div>

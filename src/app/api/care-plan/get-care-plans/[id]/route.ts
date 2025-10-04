@@ -12,7 +12,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
         if (!session) {
             return NextResponse.json({ success: false, message: "User not authenticated!" }, { status: 401 });
         }
-        const { id } = params;
+        const { id } = await params;
         const carePlan = await CarePlan.findOne({ user: (session.user as { id: string }).id, _id:  id});
         console.log("Care plan:", carePlan);
         return NextResponse.json({ success: true, carePlan }, { status: 200 });

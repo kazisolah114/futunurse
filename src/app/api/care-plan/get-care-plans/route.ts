@@ -9,12 +9,10 @@ export async function GET() {
     try {
         await connectDB();
         const session = await getServerSession(authOptions);
-        console.log("session:", session);
         if(!session) {
             return NextResponse.json({ success: false, message: "User unauthenticated!" }, { status: 401 })
         }
         const carePlans = await CarePlan.find({ user: (session.user as { id: string }).id }).select("-user -__v");
-        console.log("Care plans:", carePlans);
         return NextResponse.json({ success: true, carePlans }, { status: 200 });
     } catch (error) {
         console.log(error);

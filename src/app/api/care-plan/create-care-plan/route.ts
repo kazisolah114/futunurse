@@ -1,6 +1,8 @@
 import { handleApiError } from "@/lib/apiError";
 import { configDotenv } from "dotenv";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import { authOptions } from "../../auth/[...nextauth]/route";
 configDotenv();
 
 function extractJson(content: string): object {
@@ -48,6 +50,11 @@ interface IPatientData {
 
 export async function POST(req: Request) {
     try {
+        const session = await getServerSession(authOptions);
+        if(!session) {
+            return NextResponse.json({ success: false, message: "User unauthenticated!" }, { status: 401 })
+        }
+        
         const patient: IPatientData = await req.json();
         console.log("patient:", patient);
 

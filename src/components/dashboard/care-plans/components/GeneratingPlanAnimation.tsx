@@ -22,7 +22,7 @@ const GeneratingPlanAnimation = ({ currentStage, setCurrentStage }: GeneratingPl
     <AnimatePresence>
       {show && (
         <motion.div
-          className="w-full h-[calc(100vh-10.1rem)] flex flex-col items-center justify-center gap-8 bg-gradient-to-b from-white to-sky-50"
+          className="w-full h-[calc(100vh-10.1rem)] flex flex-col items-center justify-center gap-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}

@@ -1,3 +1,5 @@
+import { Document } from "mongoose";
+
 export interface IPatient {
     // Patient Demographics
     name: string | null;
@@ -41,4 +43,11 @@ export type Diagnosis = {
     evaluationCriteria: string[]
     patientEducation: string
     references: string[]
+}
+
+export interface ICarePlan extends Document {
+    patient: IPatient;
+    diagnoses: Diagnosis[];
+    createdAt: Date;
+    updatedAt: Date
 }

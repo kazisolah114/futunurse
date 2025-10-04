@@ -8,10 +8,10 @@ interface PatientInformationProps {
 const PatientInformation = ({ patient }: PatientInformationProps) => {
     return (
         <div className='border-2 border-slate-300 rounded-none bg-white p-5 mt-8 mb-10 space-y-2'>
-            <div className='flex gap-8 max-sm:gap-5 flex-wrap'>
+            <div className='flex gap-8 max-sm:gap-4 flex-wrap'>
                 <div>
                     <span className='text-xs text-gray-500 uppercase'>Age</span>
-                    <p className=' text-gray-800 capitalize'>{patient.age} years old</p>
+                    <p className=' text-gray-800'>{patient.age} y/o</p>
                 </div>
                 <div>
                     <span className='text-xs text-gray-500 uppercase'>Gender</span>

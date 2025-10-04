@@ -10,9 +10,8 @@ interface CarePlanProps {
 }
 
 const CarePlan = ({ carePlan }: CarePlanProps) => {
-    console.log("Care Plan:", carePlan);
     const pathname = usePathname();
-    const { _id, patient, diagnoses, createdAt, updatedAt } = carePlan || {};
+    const { _id, patient, createdAt, updatedAt } = carePlan || {};
     return (
         <div className='w-full border bg-white p-5 rounded-md'>
             <div className='flex items-center gap-3'>

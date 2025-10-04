@@ -26,7 +26,6 @@ const PatientForm = ({ currentStage, setCurrentStage, patientData, setPatientDat
                 "http://localhost:3000/api/care-plan/create-care-plan",
                 patientData
             );
-            console.log(response)
             if (response.status === 200) {
                 setDiagnoses(response.data?.care_plan?.diagnoses || []);
                 setCurrentStage(3);

@@ -85,12 +85,12 @@ const PatientForm = ({ currentStage, setCurrentStage, patientData, setPatientDat
                                 <SelectValue placeholder="Specialty" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="medical-surgical">Medical-Surgical</SelectItem>
+                                <SelectItem value="medical surgical">Medical-Surgical</SelectItem>
                                 <SelectItem value="pediatrics">Pediatrics</SelectItem>
                                 <SelectItem value="obgyn">OB/GYN</SelectItem>
                                 <SelectItem value="phsychiatric">Phsychiatric</SelectItem>
-                                <SelectItem value="critical-care">Critical Care</SelectItem>
-                                <SelectItem value="community-health">Community Health</SelectItem>
+                                <SelectItem value="critical care">Critical Care</SelectItem>
+                                <SelectItem value="community health">Community Health</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>

@@ -4,7 +4,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Diagnoses from './components/Diagnoses';
 import PatientInformation from './components/PatientInformation';
-import { Download, PencilLine, User } from 'lucide-react';
+import { Download, PencilLine, UserRound } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface CarePlanProps {
@@ -40,13 +40,13 @@ export const CarePlan = ({ slug }: CarePlanProps) => {
                     <div>
                         <div className='flex items-start justify-between max-md:flex-col max-md:gap-3'>
                             <div>
-                                <h3 className='mb-0.5 font-semibold text-2xl text-gray-700 flex items-center gap-2'><User size={28} /> {carePlan?.patient.name}
+                                <h3 className='mb-0.5 font-bold text-2xl text-gray-700 flex items-center gap-2'><UserRound size={28} /> {carePlan?.patient.name}
                                 </h3>
-                                <p className='text-gray-600 capitalize'>{carePlan?.patient.primaryDiagnoses} with {carePlan?.patient.physicalFindings}</p>
+                                <p className='text-gray-600 capitalize'>{carePlan?.patient.primaryDiagnoses} with {carePlan?.patient.physicalFindings?.slice(0, 50)}...</p>
                             </div>
                             <div className='space-x-2 max-sm:w-full max-sm:grid max-sm:grid-cols-2 max-sm:gap-2'>
                                 <Button size={'lg'} variant={'outline'} className='max-sm:w-full border-teal-600 text-teal-600 hover:bg-transparent hover:text-teal-600'><Download size={18} /> Export Plan</Button>
-                                <Button size={'lg'} className='max-sm:w-full sm:!w-40'><PencilLine size={18} /> Edit Plan</Button>
+                                <Button size={'lg'} className='max-sm:w-full sm:!w-40'><PencilLine size={20} /> Edit Plan</Button>
                             </div>
                         </div>
                         {carePlan?.patient && <PatientInformation patient={carePlan.patient} />}

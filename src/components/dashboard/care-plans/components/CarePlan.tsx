@@ -17,7 +17,7 @@ const CarePlan = ({ carePlan }: CarePlanProps) => {
             <div className='flex items-center gap-3'>
                 <h2 className='text-xl font-bold text-gray-800'>{patient.name}</h2> <span className='px-2 py-0.5 border rounded-full text-xs'>{patient.specialty}</span>
             </div>
-            <p className='text-gray-800 my-2'>{patient.primaryDiagnoses} with {patient.physicalFindings}</p>
+            <p className='text-gray-800 my-2'>{patient.primaryDiagnoses}</p>
             <div className='flex items-center gap-8'>
                 <p className='text-sm text-gray-500 flex items-center gap-2'><Calendar size={16} /> Created {new Date(createdAt).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</p>
                 <p className='text-sm text-gray-500 flex items-center gap-2'><Clock size={16} /> Updated {new Date(updatedAt).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</p>

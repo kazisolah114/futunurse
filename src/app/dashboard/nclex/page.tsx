@@ -1,11 +1,10 @@
+import { NCLEX } from '@/components/dashboard/nclex';
 import React from 'react';
 
-const NCLEX = () => {
+const NCLEXPage = () => {
     return (
-        <div>
-            NCLEX
-        </div>
+        <NCLEX />
     );
 };
 
-export default NCLEX;
+export default NCLEXPage;

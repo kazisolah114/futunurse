@@ -1,6 +1,6 @@
 "use client";
 import { Button } from '@/components/ui/button';
-import { Book, Home, LucideArrowLeft, Stethoscope, User, XCircle } from 'lucide-react';
+import { ArrowBigRight, Book, Home, LucideArrowLeft, LucideArrowLeftSquare, MoveLeft, PanelLeftRightDashedIcon, PanelRight, Stethoscope, User, XCircle } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -33,13 +33,13 @@ const Navigation = ({ responsiveMenu, setResponsiveMenu }: NavigationProps) => {
                         const isActive = nav.href === pathname;
                         return (
                             <li key={index} onClick={() => setResponsiveMenu(false)} className={`${isActive ? 'bg-white text-teal-600' : 'hover:bg-teal-500'} w-full rounded-lg px-3 `}>
-                                <Link href={nav.href} className='flex items-center gap-2 py-2'>{nav.icon} {nav.name}</Link>
+                                <Link href={nav.href} className='flex items-center gap-2 py-3'>{nav.icon} {nav.name}</Link>
                             </li>
                         )
                     })}
                 </ul>
             </div>
-            <Button onClick={() => signOut({ callbackUrl: '/' })} className='border w-full'><LucideArrowLeft size={20} /> Logout</Button>
+            <Button onClick={() => signOut({ callbackUrl: '/' })} className='w-full h-12 bg-teal-500/10 hover:bg-teal-500'>Logout</Button>
         </nav>
     );
 };

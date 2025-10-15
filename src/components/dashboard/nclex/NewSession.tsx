@@ -27,11 +27,14 @@ export const NewSession = () => {
             alert("This session has been completed!")
         }
     }
+    const [sessionScores, setSessionScores] = useState<number>(0);
+    const progress = Math.round((currentQuestionIndex / sessionQuestions.length) * 100);
+    console.log("progress:", progress);
     return (
         <div className='space-y-7 max-w-4xl mx-auto'>
             <NewSessionHeader currentQuestion={currentQuestion} currentQuestionIndex={currentQuestionIndex} length={sessionQuestions.length} />
-            <SessionProgress />
-            <Question currentQuestion={currentQuestion} onNextQuestion={handleNextQuestion} currentQuestionIndex={currentQuestionIndex} />
+            <SessionProgress progress={progress} />
+            <Question currentQuestion={currentQuestion} onNextQuestion={handleNextQuestion} currentQuestionIndex={currentQuestionIndex} sessionScores={sessionScores} setSessionScores={setSessionScores} />
         </div>
     );
 };

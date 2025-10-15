@@ -1,6 +1,6 @@
 "use client";
 import { Button } from '@/components/ui/button';
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { NCLEXQuestion } from '../nclex-questions';
 import { ArrowRight, CheckCircle2, XCircle } from 'lucide-react';
 
@@ -8,21 +8,28 @@ interface QuestionProps {
     currentQuestion: NCLEXQuestion | null;
     onNextQuestion: () => void;
     currentQuestionIndex: number;
+    sessionScores: number;
+    setSessionScores: Dispatch<SetStateAction<number>>;
 }
 
-const Question = ({ currentQuestion, onNextQuestion, currentQuestionIndex }: QuestionProps) => {
+const Question = ({ currentQuestion, onNextQuestion, currentQuestionIndex, sessionScores, setSessionScores }: QuestionProps) => {
     const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
     const [submittedAnswer, setSubmittedAnswer] = useState<number | null>(null);
     const [showResult, setShowResult] = useState<boolean>(false);
+
     useEffect(() => {
         setSelectedAnswer(null);
         setSubmittedAnswer(null);
         setShowResult(false);
-    }, [onNextQuestion])
+    }, [currentQuestionIndex])
+
     const handleSubmitAnswer = () => {
         if (selectedAnswer !== null) {
             setSubmittedAnswer(selectedAnswer);
             setShowResult(true);
+        }
+        if(selectedAnswer === currentQuestion?.correctAnswer) {
+            setSessionScores((prev) => prev + 1);
         }
     }
     if (!currentQuestion) return <div>Thinking...</div>
@@ -40,18 +47,15 @@ const Question = ({ currentQuestion, onNextQuestion, currentQuestionIndex }: Que
 
                         if (showResult) {
                             if (submittedAnswer === currentQuestion.correctAnswer) {
-                                // ✅ User answered correctly — highlight only the correct one
                                 if (isCorrect)
                                     className += " bg-green-600/20 text-gray-900 hover:bg-green-600/20";
                             } else {
-                                // ❌ User answered wrong — highlight both
                                 if (isSelected)
                                     className += " bg-red-600/20 text-gray-900 cursor-not-allowed";
                                 if (isCorrect)
                                     className += " bg-green-600/20 text-gray-900 cursor-not-allowed";
                             }
                         } else {
-                            // During selection (before submit)
                             if (selectedAnswer === index)
                                 className += " bg-teal-600 text-white hover:bg-teal-600/90";
                         }
@@ -62,21 +66,21 @@ const Question = ({ currentQuestion, onNextQuestion, currentQuestionIndex }: Que
                                 onClick={() => !showResult && setSelectedAnswer(index)} // disable clicks after submit
                                 className={className}
                             >
-                                {/* ✅ Correct and selected */}
+                                {/* Correct and selected */}
                                 {showResult &&
                                     isSelected &&
                                     submittedAnswer === currentQuestion.correctAnswer && (
                                         <CheckCircle2 size={18} className="text-green-500" />
                                     )}
 
-                                {/* ❌ Selected wrong answer */}
+                                {/* Selected wrong answer */}
                                 {showResult &&
                                     isSelected &&
                                     submittedAnswer !== currentQuestion.correctAnswer && (
                                         <XCircle size={18} className="text-red-500" />
                                     )}
 
-                                {/* ✅ Show correct icon when user chose wrong answer */}
+                                {/* Show correct icon when user chose wrong answer */}
                                 {showResult &&
                                     submittedAnswer !== currentQuestion.correctAnswer &&
                                     isCorrect && <CheckCircle2 size={18} className="text-green-500" />}
@@ -112,7 +116,7 @@ const Question = ({ currentQuestion, onNextQuestion, currentQuestionIndex }: Que
                 </div>
             }
             <div className='mt-7 flex justify-between items-center'>
-                <p className='text-gray-700'>Score: 0/{currentQuestionIndex + 1}</p>
+                <p className='text-gray-700'>Score: {sessionScores}/{currentQuestionIndex + 1}</p>
                 {!showResult ?
                     <Button size={'lg'} onClick={handleSubmitAnswer}>Submit Answer</Button>
                     :

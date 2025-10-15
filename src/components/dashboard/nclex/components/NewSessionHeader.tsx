@@ -16,7 +16,7 @@ const NewSessionHeader = ({ currentQuestion, currentQuestionIndex, length }: New
             </div>
             <div className='flex items-center gap-2'>
                 <p className='bg-teal-600 text-white text-sm rounded-full px-2 py-0.5'>{currentQuestion?.category}</p>
-                <span className={`text-sm rounded-full px-2 py-0.5 border ${currentQuestion?.difficulty === 'easy' ? 'text-blue-600 bg-blue-600/20 border-blue-500/50' : currentQuestion?.difficulty === 'medium' ? 'text-yellow-600 bg-yellow-600/20 border-yellow-500/50' : 'text-red-600 bg-yellow-red/20 border-red-500/50'}`}>{currentQuestion?.difficulty}</span>
+                <span className={`text-sm rounded-full px-2 py-0.5 border ${currentQuestion?.difficulty === 'easy' ? 'text-blue-600 bg-blue-600/20 border-blue-500/50' : currentQuestion?.difficulty === 'medium' ? 'text-yellow-600 bg-yellow-600/20 border-yellow-500/50' : 'text-red-600 bg-red-600/20 border-red-500/50'}`}>{currentQuestion?.difficulty}</span>
             </div>
         </div>
     );

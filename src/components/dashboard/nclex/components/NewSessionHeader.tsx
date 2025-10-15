@@ -15,8 +15,8 @@ const NewSessionHeader = ({ currentQuestion, currentQuestionIndex, length }: New
                 <p className='text-sm text-gray-600'>Question {currentQuestionIndex + 1} of {length}</p>
             </div>
             <div className='flex items-center gap-2'>
-                <p className='bg-teal-600 text-white text-sm rounded-full px-2 py-0.5'>{currentQuestion?.category}</p>
-                <span className={`text-sm rounded-full px-2 py-0.5 border ${currentQuestion?.difficulty === 'easy' ? 'text-blue-600 bg-blue-600/20 border-blue-500/50' : currentQuestion?.difficulty === 'medium' ? 'text-yellow-600 bg-yellow-600/20 border-yellow-500/50' : 'text-red-600 bg-red-600/20 border-red-500/50'}`}>{currentQuestion?.difficulty}</span>
+                <p className='bg-gray-900 text-white text-sm rounded-full px-2 py-0.5'>{currentQuestion?.category}</p>
+                <span className={`text-sm rounded-full px-2 py-0.5 border ${currentQuestion?.difficulty === 'easy' ? 'text-green-600 bg-green-600/10 border-green-500/30' : currentQuestion?.difficulty === 'medium' ? 'text-yellow-600 bg-yellow-600/10 border-yellow-500/30' : 'text-red-600 bg-red-600/10 border-red-500/30'}`}>{currentQuestion?.difficulty}</span>
             </div>
         </div>
     );

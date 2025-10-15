@@ -121,7 +121,7 @@ const Question = ({ currentQuestion, onNextQuestion, currentQuestionIndex, sessi
             <div className='mt-7 flex justify-between sm:items-center max-sm:flex-col max-sm:gap-3 max-sm:space-y-3'>
                 <p className='text-gray-700'>Score: {sessionScores}/{currentQuestionIndex + 1}</p>
                 {!showResult ?
-                    <Button size={'lg'} className={`${selectedAnswer || 'cursor-not-allowed opacity-50'}`} onClick={handleSubmitAnswer}>Submit Answer</Button>
+                    <Button size={'lg'} className={`${selectedAnswer === null ? 'cursor-not-allowed opacity-50' : ''}`} onClick={handleSubmitAnswer}>Submit Answer</Button>
                     :
                     <Button size={'lg'} onClick={onNextQuestion}>{currentQuestionIndex === questionsLength - 1 ? 'Finish Session' : 'Next Question'} <ArrowRight /></Button>
                 }

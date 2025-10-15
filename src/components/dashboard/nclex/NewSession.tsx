@@ -10,7 +10,7 @@ export const NewSession = () => {
     const [sessionQuestions, setSessionQuestions] = useState<NCLEXQuestion[]>([]);
     useEffect(() => {
         const questions = [...nclexQuestions].sort(() => Math.random() - 0.5);
-        setSessionQuestions(questions.slice(0, 5));
+        setSessionQuestions(questions.slice(0, 25));
     }, []);
     console.log(sessionQuestions)
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);

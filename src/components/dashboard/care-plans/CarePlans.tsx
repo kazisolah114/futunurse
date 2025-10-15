@@ -6,6 +6,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import CarePlan from './components/CarePlan';
 import { ICarePlan } from '@/components/types/PatientCarePlan';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export const CarePlans = () => {
     const [carePlans, setCarePlans] = useState<ICarePlan[]>([]);
@@ -30,7 +31,7 @@ export const CarePlans = () => {
             <div className='flex md:justify-between max-md:flex-col max-md:gap-8'>
                 <div>
                     <h2 className='font-bold text-3xl text-gray-800 mb-1'>Care Plans Library</h2>
-                    <p className='text-gray-700 mb-3'>Manage your nursing care plans with AI-powered assistance and templates</p>
+                    <p className='text-gray-700 mb-3'>AI-powered nursing care plans with evidence-based practice and NANDA/NIC/NOC integration</p>
                     <div className='flex items-center gap-4'>
                         <p className='flex items-center gap-1 text-gray-500 text-sm'><Stethoscope size={16} /> {carePlans.length} total plans</p>
                         <p className='flex items-center gap-1 text-gray-500 text-sm'><Star size={16} /> 0 starred</p>
@@ -43,8 +44,8 @@ export const CarePlans = () => {
             </div>
             {plansLoading ? (
                 // Loading state
-                <div className="flex justify-center items-center py-8 text-gray-600">
-                    <span>Loading care plans...</span>
+                <div className="flex justify-center items-center text-gray-600">
+                    <Skeleton className='bg-slate-200 h-52 w-full rounded-md' />
                 </div>
             ) : carePlans.length > 0 ? (
                 <div className="space-y-4">

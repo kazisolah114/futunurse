@@ -4,8 +4,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Diagnoses from './components/Diagnoses';
 import PatientInformation from './components/PatientInformation';
-import { Download, PencilLine, UserRound } from 'lucide-react';
+import { Download, PencilLine, Stethoscope, UserRound } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface CarePlanProps {
     slug: string;
@@ -33,14 +34,18 @@ export const CarePlan = ({ slug }: CarePlanProps) => {
         <>
             {planLoading ?
                 (
-                    <div>Loading...</div>
+                    <div className='space-y-5'>
+                        <Skeleton className='bg-slate-200 h-16 w-full rounded-md' />
+                        <Skeleton className='bg-slate-200 h-96 w-full rounded-md' />
+                        <Skeleton className='bg-slate-200 h-[30rem] w-full rounded-md' />
+                    </div>
                 )
                 :
                 (
                     <div>
                         <div className='flex items-start justify-between max-md:flex-col max-md:gap-3'>
                             <div>
-                                <h3 className='mb-0.5 font-bold text-2xl text-gray-700 flex items-center gap-2'><UserRound size={28} /> {carePlan?.patient.name}
+                                <h3 className='mb-1 font-bold text-3xl text-gray-700 flex items-center gap-3'><Stethoscope size={28} /> {carePlan?.patient.name}
                                 </h3>
                                 <p className='text-gray-600 capitalize'>{carePlan?.patient.primaryDiagnoses} with {carePlan?.patient.physicalFindings?.slice(0, 50)}...</p>
                             </div>

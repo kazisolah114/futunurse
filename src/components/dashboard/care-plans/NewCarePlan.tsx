@@ -40,9 +40,9 @@ export const NewCarePlan = () => {
             {currentStage === 1 ?
                 (
                     <Tabs defaultValue="manual" className='rounded-md'>
-                        <TabsList>
-                            <TabsTrigger value={"manual"} className='w-44 text-sm cursor-pointer'>Manual Entry</TabsTrigger>
-                            <TabsTrigger value={"template"} className='w-44 text-sm cursor-pointer'>Use Template</TabsTrigger>
+                        <TabsList className='py-6'>
+                            <TabsTrigger value={"manual"} className='w-44 py-5 text-sm cursor-pointer'>Manual Entry</TabsTrigger>
+                            <TabsTrigger value={"template"} className='w-44 py-5 text-sm cursor-pointer'>Use Template</TabsTrigger>
                         </TabsList>
                         <TabsContent value={"manual"}>
                             <PatientForm currentStage={currentStage} setCurrentStage={setCurrentStage} patientData={patientData} setPatientData={setPatientData} setDiagnoses={setDiagnoses} />

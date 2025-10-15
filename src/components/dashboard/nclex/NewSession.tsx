@@ -4,6 +4,7 @@ import NewSessionHeader from './components/NewSessionHeader';
 import SessionProgress from './components/SessionProgress';
 import Question from './components/Question';
 import { NCLEXQuestion, nclexQuestions } from './nclex-questions';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export const NewSession = () => {
     const [sessionQuestions, setSessionQuestions] = useState<NCLEXQuestion[]>([]);
@@ -29,7 +30,11 @@ export const NewSession = () => {
     }
     const [sessionScores, setSessionScores] = useState<number>(0);
     const progress = Math.round((currentQuestionIndex / sessionQuestions.length) * 100);
-    if (!currentQuestion) return <div>Thinking...</div>
+    if (!currentQuestion) return <div className='space-y-7 max-w-4xl mx-auto'>
+        <Skeleton className='h-10 w-full bg-slate-200' />
+        <Skeleton className='h-5 w-full bg-slate-200' />
+        <Skeleton className='h-96 w-full rounded-md bg-slate-200' />
+    </div>
     return (
         <div className='space-y-7 max-w-4xl mx-auto'>
             <NewSessionHeader currentQuestion={currentQuestion} currentQuestionIndex={currentQuestionIndex} length={sessionQuestions.length} />

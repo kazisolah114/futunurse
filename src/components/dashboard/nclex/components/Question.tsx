@@ -29,7 +29,7 @@ const Question = ({ currentQuestion, onNextQuestion, currentQuestionIndex, sessi
             setSubmittedAnswer(selectedAnswer);
             setShowResult(true);
         }
-        if(selectedAnswer === currentQuestion?.correctAnswer) {
+        if (selectedAnswer === currentQuestion?.correctAnswer) {
             setSessionScores((prev) => prev + 1);
         }
     }
@@ -104,16 +104,18 @@ const Question = ({ currentQuestion, onNextQuestion, currentQuestionIndex, sessi
             {showResult &&
                 <div className={`${submittedAnswer === currentQuestion.correctAnswer ? 'border-green-500/20 bg-green-500/10' : 'border-red-500/20 bg-red-500/10'} border rounded-md p-4 mt-7 space-y-2`}>
                     {submittedAnswer === currentQuestion.correctAnswer ?
-                        <h5 className='font-semibold flex items-center gap-2'>
+                        <h5 className='font-semibold flex items-center gap-2 text-green-500'>
                             <CheckCircle2 size={18} className='text-green-500' /> Correct
                         </h5>
                         :
-                        <h5 className='font-semibold flex items-center gap-2'>
+                        <h5 className='font-semibold flex items-center gap-2 text-red-500'>
                             <XCircle size={18} className='text-red-500' /> Incorrect
                         </h5>
                     }
+                    <span className='text-xs font-medium text-gray-800 uppercase'>Reason</span>
                     <p className='text-gray-900 text-sm'>{currentQuestion.explanation}</p>
-                    <p className='text-gray-900 text-sm'><span className='font-medium text-gray-700'>Rationale:</span> {currentQuestion.rationale}</p>
+                    <span className='text-xs font-medium text-gray-800 uppercase'>Rationale</span>
+                    <p className='text-gray-900 text-sm'>{currentQuestion.rationale}</p>
                 </div>
             }
             <div className='mt-7 flex justify-between sm:items-center max-sm:flex-col max-sm:gap-3 max-sm:space-y-3'>

@@ -9,7 +9,7 @@ interface NewSessionHeaderProps {
 
 const NewSessionHeader = ({ currentQuestion, currentQuestionIndex, length }: NewSessionHeaderProps) => {
     return (
-        <div className='flex items-center justify-between'>
+        <div className='flex sm:items-center justify-between max-sm:flex-col max-sm:gap-3'>
             <div>
                 <h2 className='font-bold text-2xl mb-1'>NCLEX Practice Session</h2>
                 <p className='text-sm text-gray-600'>Question {currentQuestionIndex + 1} of {length}</p>

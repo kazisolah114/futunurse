@@ -10,9 +10,10 @@ interface QuestionProps {
     currentQuestionIndex: number;
     sessionScores: number;
     setSessionScores: Dispatch<SetStateAction<number>>;
+    questionsLength: number;
 }
 
-const Question = ({ currentQuestion, onNextQuestion, currentQuestionIndex, sessionScores, setSessionScores }: QuestionProps) => {
+const Question = ({ currentQuestion, onNextQuestion, currentQuestionIndex, sessionScores, setSessionScores, questionsLength }: QuestionProps) => {
     const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
     const [submittedAnswer, setSubmittedAnswer] = useState<number | null>(null);
     const [showResult, setShowResult] = useState<boolean>(false);
@@ -115,12 +116,12 @@ const Question = ({ currentQuestion, onNextQuestion, currentQuestionIndex, sessi
                     <p className='text-gray-900 text-sm'><span className='font-medium text-gray-700'>Rationale:</span> {currentQuestion.rationale}</p>
                 </div>
             }
-            <div className='mt-7 flex justify-between items-center'>
+            <div className='mt-7 flex justify-between sm:items-center max-sm:flex-col max-sm:gap-3 max-sm:space-y-3'>
                 <p className='text-gray-700'>Score: {sessionScores}/{currentQuestionIndex + 1}</p>
                 {!showResult ?
-                    <Button size={'lg'} onClick={handleSubmitAnswer}>Submit Answer</Button>
+                    <Button size={'lg'} className={`${selectedAnswer || 'cursor-not-allowed opacity-50'}`} onClick={handleSubmitAnswer}>Submit Answer</Button>
                     :
-                    <Button size={'lg'} onClick={onNextQuestion}>Next Question <ArrowRight /></Button>
+                    <Button size={'lg'} onClick={onNextQuestion}>{currentQuestionIndex === questionsLength - 1 ? 'Finish Session' : 'Next Question'} <ArrowRight /></Button>
                 }
             </div>
         </div>

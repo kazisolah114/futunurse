@@ -29,12 +29,12 @@ export const NewSession = () => {
     }
     const [sessionScores, setSessionScores] = useState<number>(0);
     const progress = Math.round((currentQuestionIndex / sessionQuestions.length) * 100);
-    console.log("progress:", progress);
+    if (!currentQuestion) return <div>Thinking...</div>
     return (
         <div className='space-y-7 max-w-4xl mx-auto'>
             <NewSessionHeader currentQuestion={currentQuestion} currentQuestionIndex={currentQuestionIndex} length={sessionQuestions.length} />
             <SessionProgress progress={progress} />
-            <Question currentQuestion={currentQuestion} onNextQuestion={handleNextQuestion} currentQuestionIndex={currentQuestionIndex} sessionScores={sessionScores} setSessionScores={setSessionScores} />
+            <Question currentQuestion={currentQuestion} onNextQuestion={handleNextQuestion} currentQuestionIndex={currentQuestionIndex} sessionScores={sessionScores} setSessionScores={setSessionScores} questionsLength={sessionQuestions.length} />
         </div>
     );
 };

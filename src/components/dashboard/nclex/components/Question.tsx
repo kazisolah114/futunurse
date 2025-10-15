@@ -1,0 +1,126 @@
+"use client";
+import { Button } from '@/components/ui/button';
+import React, { useEffect, useState } from 'react';
+import { NCLEXQuestion } from '../nclex-questions';
+import { ArrowRight, CheckCircle2, XCircle } from 'lucide-react';
+
+interface QuestionProps {
+    currentQuestion: NCLEXQuestion | null;
+    onNextQuestion: () => void;
+    currentQuestionIndex: number;
+}
+
+const Question = ({ currentQuestion, onNextQuestion, currentQuestionIndex }: QuestionProps) => {
+    const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+    const [submittedAnswer, setSubmittedAnswer] = useState<number | null>(null);
+    const [showResult, setShowResult] = useState<boolean>(false);
+    useEffect(() => {
+        setSelectedAnswer(null);
+        setSubmittedAnswer(null);
+        setShowResult(false);
+    }, [onNextQuestion])
+    const handleSubmitAnswer = () => {
+        if (selectedAnswer !== null) {
+            setSubmittedAnswer(selectedAnswer);
+            setShowResult(true);
+        }
+    }
+    if (!currentQuestion) return <div>Thinking...</div>
+    return (
+        <div className='border bg-white shadow-md p-5 rounded-md'>
+            <h6 className='font-medium text-lg text-gray-900'>{currentQuestion.question}</h6>
+            <ul className='space-y-3 mt-6'>
+                {
+                    currentQuestion.options.map((option, index) => {
+                        const isCorrect = index === currentQuestion.correctAnswer;
+                        const isSelected = index === submittedAnswer;
+
+                        let className =
+                            "flex items-center gap-3 border px-3 py-2 rounded-md hover:bg-gray-100/50 duration-150 cursor-pointer";
+
+                        if (showResult) {
+                            if (submittedAnswer === currentQuestion.correctAnswer) {
+                                // ✅ User answered correctly — highlight only the correct one
+                                if (isCorrect)
+                                    className += " bg-green-600/20 text-gray-900 hover:bg-green-600/20";
+                            } else {
+                                // ❌ User answered wrong — highlight both
+                                if (isSelected)
+                                    className += " bg-red-600/20 text-gray-900 cursor-not-allowed";
+                                if (isCorrect)
+                                    className += " bg-green-600/20 text-gray-900 cursor-not-allowed";
+                            }
+                        } else {
+                            // During selection (before submit)
+                            if (selectedAnswer === index)
+                                className += " bg-teal-600 text-white hover:bg-teal-600/90";
+                        }
+
+                        return (
+                            <li
+                                key={index}
+                                onClick={() => !showResult && setSelectedAnswer(index)} // disable clicks after submit
+                                className={className}
+                            >
+                                {/* ✅ Correct and selected */}
+                                {showResult &&
+                                    isSelected &&
+                                    submittedAnswer === currentQuestion.correctAnswer && (
+                                        <CheckCircle2 size={18} className="text-green-500" />
+                                    )}
+
+                                {/* ❌ Selected wrong answer */}
+                                {showResult &&
+                                    isSelected &&
+                                    submittedAnswer !== currentQuestion.correctAnswer && (
+                                        <XCircle size={18} className="text-red-500" />
+                                    )}
+
+                                {/* ✅ Show correct icon when user chose wrong answer */}
+                                {showResult &&
+                                    submittedAnswer !== currentQuestion.correctAnswer &&
+                                    isCorrect && <CheckCircle2 size={18} className="text-green-500" />}
+
+                                <span>
+                                    {index === 0
+                                        ? "A."
+                                        : index === 1
+                                            ? "B."
+                                            : index === 2
+                                                ? "C."
+                                                : "D."}
+                                </span>{" "}
+                                {option}
+                            </li>
+                        );
+                    })
+                }
+            </ul>
+            {showResult &&
+                <div className={`${submittedAnswer === currentQuestion.correctAnswer ? 'border-green-500/20 bg-green-500/10' : 'border-red-500/20 bg-red-500/10'} border rounded-md p-4 mt-7 space-y-2`}>
+                    {submittedAnswer === currentQuestion.correctAnswer ?
+                        <h5 className='font-semibold flex items-center gap-2'>
+                            <CheckCircle2 size={18} className='text-green-500' /> Correct
+                        </h5>
+                        :
+                        <h5 className='font-semibold flex items-center gap-2'>
+                            <XCircle size={18} className='text-red-500' /> Incorrect
+                        </h5>
+                    }
+                    <p className='text-gray-900 text-sm'>{currentQuestion.explanation}</p>
+                    <p className='text-gray-900 text-sm'><span className='font-medium text-gray-700'>Rationale:</span> {currentQuestion.rationale}</p>
+                </div>
+            }
+            <div className='mt-7 flex justify-between items-center'>
+                <p className='text-gray-700'>Score: 0/{currentQuestionIndex + 1}</p>
+                {!showResult ?
+                    <Button size={'lg'} onClick={handleSubmitAnswer}>Submit Answer</Button>
+                    :
+                    <Button size={'lg'} onClick={onNextQuestion}>Next Question <ArrowRight /></Button>
+                }
+            </div>
+        </div>
+    );
+};
+
+export default Question;

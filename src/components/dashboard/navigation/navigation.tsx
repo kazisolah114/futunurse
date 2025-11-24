@@ -1,12 +1,10 @@
 "use client";
 import { Button } from '@/components/ui/button';
-import { ArrowBigLeft, ArrowBigRight, ArrowRightIcon, Book, Home, LucideArrowLeft, LucideArrowLeftSquare, MoveLeft, PanelLeftRightDashedIcon, PanelRight, Stethoscope, User, XCircle } from 'lucide-react';
+import { Book, Home, LogOut, Stethoscope, User, XCircle } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { redirect } from 'next/navigation';
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 
 interface NavigationProps {
     responsiveMenu: boolean;
@@ -20,12 +18,25 @@ const Navigation = ({ responsiveMenu, setResponsiveMenu }: NavigationProps) => {
         { name: 'NCLEX Coach', href: '/dashboard/nclex', icon: <Book size={20} /> },
         { name: 'Profile', href: '/dashboard/profile', icon: <User size={20} /> },
     ]
+    useEffect(() => {
+        if (responsiveMenu) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+        return () => {
+            document.body.style.overflow = 'auto';
+        }
+    }, [responsiveMenu])
     const pathname = usePathname();
     const { data } = useSession();
     const user = data?.user;
     const userNameAbbr = user?.name ? user.name.split(' ').map(n => n[0]).join('') : "G";
     return (
-        <nav className={`lg:col-span-1 p-4 max-h-screen sticky top-0 left-0 bg-teal-600 flex flex-col justify-between items-start max-lg:absolute max-lg:z-20 max-lg:w-full max-lg:h-full ${responsiveMenu ? '' : 'max-lg:hidden max-lg:opacity-0'}`}>
+        <nav className={`lg:col-span-1 p-4 max-h-screen sticky top-0 left-0 bg-teal-600 flex flex-col justify-between items-start
+    max-lg:fixed max-lg:top-0 max-lg:left-0 max-lg:w-full max-lg:h-full max-lg:z-20
+    ${responsiveMenu ? 'max-lg:translate-x-0' : 'max-lg:-translate-x-full'} 
+    transition-transform duration-300`}>
             <div className='w-full'>
                 <div className='flex items-center justify-between pb-5 mb-5 border-b'>
                     <>
@@ -44,13 +55,7 @@ const Navigation = ({ responsiveMenu, setResponsiveMenu }: NavigationProps) => {
                     })}
                 </ul>
             </div>
-            <div className='w-full h-12 px-3 flex items-center justify-between rounded-md bg-teal-700/50 hover:bg-teal-700/60 duration-150 ease-in-out'>
-                <Avatar onClick={() => redirect("/dashboard/profile")} className='w-9 h-9 cursor-pointer'>
-                    <AvatarImage src={user?.image as string} />
-                    <AvatarFallback>{userNameAbbr}</AvatarFallback>
-                </Avatar>
-                <Button onClick={() => signOut({ callbackUrl: '/' })} className='flex-1 justify-end bg-transparent hover:bg-transparent group'>Sign Out <ArrowRightIcon className='relative group-hover:left-1' /></Button>
-            </div>
+            <Button onClick={() => signOut({ callbackUrl: '/' })} className='w-full flex items-center justify-start bg-teal-700/50 hover:bg-teal-700/60 duration-150 ease-in-out h-11'><LogOut className='relative top-0.5' /> Sign Out</Button>
         </nav>
     );
 };

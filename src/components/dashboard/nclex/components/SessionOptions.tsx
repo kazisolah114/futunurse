@@ -30,15 +30,15 @@ const SessionOptions = () => {
                 options.map((option, index) => {
                     const Icon = option.icon;
                     return (
-                        <div key={index} className='bg-white border p-6 rounded-md shadow-md hover:shadow-lg'>
-                            <h4 className='flex items-center gap-3 font-bold text-gray-800'><Icon className={`w-5 h-5 ${index === 0 ? 'text-teal-600' : index === 1 ? 'text-blue-600' : null}`} /> {option.title}</h4>
+                        <div key={index} className='bg-white/30 border border-gray-200/30 p-5 rounded-md '>
+                            <h4 className='flex items-center gap-3 font-semibold text-gray-800'><Icon className={`w-5 h-5 ${index === 0 ? 'text-teal-600' : index === 1 ? 'text-blue-600' : null}`} /> {option.title}</h4>
                             <p className='text-gray-500 mb-5 mt-1 text-sm'>{option.label}</p>
                             <p className='text-gray-600 mb-5 text-sm'>{option.description}</p>
                             {index === 0 ?
                             <Button size={'lg'} className='w-full'><Play /> Start Adaptive Session</Button>
                             :
                             index === 1 ?
-                            <Button size={'lg'} variant={'outline'} className='w-full'><BookOpen /> Choose Category</Button>
+                            <Button size={'lg'} className='w-full bg-blue-600/90 hover:bg-blue-600 duration-200'><BookOpen /> Choose Category</Button>
                             :
                             null
                             }

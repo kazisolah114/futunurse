@@ -15,14 +15,14 @@ const RecentPracticeSessions = () => {
         { title: 'Pediatrics', date: '2/05/2025', accuracy_percentage: 90, questions_completed: 25 }
     ]
     return (
-        <div className='bg-white border rounded-md shadow-md p-6'>
-            <h2 className='text-gray-900 font-medium text-lg flex items-center gap-2'><Clock size={20} /> Recent Practice Sessions</h2>
+        <div className='bg-white/70 backdrop-blur-xl border border-gray-200/30 rounded-lg p-5'>
+            <h2 className='text-gray-900 font-medium text-lg flex items-center gap-2'><Clock size={20} className='text-blue-600/90' /> Recent Practice Sessions</h2>
             <ul className='space-y-2 mt-5'>
                 {
                     recentPracticeSessions.map((item, index) => (
-                        <li key={index} className='flex items-center justify-between bg-gray-100/30 rounded-lg p-3'>
+                        <li key={index} className='flex items-center justify-between bg-gray-400/5 rounded-lg p-3'>
                             <div>
-                                <h5 className='font-semibold text-gray-900'>{item.title}</h5>
+                                <h5 className='font-semibold text-gray-800'>{item.title}</h5>
                                 <p className='text-gray-600'>{item.date}</p>
                             </div>
                             <div className='text-right'>

@@ -37,7 +37,7 @@ const QuickInsights = () => {
                 insights.map((insight, index) => {
                     const Icon = insight.icon;
                     return (
-                        <div key={index} className="flex items-start justify-between rounded-lg p-4 border border-gray-200/50 hover:border-gray-200/60 bg-white/90 hover:bg-white duration-200">
+                        <div key={index} className="flex items-start justify-between rounded-lg p-4 border border-gray-200/30 hover:border-gray-200/50 bg-white/70 backdrop-blur-xl duration-200">
                             <div>
                                 <p className='text-slate-500 uppercase text-sm'>{insight.title}</p>
                                 <h2 className='font-bold text-3xl max-sm:text-2xl text-gray-900 mt-2 mb-2'>{insight.value}</h2>

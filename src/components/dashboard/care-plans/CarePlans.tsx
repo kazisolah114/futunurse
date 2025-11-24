@@ -43,10 +43,12 @@ export const CarePlans = () => {
                 </div>
             </div>
             {plansLoading ? (
-                // Loading state
-                <div className="flex justify-center items-center text-gray-600">
-                    <Skeleton className='bg-slate-200 h-52 w-full rounded-md' />
-                </div>
+                Array.from({ length: 2 }).map((_, index) => (
+                    <Skeleton
+                        key={index}
+                        className="bg-gray-900/10 h-52 w-full rounded-md"
+                    />
+                ))
             ) : carePlans.length > 0 ? (
                 <div className="space-y-4">
                     {carePlans.map((plan, index) => (

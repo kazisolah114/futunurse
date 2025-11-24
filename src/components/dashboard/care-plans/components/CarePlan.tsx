@@ -27,7 +27,7 @@ const CarePlan = ({ carePlan }: CarePlanProps) => {
         }
     };
     return (
-        <div className='w-full border bg-white p-5 rounded-md'>
+        <div className='w-full bg-white/70 backdrop-blur-xl border border-gray-200/30 hover:border-gray-200/50 duration-200 p-5 rounded-md'>
             <div className='flex items-center gap-3'>
                 <h2 className='text-xl font-bold text-gray-800'>{patient.name}</h2> <span className='px-2 py-0.5 border rounded-full text-xs'>{patient.specialty}</span>
             </div>

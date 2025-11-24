@@ -15,12 +15,12 @@ const PerformanceByCategory = () => {
         { title: 'Psychosocial Integrity', accuracy_percentage: 74, questions_completed: 210 }
     ]
     return (
-        <div className='bg-white border rounded-md shadow-md p-6'>
-            <h2 className='text-gray-900 font-medium text-lg flex items-center gap-2'><BarChart3 size={20} /> Performance by Category</h2>
-            <ul className='space-y-2 mt-5'>
+        <div className='bg-white/70 backdrop-blur-xl border border-gray-200/30 rounded-lg p-5'>
+            <h2 className='text-gray-900 font-medium text-lg flex items-center gap-2'><BarChart3 size={20} className='text-green-600/90' /> Performance by Category</h2>
+            <ul className='space-y-3 mt-5'>
                 {
                     performanceByCategory.map((item, index) => (
-                        <li key={index} className='space-y-4'>
+                        <li key={index} className='space-y-2.5'>
                             <div className='flex items-end justify-between'>
                                 <div>
                                     <h5 className='font-medium text-gray-900'>{item.title}</h5>
@@ -28,7 +28,7 @@ const PerformanceByCategory = () => {
                                 </div>
                                 <p className={`text-sm w-12 text-center rounded-full ${item.accuracy_percentage > 80 ? 'bg-green-500/20 text-green-700' : 'bg-gray-100 text-gray-900'}`}>{item.accuracy_percentage}%</p>
                             </div>
-                            <Progress value={item.accuracy_percentage} className='mt-2' />
+                            <Progress value={item.accuracy_percentage} className='' />
                         </li>
                     ))
                 }

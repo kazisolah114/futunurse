@@ -64,7 +64,7 @@ const QuickInsights = () => {
         return (
           <div
             key={index}
-            className={`${colors.bg} text-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-200`}
+            className={`${colors.bg} text-white p-5 rounded-xl shadow-md hover:shadow-lg transition-all duration-200`}
           >
 
             <div className="flex items-center gap-4">

@@ -1,6 +1,6 @@
 "use client";
 import { Button } from '@/components/ui/button';
-import { Book, Home, LogOut, Stethoscope, User, XCircle } from 'lucide-react';
+import { Book, Home, LogOut, Stethoscope, User, X, XCircle } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -36,13 +36,16 @@ const Navigation = ({ responsiveMenu, setResponsiveMenu }: NavigationProps) => {
         <nav className={`lg:col-span-1 p-4 max-h-screen sticky top-0 left-0 bg-teal-600 flex flex-col justify-between items-start
     max-lg:fixed max-lg:top-0 max-lg:left-0 max-lg:w-full max-lg:h-full max-lg:z-20
     ${responsiveMenu ? 'max-lg:translate-x-0' : 'max-lg:-translate-x-full'} 
-    transition-transform duration-300`}>
+    transition-transform duration-300 md:rounded-r-3xl`}>
             <div className='w-full'>
-                <div className='flex items-center justify-between pb-5 mb-5 border-b'>
+                <div className='flex items-center justify-between pb-5 mb-5 border-b border-teal-500/50'>
                     <>
-                        <Link href="/dashboard" className='flex items-center gap-2 text-white'><h2 className='font-bold text-3xl'>FutuNurse</h2></Link>
+                        <Link href="/dashboard" className='flex items-center gap-2 text-white'>
+                            <Stethoscope size={27} className='relative top-0.5' />
+                            <h2 className='font-semibold text-3xl'>Futunurse</h2>
+                        </Link>
                     </>
-                    <button onClick={() => setResponsiveMenu(false)} className='lg:hidden text-white'><XCircle size={35} /></button>
+                    <button onClick={() => setResponsiveMenu(false)} className='lg:hidden text-white relative top-1'><X size={35} /></button>
                 </div>
                 <ul className='flex flex-col gap-3 text-white font-medium'>
                     {navs.map((nav, index) => {

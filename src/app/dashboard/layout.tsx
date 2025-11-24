@@ -14,7 +14,7 @@ const DashboardLayout = ({ children }: LayoutProps) => {
             <Navigation responsiveMenu={responsiveMenu} setResponsiveMenu={setResponsiveMenu} />
             <div className='lg:col-span-4 bg-gradient-to-br from-blue-50 via-white to-green-50'>
                 <Header setResponsiveMenu={setResponsiveMenu} />
-                <div className='p-6'>
+                <div className='p-5 md:p-6'>
                     {children}
                 </div>
             </div>

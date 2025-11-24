@@ -32,7 +32,7 @@ const QuickInsights = () => {
         }
     ]
     return (
-        <div className='grid grid-cols-3 gap-4'>
+        <div className='grid grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 gap-4 max-sm:gap-2'>
             {
                 insights.map((insight, index) => {
                     const Icon = insight.icon;
@@ -40,7 +40,7 @@ const QuickInsights = () => {
                         <div key={index} className="flex items-start justify-between rounded-lg p-4 border border-gray-200/50 hover:border-gray-200/60 bg-white/90 hover:bg-white duration-200">
                             <div>
                                 <p className='text-slate-500 uppercase text-sm'>{insight.title}</p>
-                                <h2 className='font-bold text-3xl text-gray-900 mt-2 mb-2'>{insight.value}</h2>
+                                <h2 className='font-bold text-3xl max-sm:text-2xl text-gray-900 mt-2 mb-2'>{insight.value}</h2>
                                 {
                                     insight.nclex_score && (
                                         <span className='text-[13px] text-teal-400'>+{insight.nclex_score}% this week</span>

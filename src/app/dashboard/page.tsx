@@ -1,15 +1,14 @@
-import { getServerSession } from 'next-auth';
 import React from 'react';
+import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]/route';
+import { Dashboard } from '@/components/dashboard/dashboard';
 
-const Dashboard = async () => {
+const DashboardPage = async () => {
     const session = await getServerSession(authOptions);
     console.log("session:", session);
     return (
-        <div>
-            Welcome Dashboard
-        </div>
+        <Dashboard user={session?.user} />
     );
 };
 
-export default Dashboard;
+export default DashboardPage;

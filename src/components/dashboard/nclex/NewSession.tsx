@@ -16,7 +16,7 @@ export const NewSession = () => {
 
     useEffect(() => {
         const questions = [...nclexQuestions].sort(() => Math.random() - 0.5);
-        setSessionQuestions(questions.slice(0, 5));
+        setSessionQuestions(questions.slice(0, 10));
     }, []);
 
     console.log("Session Questions:", sessionQuestions)

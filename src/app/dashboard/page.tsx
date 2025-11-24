@@ -5,7 +5,6 @@ import { Dashboard } from '@/components/dashboard/dashboard';
 
 const DashboardPage = async () => {
     const session = await getServerSession(authOptions);
-    console.log("session:", session);
     return (
         <Dashboard user={session?.user} />
     );

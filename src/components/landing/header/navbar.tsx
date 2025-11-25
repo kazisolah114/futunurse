@@ -5,7 +5,7 @@ import Link from 'next/link';
 const Navbar = () => {
     return (
         <nav className='flex items-center gap-5'>
-            <ul className='flex items-center gap-1'>
+            <ul className='flex items-center gap-1 max-md:hidden'>
                 {[
                     { label: 'Features', href: '#features' },
                     { label: 'Pricing', href: '#pricing' },

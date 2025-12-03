@@ -1,6 +1,6 @@
 import Header from "@/components/landing/header/header";
 import Hero from "@/components/landing/hero/hero";
-import WhyUsSection from "@/components/landing/why-us/why-us";
+import AboutUsSection from "@/components/landing/about-us/about-us";
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
       <Header />
       <main className="p-6 max-sm:p-3">
         <Hero />
-        <WhyUsSection />
+        <AboutUsSection />
       </main>
     </>
   );

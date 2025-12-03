@@ -12,22 +12,33 @@ type Features = {
 const AboutUsSection = () => {
     const features: Features[] = [
         {
-            icon: <Check size={16} />,
+            icon: <Check size={15} />,
             title: 'AI Care Plans',
             description: 'Generate accurate NANDA care plans instantly with AI.'
         },
         {
-            icon: <CheckCircle size={16} />,
+            icon: <CheckCircle size={15} />,
             title: 'NCLEX Coach',
             description: 'Smart, personalized NCLEX prep with adaptive quizzes.'
         },
         {
-            icon: <Stethoscope size={16} />,
+            icon: <Stethoscope size={15} />,
             title: 'Clinical Scenarios',
             description: 'Practice real patient cases to build clinical confidence.'
         },
     ];
-
+    const bgColor = (index: number) => {
+        switch (index) {
+            case 1:
+                return 'bg-green-600';
+            case 2:
+                return 'bg-blue-600';
+            case 3:
+                return 'bg-purple-600';
+            default:
+                return 'bg-gray-600';
+        }
+    }
     return (
         <section id={'about'} className="py-28">
             <div className="lg:px-32 max-sm:p-3 grid grid-cols-2 items-center justify-between gap-5 max-md:grid-cols-1 max-md:gap-8">
@@ -60,11 +71,11 @@ const AboutUsSection = () => {
                     <ul className="space-y-3">
                         {features.map((feature, index) => (
                             <li key={index} className="flex items-start gap-3">
-                                <div className="w-6 h-6 rounded bg-teal-600 flex items-center justify-center text-white">
+                                <div className={`w-6 h-6 rounded ${bgColor(index + 1)} flex items-center justify-center text-white`}>
                                     {feature.icon}
                                 </div>
                                 <div>
-                                    <p className="font-bold text-gray-900 mb-0">{feature.title}</p>
+                                    <p className="font-semibold text-gray-900 mb-0">{feature.title}</p>
                                     <p className="text-sm text-gray-600">{feature.description}</p>
                                 </div>
                             </li>

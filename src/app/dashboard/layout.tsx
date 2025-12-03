@@ -10,7 +10,7 @@ interface LayoutProps {
 const DashboardLayout = ({ children }: LayoutProps) => {
     const [responsiveMenu, setResponsiveMenu] = useState<boolean>(false);
     return (
-        <main className='grid lg:grid-cols-5 min-h-screen max-lg:relative bg-gradient-to-br from-blue-100 via-white to-green-100'>
+        <main className='grid lg:grid-cols-5 min-h-screen max-lg:relative bg-gradient-to-br from-teal-200 via-white to-blue-200'>
             <Navigation responsiveMenu={responsiveMenu} setResponsiveMenu={setResponsiveMenu} />
             <div className='lg:col-span-4'>
                 <Header setResponsiveMenu={setResponsiveMenu} />

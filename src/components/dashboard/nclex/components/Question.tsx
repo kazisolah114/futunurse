@@ -119,7 +119,7 @@ const Question = ({ currentQuestion, onNextQuestion, currentQuestionIndex, sessi
                 </div>
             }
             <div className='mt-7 flex justify-between sm:items-center max-sm:flex-col max-sm:gap-3 max-sm:space-y-3'>
-                <p className='text-gray-700'>Score: {sessionScores}/{currentQuestionIndex + 1}</p>
+                <p className='text-gray-700'>Score: {sessionScores}/{currentQuestionIndex}</p>
                 {!showResult ?
                     <Button size={'lg'} className={`${selectedAnswer === null ? 'cursor-not-allowed opacity-50' : ''}`} onClick={handleSubmitAnswer}>Submit Answer</Button>
                     :

@@ -19,7 +19,7 @@ const Hero = () => {
                 </div>
                 <div className='flex items-center gap-3 max-sm:gap-2 z-10'>
                     <Button size={'lg'} className='rounded-full w-44 max-sm:w-40 h-12 max-sm:h-11 font-medium'>Start Free Trial</Button>
-                    <Button size={'lg'} className='bg-white text-black hover:bg-white/90 rounded-full w-44 max-sm:w-40 h-12 max-sm:h-11 font-medium group'>Watch Demo <LucidePlayCircle size={30} className='group-hover:scale-125 duration-300 ease-in-out relative top-0.5' /></Button>
+                    <Button size={'lg'} className='bg-white text-black hover:bg-white/90 rounded-full w-44 max-sm:w-40 h-12 max-sm:h-11 font-medium group'>Watch Demo <LucidePlayCircle size={30} className='relative top-0.5 animate-pulse-dot' /></Button>
                 </div>
             </div>
         </section>

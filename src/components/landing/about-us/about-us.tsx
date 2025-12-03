@@ -29,8 +29,8 @@ const AboutUsSection = () => {
     ];
 
     return (
-        <section className="py-20">
-            <div className="lg:px-32 grid grid-cols-2 items-center justify-between gap-5 max-md:grid-cols-1 max-md:gap-8">
+        <section id={'about'} className="py-28">
+            <div className="lg:px-32 max-sm:p-3 grid grid-cols-2 items-center justify-between gap-5 max-md:grid-cols-1 max-md:gap-8">
 
                 <Image
                     src="/images/nurse-tablet.jpg"

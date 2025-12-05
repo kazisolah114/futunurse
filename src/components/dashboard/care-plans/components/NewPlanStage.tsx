@@ -13,7 +13,7 @@ const NewPlanStage = ({ currentStage }: StageProps) => {
   ];
 
   return (
-    <div className="lg:w-3xl mx-auto flex flex-col md:flex-row items-start md:items-center mb-7">
+    <div className="lg:w-3xl max-md:hidden mx-auto flex flex-col md:flex-row items-start md:items-center mb-10">
       {stages.map((stage, index) => {
         const isCurrent = stage.id === currentStage;
         const isCompleted = stage.id < currentStage;

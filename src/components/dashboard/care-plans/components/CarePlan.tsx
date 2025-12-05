@@ -32,7 +32,7 @@ const CarePlan = ({ carePlan }: CarePlanProps) => {
                 <h2 className='text-xl font-bold text-gray-800'>{patient.name}</h2> <span className='px-2 py-0.5 border rounded-full text-xs'>{patient.specialty}</span>
             </div>
             <p className='text-gray-800 my-2'>{patient.primaryDiagnoses}</p>
-            <div className='flex items-center gap-8'>
+            <div className='flex sm:items-center gap-8 max-sm:flex-col max-sm:gap-2'>
                 <p className='text-sm text-gray-500 flex items-center gap-2'><Calendar size={16} /> Created {new Date(createdAt).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</p>
                 <p className='text-sm text-gray-500 flex items-center gap-2'><Clock size={16} /> Updated {new Date(updatedAt).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</p>
             </div>
@@ -45,8 +45,8 @@ const CarePlan = ({ carePlan }: CarePlanProps) => {
                     }
                 }}><Button><Stethoscope size={18} /> View Details</Button></Link>
                 <Button variant={'outline'}><PencilLine size={18} /> Edit Plan</Button>
-                <Button className='bg-transparent text-gray-700 hover:text-yellow-500 hover:bg-yellow-500/20'><Star size={18} /></Button>
-                <Button onClick={handleDeletePlan} className='bg-transparent text-gray-700 hover:text-red-500 hover:bg-red-500/20'><Trash size={18} /></Button>
+                <Button className='bg-transparent text-gray-700 hover:text-yellow-500 hover:bg-yellow-500/20 max-sm:w-1'><Star size={18} /></Button>
+                <Button onClick={handleDeletePlan} className='bg-transparent text-gray-700 hover:text-red-500 hover:bg-red-500/20 max-sm:w-1'><Trash size={18} /></Button>
             </div>
         </div>
     );

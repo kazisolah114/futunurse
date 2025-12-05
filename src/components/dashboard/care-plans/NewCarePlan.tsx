@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import NewPlanStage from './components/NewPlanStage';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import PatientForm from './components/PatientForm';
 import GeneratingPlanAnimation from './components/GeneratingPlanAnimation';
 import ReviewAndEditPlan from './components/ReviewAndEditPlan';
@@ -39,16 +39,17 @@ export const NewCarePlan = () => {
             <NewPlanStage currentStage={currentStage} />
             {currentStage === 1 ?
                 (
-                    <Tabs defaultValue="manual" className='rounded-md'>
-                        <TabsList className='py-6'>
-                            <TabsTrigger value={"manual"} className='w-44 py-5 text-sm cursor-pointer'>Manual Entry</TabsTrigger>
-                            <TabsTrigger value={"template"} className='w-44 py-5 text-sm cursor-pointer'>Use Template</TabsTrigger>
-                        </TabsList>
-                        <TabsContent value={"manual"}>
-                            <PatientForm currentStage={currentStage} setCurrentStage={setCurrentStage} patientData={patientData} setPatientData={setPatientData} setDiagnoses={setDiagnoses} />
-                        </TabsContent>
-                        <TabsContent value={"template"}>Template content</TabsContent>
-                    </Tabs>
+                    // <Tabs defaultValue="manual" className='rounded-md'>
+                    //     <TabsList className='py-6'>
+                    //         <TabsTrigger value={"manual"} className='w-44 py-5 text-sm cursor-pointer'>Manual Entry</TabsTrigger>
+                    //         <TabsTrigger value={"template"} className='w-44 py-5 text-sm cursor-pointer'>Use Template</TabsTrigger>
+                    //     </TabsList>
+                    //     <TabsContent value={"manual"}>
+                    //         <PatientForm currentStage={currentStage} setCurrentStage={setCurrentStage} patientData={patientData} setPatientData={setPatientData} setDiagnoses={setDiagnoses} />
+                    //     </TabsContent>
+                    //     <TabsContent value={"template"}>Template content</TabsContent>
+                    // </Tabs>
+                    <PatientForm currentStage={currentStage} setCurrentStage={setCurrentStage} patientData={patientData} setPatientData={setPatientData} setDiagnoses={setDiagnoses} />
                 )
                 :
                 currentStage === 2 ?

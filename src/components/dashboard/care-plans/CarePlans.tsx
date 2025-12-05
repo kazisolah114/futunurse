@@ -43,14 +43,18 @@ export const CarePlans = () => {
                 </div>
             </div>
             {plansLoading ? (
-                Array.from({ length: 2 }).map((_, index) => (
-                    <Skeleton
-                        key={index}
-                        className="bg-gray-900/10 h-52 w-full rounded-md"
-                    />
-                ))
+                <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-6">
+                    {
+                        Array.from({ length: 2 }).map((_, index) => (
+                            <Skeleton
+                                key={index}
+                                className="bg-gray-900/10 h-52 w-full rounded-md"
+                            />
+                        ))
+                    }
+                </div>
             ) : carePlans.length > 0 ? (
-                <div className="space-y-4">
+                <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-6">
                     {carePlans.map((plan, index) => (
                         <CarePlan key={index} carePlan={plan} />
                     ))}

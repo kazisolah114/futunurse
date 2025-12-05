@@ -3,8 +3,8 @@ import React from 'react';
 
 const Features = () => {
     return (
-        <div className='col-span-2 max-md:col-span-full grid sm:grid-cols-2 gap-4 max-sm:gap-2 '>
-            <div className='cursor-pointer bg-white/70 backdrop-blur-xl border border-gray-200/30 hover:border-blue-600/50 duration-200 p-4 rounded-lg group'>
+        <div className='col-span-2 max-md:col-span-full grid sm:grid-cols-2 gap-6 max-sm:gap-3 '>
+            <div className='cursor-pointer bg-white border border-gray-200/30 hover:border-blue-600/50 duration-200 p-4 rounded-lg group'>
                 <div className='bg-blue-600/10 rounded-lg p-3 inline-block'>
                     <Stethoscope size={20} className='text-blue-600' />
                 </div>
@@ -12,7 +12,7 @@ const Features = () => {
                 <p className=' text-xs text-slate-500'>AI-powered NANDA/NIC/NOC care plans</p>
                 <span className='mt-3 text-sm flex items-center text-blue-600'>Start now <ChevronRight size={13} className='group-hover:ml-2 duration-200 relative top-0.5' /></span>
             </div>
-            <div className='cursor-pointer bg-white/70 backdrop-blur-xl border border-gray-200/30 hover:border-green-600/50 duration-200 p-4 rounded-lg group'>
+            <div className='cursor-pointer bg-white border border-gray-200/30 hover:border-green-600/50 duration-200 p-4 rounded-lg group'>
                 <div className='bg-green-600/10 rounded-lg p-3 inline-block'>
                     <Stethoscope size={20} className='text-green-600' />
                 </div>

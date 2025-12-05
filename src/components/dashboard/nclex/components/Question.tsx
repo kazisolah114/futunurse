@@ -35,7 +35,7 @@ const Question = ({ currentQuestion, onNextQuestion, currentQuestionIndex, sessi
     }
     if (!currentQuestion) return <div>Thinking...</div>
     return (
-        <div className='border bg-white shadow-md p-5 rounded-md'>
+        <div className='border border-gray-900/10 bg-white/50 backdrop-blur-lg p-5 rounded-md'>
             <h6 className='font-medium text-lg text-gray-900'>{currentQuestion.question}</h6>
             <ul className='space-y-3 mt-6'>
                 {
@@ -121,7 +121,7 @@ const Question = ({ currentQuestion, onNextQuestion, currentQuestionIndex, sessi
             <div className='mt-7 flex justify-between sm:items-center max-sm:flex-col max-sm:gap-3 max-sm:space-y-3'>
                 <p className='text-gray-700'>Score: {sessionScores}/{currentQuestionIndex}</p>
                 {!showResult ?
-                    <Button size={'lg'} className={`${selectedAnswer === null ? 'cursor-not-allowed opacity-50' : ''}`} onClick={handleSubmitAnswer}>Submit Answer</Button>
+                    <Button size={'lg'} className={`rounded-full ${selectedAnswer === null ? 'cursor-not-allowed opacity-50' : ''}`} onClick={handleSubmitAnswer}>Submit Answer</Button>
                     :
                     <Button size={'lg'} onClick={onNextQuestion}>{currentQuestionIndex === questionsLength - 1 ? 'Finish Session' : 'Next Question'} <ArrowRight /></Button>
                 }

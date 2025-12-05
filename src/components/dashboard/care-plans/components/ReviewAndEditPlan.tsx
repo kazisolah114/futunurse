@@ -90,9 +90,9 @@ const ReviewAndEditPlan = ({ patientData, setPatientData, diagnoses, setCurrentS
             </div>
 
             <div className="mt-5 flex items-center gap-4">
-                <Button onClick={() => handleSavePlan()} className="flex-1" size={'lg'}>{saveLoading ? 'Loading...' : 'Save Care Plan'}</Button>
-                <Button onClick={() => setCurrentStage(1)} variant={'outline'} size={'lg'}>Create New Plan</Button>
-                <Button variant={'outline'} size={'lg'}>Download as PDF</Button>
+                <Button onClick={() => handleSavePlan()} className="flex-1 rounded-full" size={'lg'}>{saveLoading ? 'Loading...' : 'Save care plan'}</Button>
+                <Button onClick={() => setCurrentStage(1)} variant={'outline'} size={'lg'} className="rounded-full">Create new plan</Button>
+                <Button variant={'outline'} size={'lg'} className="rounded-full">Download as PDF</Button>
             </div>
         </div>
     )

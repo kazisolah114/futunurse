@@ -1,9 +1,9 @@
 import { handleApiError } from "@/lib/apiError";
 import { connectDB } from "@/lib/mongoose";
 import { CarePlan } from "@/models/PatientCarePlan/PatientCarePlanModel";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     try {
         await connectDB();
         const { id } = await params;

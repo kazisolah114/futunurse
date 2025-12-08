@@ -1,11 +1,11 @@
 import { handleApiError } from "@/lib/apiError";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { CarePlan } from "@/models/PatientCarePlan/PatientCarePlanModel";
 import { connectDB } from "@/lib/mongoose";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
     try {
         await connectDB();
         const session = await getServerSession(authOptions);

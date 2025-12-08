@@ -1,7 +1,7 @@
 import { handleApiError } from "@/lib/apiError";
 import { configDotenv } from "dotenv";
 import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
 configDotenv();
 
@@ -48,7 +48,7 @@ interface IPatientData {
     allergies?: string
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
     try {
         const session = await getServerSession(authOptions);
         if(!session) {

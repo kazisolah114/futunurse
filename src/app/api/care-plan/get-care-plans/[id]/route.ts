@@ -3,9 +3,9 @@ import { handleApiError } from "@/lib/apiError";
 import { connectDB } from "@/lib/mongoose";
 import { CarePlan } from "@/models/PatientCarePlan/PatientCarePlanModel";
 import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     try {
         await connectDB();
         const session = await getServerSession(authOptions);
@@ -14,7 +14,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
         }
         const { id } = await params;
         const carePlan = await CarePlan.findOne({ user: (session.user as { id: string }).id, _id:  id});
-        console.log("Care plan:", carePlan);
+        // console.log("Care plan:", carePlan);
         return NextResponse.json({ success: true, carePlan }, { status: 200 });
     } catch (error) {
         console.log(error);

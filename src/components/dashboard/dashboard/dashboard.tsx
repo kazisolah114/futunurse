@@ -1,9 +1,10 @@
-import { Activity, Calendar, Zap } from 'lucide-react';
+import { Calendar, Zap } from 'lucide-react';
 import React from 'react';
 import QuickInsights from './components/QuickInsights';
 import Features from './components/Features';
 import NclexPerformance from './components/NclexPerformance';
 import WeekInsight from './components/WeekInsight';
+import AISuggestions from './components/AISuggestions';
 
 interface DashboardProps {
     user?: {
@@ -26,12 +27,13 @@ export const Dashboard = ({ user }: DashboardProps) => {
                 <div className='max-md:hidden text-white bg-gradient-to-b bg-green-500 to-10% flex items-center gap-3 rounded-md text-xs px-3 py-2 font-medium'><Zap size={16} /> Pro Trial - 14 days remaining</div>
             </div>
             <QuickInsights />
-            <div className='grid grid-cols-3 gap-6 max-sm:gap-3'>
+            <div className='md:grid grid-cols-3 gap-6 max-sm:gap-3'>
                 <div className='col-span-2 space-y-6'>
                     <Features />
                     <NclexPerformance />
                 </div>
-                <div className='col-span-1'>
+                <div className='col-span-1 space-y-6'>
+                    <AISuggestions />
                     <WeekInsight />
                 </div>
             </div>

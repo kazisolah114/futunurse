@@ -23,7 +23,7 @@ const PatientForm = ({ currentStage, setCurrentStage, patientData, setPatientDat
         setCurrentStage(2);
         try {
             const response = await axios.post(
-                "http://localhost:3000/api/care-plan/create-care-plan",
+                `${process.env.NEXT_PUBLIC_API_BASE}/api/care-plan/create-care-plan`,
                 patientData
             );
             if (response.status === 200) {

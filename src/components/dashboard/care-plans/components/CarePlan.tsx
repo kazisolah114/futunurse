@@ -16,7 +16,7 @@ const CarePlan = ({ carePlan }: CarePlanProps) => {
     const { _id, patient, createdAt, updatedAt } = carePlan || {};
     const handleDeletePlan = async () => {
         try {
-            const response = await axios.delete(`http://localhost:3000/api/care-plan/delete-care-plan/${_id}`);
+            const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_BASE}/api/care-plan/delete-care-plan/${_id}`);
             console.log(response);
             if (response.status === 200) {
                 toast.success("Care plan deleted succesfully!", { autoClose: 1000 });

@@ -30,7 +30,7 @@ const SignUp = ({ signInInstead, onClose }: SignUpProps) => {
         e.preventDefault();
         setLoading(true);
         // User sign up logic:
-        const res = fetch('http://localhost:3000/api/auth/signup', {
+        const res = fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/auth/signup`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

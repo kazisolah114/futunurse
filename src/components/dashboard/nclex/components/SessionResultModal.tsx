@@ -1,4 +1,4 @@
-import { ISessionResult } from '@/components/types/NCLEX';
+import { ISessionResult } from '@/types/NCLEX';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Progress } from '@/components/ui/progress';

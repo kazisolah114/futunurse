@@ -1,8 +1,8 @@
 import React from 'react';
-import { NCLEXQuestion } from '../nclex-questions';
+import { INCLEXQuestion } from '@/types/NCLEX';
 
 interface NewSessionHeaderProps {
-    currentQuestion: NCLEXQuestion | null;
+    currentQuestion: INCLEXQuestion | null;
     currentQuestionIndex: number;
     length: number;
 }

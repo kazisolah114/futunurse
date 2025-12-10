@@ -1,17 +1,6 @@
-export interface NCLEXQuestion {
-    id: string
-    question: string
-    options: string[]
-    correctAnswer: number
-    explanation: string
-    category: string
-    subcategory: string
-    difficulty: "easy" | "medium" | "hard"
-    rationale: string
-    tags: string[]
-}
+import { INCLEXQuestion } from "@/types/NCLEX"
 
-export const nclexQuestions: NCLEXQuestion[] = [
+export const nclexQuestions: INCLEXQuestion[] = [
     // Safe and Effective Care Environment
     {
         id: "q001",

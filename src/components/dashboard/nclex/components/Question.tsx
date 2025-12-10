@@ -1,11 +1,11 @@
 "use client";
 import { Button } from '@/components/ui/button';
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { NCLEXQuestion } from '../nclex-questions';
 import { ArrowRight, CheckCircle2, XCircle } from 'lucide-react';
+import { INCLEXQuestion } from '@/types/NCLEX';
 
 interface QuestionProps {
-    currentQuestion: NCLEXQuestion | null;
+    currentQuestion: INCLEXQuestion | null;
     onNextQuestion: () => void;
     currentQuestionIndex: number;
     sessionScores: number;

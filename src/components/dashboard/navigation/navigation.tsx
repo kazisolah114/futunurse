@@ -1,6 +1,6 @@
 "use client";
 import { Button } from '@/components/ui/button';
-import { Book, Home, LogOut, Stethoscope, User, X, XCircle } from 'lucide-react';
+import { Book, Home, LogOut, Stethoscope, User, X } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';

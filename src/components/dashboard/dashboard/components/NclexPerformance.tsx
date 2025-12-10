@@ -1,5 +1,5 @@
 "use client";
-import { Activity, ChartArea, ChartAreaIcon } from 'lucide-react';
+import { ChartAreaIcon } from 'lucide-react';
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 

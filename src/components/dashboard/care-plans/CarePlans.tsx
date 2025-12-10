@@ -5,7 +5,7 @@ import { Download, Plus, Star, Stethoscope } from 'lucide-react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import CarePlan from './components/CarePlan';
-import { ICarePlan } from '@/components/types/PatientCarePlan';
+import { ICarePlan } from '@/types/PatientCarePlan';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export const CarePlans = () => {

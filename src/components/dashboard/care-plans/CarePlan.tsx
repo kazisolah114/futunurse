@@ -1,10 +1,10 @@
 "use client";
-import { ICarePlan } from '@/components/types/PatientCarePlan';
+import { ICarePlan } from '@/types/PatientCarePlan';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Diagnoses from './components/Diagnoses';
 import PatientInformation from './components/PatientInformation';
-import { Download, PencilLine, Stethoscope, UserRound } from 'lucide-react';
+import { Download, PencilLine } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 

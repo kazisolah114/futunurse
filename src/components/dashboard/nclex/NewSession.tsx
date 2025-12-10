@@ -3,34 +3,30 @@ import React, { useEffect, useState } from 'react';
 import NewSessionHeader from './components/NewSessionHeader';
 import SessionProgress from './components/SessionProgress';
 import Question from './components/Question';
-import { NCLEXQuestion, nclexQuestions } from './nclex-questions';
+import { nclexQuestions } from './nclex-questions';
 import { Skeleton } from '@/components/ui/skeleton';
-import { ISessionResult } from '@/components/types/NCLEX';
+import { INCLEXQuestion, ISessionResult } from '@/types/NCLEX';
 import SessionResultModal from './components/SessionResultModal';
 
 export const NewSession = () => {
 
     const [sessionResult, setSessionResult] = useState<ISessionResult | null>(null);
     const [sessionScores, setSessionScores] = useState<number>(0);
-    const [sessionQuestions, setSessionQuestions] = useState<NCLEXQuestion[]>([]);
+    const [sessionQuestions, setSessionQuestions] = useState<INCLEXQuestion[]>([]);
 
     useEffect(() => {
         const questions = [...nclexQuestions].sort(() => Math.random() - 0.5);
         setSessionQuestions(questions.slice(0, 10));
     }, []);
 
-    console.log("Session Questions:", sessionQuestions)
-
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
-    const [currentQuestion, setCurrentQuestion] = useState<NCLEXQuestion | null>(null);
+    const [currentQuestion, setCurrentQuestion] = useState<INCLEXQuestion | null>(null);
 
     useEffect(() => {
         if (sessionQuestions && sessionQuestions.length > 0) {
             setCurrentQuestion(sessionQuestions[currentQuestionIndex])
         }
     }, [sessionQuestions, currentQuestionIndex])
-
-    console.log("Current Questions:", currentQuestion)
 
     const handleNextQuestion = () => {
         if (currentQuestionIndex < sessionQuestions.length - 1) {

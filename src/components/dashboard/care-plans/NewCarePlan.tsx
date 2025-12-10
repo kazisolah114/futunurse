@@ -6,7 +6,7 @@ import PatientForm from './components/PatientForm';
 import GeneratingPlanAnimation from './components/GeneratingPlanAnimation';
 import ReviewAndEditPlan from './components/ReviewAndEditPlan';
 import { ToastContainer } from "react-toastify";
-import { IPatient } from '@/components/types/PatientCarePlan';
+import { IPatient } from '@/types/PatientCarePlan';
 
 export const NewCarePlan = () => {
     const [currentStage, setCurrentStage] = useState<number>(1);

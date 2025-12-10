@@ -29,6 +29,6 @@ export interface IRecentSession extends Document {
     correctAnswers: number;
     score: number;
     date: Date;
-    performanceAnalysis: string;
-    studyRecommendations: string[];
+    performanceAnalysis?: string;
+    studyRecommendations?: string[];
 }

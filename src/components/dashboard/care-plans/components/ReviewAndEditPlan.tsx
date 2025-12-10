@@ -1,5 +1,5 @@
 "use client"
-import { Diagnosis, IPatient } from "@/components/types/PatientCarePlan"
+import { Diagnosis, IPatient } from "@/types/PatientCarePlan"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import axios from "axios"

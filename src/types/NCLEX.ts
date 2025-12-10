@@ -1,3 +1,5 @@
+import { Document, Schema } from "mongoose"
+
 export interface INCLEXQuestion {
     id: string
     question: string
@@ -12,6 +14,17 @@ export interface INCLEXQuestion {
 }
 
 export interface ISessionResult {
+    totalQuestions: number;
+    correctAnswers: number;
+    score: number;
+    date: Date;
+    performanceAnalysis: string;
+    studyRecommendations: string[];
+}
+
+export interface IRecentSession extends Document {
+    user: Schema.Types.ObjectId;
+    category: string;
     totalQuestions: number;
     correctAnswers: number;
     score: number;

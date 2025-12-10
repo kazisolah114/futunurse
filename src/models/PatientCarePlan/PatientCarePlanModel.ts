@@ -1,4 +1,4 @@
-import { Diagnosis, IPatient } from "@/components/types/PatientCarePlan";
+import { Diagnosis, IPatient } from "@/types/PatientCarePlan";
 import mongoose, { Document, Types } from "mongoose";
 import IUser from "../User/UserModel";
 

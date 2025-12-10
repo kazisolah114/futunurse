@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Progress } from '@/components/ui/progress';
 import { Download, Goal } from 'lucide-react';
 import { redirect } from 'next/navigation';
-import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 interface SessionResultModalProps {
@@ -15,18 +15,30 @@ interface SessionResultModalProps {
 
 const SessionResultModal = ({ result, onSetSessionResult, onResetSession }: SessionResultModalProps) => {
     console.log("Result:", result);
+    const hasSaved = useRef(false);
     const isOpen = Boolean(result);
+
     useEffect(() => {
+        if (!result) return;
+        if (hasSaved.current) return;
+
+        hasSaved.current = true;
+
         const handleSaveSession = async () => {
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE}/api/nclex/save-session`,
-                {
-                    ...result, category: "mixed"
-                }
-            );
-            console.log("response:", res)
-        }
+            try {
+                const res = await axios.post(
+                    `${process.env.NEXT_PUBLIC_API_BASE}/api/nclex/save-session`,
+                    { ...result, category: "mixed" }
+                );
+                console.log("Saved session:", res);
+            } catch (err) {
+                console.error("Error saving session:", err);
+            }
+        };
+
         handleSaveSession();
-    }, [result])
+    }, [result]);
+    
     return (
         <Dialog open={isOpen}>
             <DialogContent showCloseButton={false}>

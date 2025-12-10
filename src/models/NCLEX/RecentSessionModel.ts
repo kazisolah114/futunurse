@@ -26,6 +26,15 @@ const RecentSessionSchema = new Schema<IRecentSession>({
     date: {
         type: Date,
         required: true,
+    },
+    performanceAnalysis: {
+        type: String,
+        default: null,
+        required: false
+    },
+    studyRecommendations: {
+        type: [String],
+        required: false
     }
 },
 { timestamps: true }

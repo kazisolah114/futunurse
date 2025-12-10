@@ -13,7 +13,6 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ success: false, message: "User not authenticated" }, { status: 401 });
         }
         const body = await req.json();
-        console.log("body:", body);
         const { category, totalQuestions, correctAnswers, score, date, performanceAnalysis, studyRecommendations } = body || {};
         if (!category || !totalQuestions || !correctAnswers || !score) {
             return NextResponse.json({ success: false, message: "Fields required" }, { status: 404 });
@@ -24,9 +23,10 @@ export async function POST(req: NextRequest) {
             totalQuestions,
             correctAnswers,
             score,
-            date
+            date,
+            performanceAnalysis,
+            studyRecommendations
         });
-        console.log(newSession);
         if (!newSession) {
             return NextResponse.json({ success: false, message: "Failed to save recent session" }, { status: 400 })
         }

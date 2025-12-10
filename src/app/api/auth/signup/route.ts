@@ -2,9 +2,9 @@ import { handleApiError } from "@/lib/apiError";
 import { connectDB } from "@/lib/mongoose";
 import User from "@/models/User/UserModel";
 import bcrypt from "bcryptjs";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
      await connectDB();
      try {
         const { fullName, email, password, confirmPassword } = await req.json();

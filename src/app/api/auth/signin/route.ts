@@ -1,14 +1,14 @@
 import bcrypt from "bcryptjs";
 import { configDotenv } from "dotenv";
 import jwt from "jsonwebtoken";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/User/UserModel";
 import { connectDB } from "@/lib/mongoose";
 configDotenv()
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
     await connectDB();
     try {
         const { email, password } = await req.json();

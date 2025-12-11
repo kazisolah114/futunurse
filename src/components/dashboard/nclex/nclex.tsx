@@ -20,7 +20,6 @@ export const NCLEX = () => {
                     <Button size={'lg'} onClick={() => redirect(`${pathname}/new-session`)} className='w-56 h-12 max-md:w-full'><Play size={18} /> Start Session</Button>
                 </div>
             </div>
-            {/* <QuickInsights /> */}
             <SessionOptions />
             <PerformanceByCategory />
             <RecentPracticeSessions />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Diagnosis } from '@/components/types/PatientCarePlan';
+import { Diagnosis } from '@/types/PatientCarePlan';
 import { Badge } from "@/components/ui/badge"
 import { AlertCircle, TrendingUp, Target, Stethoscope, CheckCircle2, GraduationCap, BookOpen, Clock } from "lucide-react"
 

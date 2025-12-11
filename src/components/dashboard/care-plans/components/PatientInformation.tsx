@@ -1,4 +1,4 @@
-import { IPatient } from '@/components/types/PatientCarePlan';
+import { IPatient } from '@/types/PatientCarePlan';
 import React from 'react';
 
 interface PatientInformationProps {

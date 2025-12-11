@@ -15,7 +15,7 @@ const PerformanceByCategory = () => {
         { title: 'Psychosocial Integrity', accuracy_percentage: 74, questions_completed: 210 }
     ]
     return (
-        <div className='bg-white/70 backdrop-blur-xl border border-gray-200/30 rounded-lg p-5'>
+        <div className='bg-white border border-gray-200/30 rounded-lg p-5'>
             <h2 className='text-gray-900 font-medium text-lg flex items-center gap-2'><BarChart3 size={20} className='text-green-600/90' /> Performance by Category</h2>
             <ul className='space-y-3 mt-5'>
                 {

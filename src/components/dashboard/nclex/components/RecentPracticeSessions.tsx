@@ -15,7 +15,7 @@ const RecentPracticeSessions = () => {
         { title: 'Pediatrics', date: '2/05/2025', accuracy_percentage: 90, questions_completed: 25 }
     ]
     return (
-        <div className='bg-white/70 backdrop-blur-xl border border-gray-200/30 rounded-lg p-5'>
+        <div className='bg-white border border-gray-200/30 rounded-lg p-5'>
             <h2 className='text-gray-900 font-medium text-lg flex items-center gap-2'><Clock size={20} className='text-blue-600/90' /> Recent Practice Sessions</h2>
             <ul className='space-y-2 mt-5'>
                 {

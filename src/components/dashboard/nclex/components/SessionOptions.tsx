@@ -30,7 +30,7 @@ const SessionOptions = () => {
                 options.map((option, index) => {
                     const Icon = option.icon;
                     return (
-                        <div key={index} className='bg-white/30 border border-gray-200/30 p-5 rounded-md '>
+                        <div key={index} className='bg-white border border-gray-200/30 p-5 rounded-md '>
                             <h4 className='flex items-center gap-3 font-semibold text-gray-800'><Icon className={`w-5 h-5 ${index === 0 ? 'text-teal-600' : index === 1 ? 'text-blue-600' : null}`} /> {option.title}</h4>
                             <p className='text-gray-500 mb-5 mt-1 text-sm'>{option.label}</p>
                             <p className='text-gray-600 mb-5 text-sm'>{option.description}</p>

@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import axios from "axios";
 import { toast } from 'react-toastify';
-import { IPatient } from '@/components/types/PatientCarePlan';
+import { IPatient } from '@/types/PatientCarePlan';
 
 interface PatientFormProps {
     currentStage: number;

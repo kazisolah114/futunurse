@@ -32,7 +32,7 @@ const PerformanceByCategory = () => {
                                     <h5 className='font-medium text-gray-900 capitalize'>{item.category}</h5>
                                     <p className='text-gray-600'>{item.totalQuestions} questions completed</p>
                                 </div>
-                                <p className={`text-sm w-12 text-center rounded-full ${item.accuracy > 80 ? 'bg-green-500/20 text-green-700' : 'bg-gray-100 text-gray-900'}`}>{item.accuracy}%</p>
+                                <p className={`text-sm font-medium w-16 py-0.5 text-center rounded-full ${item.accuracy >= 70 ? 'bg-green-500/20 text-green-700' : item.accuracy >= 40 ? 'bg-yellow-500/20 text-yellow-700' : 'bg-red-100 text-red-500'}`}>{item.accuracy.toFixed(2)}%</p>
                             </div>
                             <Progress value={item.accuracy} className='' />
                         </li>

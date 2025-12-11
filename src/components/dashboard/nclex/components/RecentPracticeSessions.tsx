@@ -27,8 +27,8 @@ const RecentPracticeSessions = () => {
                                 <p className='text-gray-600'>{new Date(item.date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</p>
                             </div>
                             <div className='text-right'>
-                                <h5 className='font-semibold text-lg text-gray-900'>{item.score}%</h5>
-                                <p className='text-gray-600'>{item.totalQuestions} questions</p>
+                                <h5 className='font-semibold text-[17px] text-gray-900'>{item.score.toFixed(0)}%</h5>
+                                <p className='text-gray-600'>{item.correctAnswers} out of {item.totalQuestions} questions</p>
                             </div>
                         </li>
                     ))

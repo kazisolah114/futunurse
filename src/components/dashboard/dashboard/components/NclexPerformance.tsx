@@ -14,7 +14,7 @@ const NclexPerformance = () => {
         { date: "Feb 12", score: 88, questions: 30 },
     ]
     return (
-        <div className='border border-gray-200/30 hover:border-gray-200/50 rounded-lg p-4 bg-white/30 backdrop-blur-2xl duration-200'>
+        <div className='border border-gray-200/30 hover:border-gray-200/50 rounded-lg p-4 bg-white duration-200'>
             <h4 className='mb-1 flex items-center gap-2.5 font-bold text-slate-800'><ChartAreaIcon size={18} className='text-blue-700' /> Performance Trend</h4>
             <p className='text-sm text-gray-500 mb-5'>Your NCLEX score progression over time</p>
             <ResponsiveContainer width="100%" height={300}>

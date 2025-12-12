@@ -5,6 +5,7 @@ import Features from './components/Features';
 import NclexPerformance from './components/NclexPerformance';
 import WeekInsight from './components/WeekInsight';
 import AISuggestions from './components/AISuggestions';
+import StrengthsRadar from './components/StrengthsRadar';
 
 interface DashboardProps {
     user?: {
@@ -33,6 +34,7 @@ export const Dashboard = ({ user }: DashboardProps) => {
                     <NclexPerformance />
                 </div>
                 <div className='col-span-1 space-y-6'>
+                    <StrengthsRadar />
                     <AISuggestions />
                     <WeekInsight />
                 </div>

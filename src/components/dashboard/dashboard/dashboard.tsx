@@ -6,6 +6,8 @@ import NclexPerformance from './components/NclexPerformance';
 import WeekInsight from './components/WeekInsight';
 import AISuggestions from './components/AISuggestions';
 import StrengthsRadar from './components/StrengthsRadar';
+import AvgTimeChart from './components/AvgTimeChart';
+import QuestionsDifficultyPie from './components/QuestionsDifficultyPie';
 
 interface DashboardProps {
     user?: {
@@ -32,6 +34,10 @@ export const Dashboard = ({ user }: DashboardProps) => {
                 <div className='col-span-2 space-y-6'>
                     <Features />
                     <NclexPerformance />
+                    <div className='grid md:grid-cols-2 gap-6'>
+                        <AvgTimeChart />
+                        <QuestionsDifficultyPie />
+                    </div>
                 </div>
                 <div className='col-span-1 space-y-6'>
                     <StrengthsRadar />

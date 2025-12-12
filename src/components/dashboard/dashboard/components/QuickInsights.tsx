@@ -1,6 +1,6 @@
 import React from "react";
 import { Progress } from "@/components/ui/progress";
-import { CheckCircle, LucideIcon, Brain, CalendarClock } from "lucide-react";
+import { CheckCircle, LucideIcon, Brain, CalendarClock, Stethoscope } from "lucide-react";
 
 type Insight = {
     title: string;
@@ -8,18 +8,18 @@ type Insight = {
     pass_probability?: string;
     this_week?: number;
     timeline?: string;
-    color: "blue" | "purple" | "green";
+    color: "blue" | "purple" | "pink" | "green";
     icon: LucideIcon;
 };
 
 const QuickInsights = () => {
     const insights: Insight[] = [
         {
-            title: "Overall Score",
-            value: "78",
-            pass_probability: "High",
+            title: "Care Plans Created",
+            value: 20,
+            this_week: 3,
             color: "blue",
-            icon: Brain,
+            icon: Stethoscope
         },
         {
             title: "Questions Completed",
@@ -29,12 +29,19 @@ const QuickInsights = () => {
             icon: CheckCircle,
         },
         {
+            title: "Overall Score",
+            value: "78%",
+            pass_probability: "High",
+            color: "pink",
+            icon: Brain,
+        },
+        {
             title: "Avg. Response Time",
             value: "3.5s",
             timeline: "Last 30 days",
             color: "green",
             icon: CalendarClock,
-        },
+        }
     ];
 
     const colorMap: Record<
@@ -49,6 +56,10 @@ const QuickInsights = () => {
             bg: "bg-purple-600",
             accent: "bg-purple-500",
         },
+        pink: {
+            bg: "bg-pink-600",
+            accent: "bg-pink-500"
+        },
         green: {
             bg: "bg-green-600",
             accent: "bg-green-500",
@@ -56,7 +67,7 @@ const QuickInsights = () => {
     };
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {insights.map((insight, index) => {
                 const Icon = insight.icon;
                 const colors = colorMap[insight.color];
@@ -74,20 +85,20 @@ const QuickInsights = () => {
                                 <Icon className="text-white w-5 h-5" />
                             </div>
                             <div>
-                                <h2 className="font-semibold text-base opacity-90">
+                                <h2 className="font-semibold text-sm opacity-90">
                                     {insight.title}
                                 </h2>
-                                <h1 className="font-bold text-3xl">{insight.value}{index === 0 && '%'}</h1>
+                                <h1 className="font-bold text-2xl">{insight.value}{index === 0 && '%'}</h1>
                             </div>
                         </div>
 
                         <div className="mt-6 space-y-2 text-sm opacity-90">
                             {insight.pass_probability && (
                                 <div>
-                                    <Progress
+                                    {/* <Progress
                                         value={Number(insight.value)}
                                         className="bg-white/30"
-                                    />
+                                    /> */}
                                     <div className="flex justify-between items-center mt-3">
                                         <p>NCLEX pass probability</p>
                                         <p className="font-medium">{insight.pass_probability}</p>
@@ -98,7 +109,7 @@ const QuickInsights = () => {
                             {insight.this_week && (
                                 <div className="flex justify-between items-center">
                                     <p>This week</p>
-                                    <p className="font-medium">{insight.this_week} questions</p>
+                                    <p className="font-medium">{insight.this_week}</p>
                                 </div>
                             )}
 

@@ -12,9 +12,19 @@ interface CarePlanProps {
 }
 
 const CarePlan = ({ carePlan }: CarePlanProps) => {
-    console.log(carePlan)
+
     const pathname = usePathname();
     const { _id, patient, createdAt, updatedAt } = carePlan || {};
+
+    const handleStartCarePlan = async (id: string) => {
+        try {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE}/api/care-plan/star-care-plan/${id}`);
+            console.log("response:", response);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const handleDeletePlan = async () => {
         try {
             const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_BASE}/api/care-plan/delete-care-plan/${_id}`);
@@ -58,7 +68,7 @@ const CarePlan = ({ carePlan }: CarePlanProps) => {
                     <Button className='max-sm:w-52'><Stethoscope size={18} /> View Details</Button>
                 </Link>
                 <Button variant={'outline'} className='max-sm:hidden'><PencilLine size={18} /> Edit Plan</Button>
-                <Button className='bg-transparent text-gray-700 hover:text-yellow-500 hover:bg-yellow-500/20 max-sm:w-2'><Star size={18} /></Button>
+                <Button onClick={() => typeof _id === 'string' && handleStartCarePlan(_id)} className='bg-transparent text-gray-700 hover:text-yellow-500 hover:bg-yellow-500/20 max-sm:w-2'><Star size={18} /></Button>
                 <Button onClick={handleDeletePlan} className='bg-transparent text-gray-700 hover:text-red-500 hover:bg-red-500/20 max-sm:w-2'><Trash size={18} /></Button>
             </div>
         </div>

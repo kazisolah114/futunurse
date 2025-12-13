@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Calendar, Clock, PencilLine, Star, Stethoscope, Trash } from 'lucide-react';
+import { Calendar, Clock, PencilLine, Star, StarOff, Stethoscope, Trash } from 'lucide-react';
 import { ICarePlan } from '@/types/PatientCarePlan';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -9,10 +9,10 @@ import { toast } from 'react-toastify';
 
 interface CarePlanProps {
     carePlan: ICarePlan;
+    starred: boolean;
 }
 
-const CarePlan = ({ carePlan }: CarePlanProps) => {
-
+const CarePlan = ({ carePlan, starred }: CarePlanProps) => {
     const pathname = usePathname();
     const { _id, patient, createdAt, updatedAt } = carePlan || {};
 
@@ -57,19 +57,25 @@ const CarePlan = ({ carePlan }: CarePlanProps) => {
                 <p className='text-sm text-gray-500 flex items-center gap-2'><Calendar size={16} /> Created {new Date(createdAt).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</p>
                 <p className='text-sm text-gray-500 flex items-center gap-2'><Clock size={16} /> Updated {new Date(updatedAt).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</p>
             </div>
-            <div className='space-x-2 max-sm:space-x-4 mt-6'>
+            <div className='flex gap-2 max-sm:gap-4 mt-6'>
                 <Link href={{
                     pathname: `${pathname}/${_id}`,
                     query: {
                         patient: patient.name?.toLowerCase(),
                         specialty: patient.specialty?.toLowerCase()
                     }
-                }}>
-                    <Button className='max-sm:w-52'><Stethoscope size={18} /> View Details</Button>
+                }} className='max-sm:flex-1'>
+                    <Button className='w-full'><Stethoscope size={18} /> View Details</Button>
                 </Link>
                 <Button variant={'outline'} className='max-sm:hidden'><PencilLine size={18} /> Edit Plan</Button>
-                <Button onClick={() => typeof _id === 'string' && handleStartCarePlan(_id)} className='bg-transparent text-gray-700 hover:text-yellow-500 hover:bg-yellow-500/20 max-sm:w-2'><Star size={18} /></Button>
-                <Button onClick={handleDeletePlan} className='bg-transparent text-gray-700 hover:text-red-500 hover:bg-red-500/20 max-sm:w-2'><Trash size={18} /></Button>
+                <Button onClick={() => typeof _id === 'string' && handleStartCarePlan(_id)} className='bg-transparent max-md:border border-yellow-500/30 text-gray-700 hover:text-yellow-500 hover:bg-yellow-500/20'>
+                    {starred ?
+                        <StarOff size={18} className='text-yellow-500' />
+                        :
+                        <Star size={18} className='text-yellow-500/80' />
+                    }
+                </Button>
+                <Button onClick={handleDeletePlan} className='bg-transparent max-md:border border-red-500/30 text-red-500/80 hover:text-red-500 hover:bg-red-500/20'><Trash size={18} /></Button>
             </div>
         </div>
     );

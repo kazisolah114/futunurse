@@ -26,39 +26,67 @@ export const CarePlans = () => {
         };
         handleGetCarePlans();
     }, []);
+    const [starred_plans, set_starred_plans] = useState<ICarePlan[]>([])
+    useEffect(() => {
+        const handleGetStarredCarePlans = async () => {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE}/api/care-plan/star-care-plan`);
+            if (response.status === 200) {
+                set_starred_plans(response.data?.starred_plans)
+            }
+        };
+        handleGetStarredCarePlans();
+    }, []);
     return (
         <div className='space-y-8'>
-            <div className='flex md:justify-between max-md:flex-col max-md:gap-8'>
-                <div>
-                    <h2 className='font-bold text-3xl text-gray-800 mb-1'>Care Plans Library</h2>
-                    <p className='text-gray-700 mb-3'>AI-powered nursing care plans with evidence-based practice and NANDA/NIC/NOC integration</p>
-                    <div className='flex items-center gap-4'>
-                        <p className='flex items-center gap-1 text-gray-500 text-sm'><Stethoscope size={16} /> {carePlans.length} total plans</p>
-                        <p className='flex items-center gap-1 text-gray-500 text-sm'><Star size={16} /> 0 starred</p>
-                    </div>
-                </div>
-                <div className='md:space-x-2 max-md:flex items-center gap-2'>
-                    <Button size={'lg'} variant={'outline'} className='max-md:w-6/12 border-teal-600 text-teal-600 hover:bg-transparent hover:text-teal-600'><Download size={18} /> Export All</Button>
-                    <Button size={'lg'} className='max-md:w-6/12 md:w-40'><Link href="/dashboard/care-plans/new" className='flex items-center gap-2'><Plus size={18} /> New Care Plan</Link></Button>
-                </div>
-            </div>
             {plansLoading ? (
-                <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-6">
-                    {
-                        Array.from({ length: 2 }).map((_, index) => (
-                            <Skeleton
-                                key={index}
-                                className="bg-gray-900/10 h-52 w-full rounded-md"
-                            />
-                        ))
-                    }
-                </div>
+                <>
+                    <div className='flex items-start md:justify-between max-md:flex-col gap-8'>
+                        <div className='w-full'>
+                            <Skeleton className='w-72 h-10 bg-gray-900/10 mb-2' />
+                            <Skeleton className='w-full h-5 bg-gray-900/10' />
+                            <div className='flex items-center gap-4 mt-4'>
+                                <Skeleton className='w-32 h-6 bg-gray-900/10' />
+                                <Skeleton className='w-32 h-6 bg-gray-900/10' />
+                            </div>
+                        </div>
+                        <div className='flex max-md:items-center gap-2'>
+                            <Skeleton className='w-40 h-11 bg-gray-900/10' />
+                            <Skeleton className='w-40 h-11 bg-gray-900/10' />
+                        </div>
+                    </div>
+                    <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-6">
+                        {
+                            Array.from({ length: 2 }).map((_, index) => (
+                                <Skeleton
+                                    key={index}
+                                    className="bg-gray-900/10 h-52 w-full rounded-md"
+                                />
+                            ))
+                        }
+                    </div>
+                </>
             ) : carePlans.length > 0 ? (
-                <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-6">
-                    {carePlans.map((plan, index) => (
-                        <CarePlan key={index} carePlan={plan} />
-                    ))}
-                </div>
+                <>
+                    <div className='flex md:justify-between max-md:flex-col max-md:gap-8'>
+                        <div>
+                            <h2 className='font-bold text-3xl text-gray-800 mb-1'>Care Plans Library</h2>
+                            <p className='text-gray-700 mb-3'>AI-powered nursing care plans with evidence-based practice and NANDA/NIC/NOC integration</p>
+                            <div className='flex items-center gap-4'>
+                                <p className='flex items-center gap-1 text-gray-500 text-sm'><Stethoscope size={16} /> {carePlans.length} total plans</p>
+                                <p className='flex items-center gap-1 text-gray-500 text-sm'><Star size={16} />{starred_plans.length} starred</p>
+                            </div>
+                        </div>
+                        <div className='flex max-md:items-center gap-2'>
+                            <Button size={'lg'} variant={'outline'} className='flex-1 border-teal-600 text-teal-600 hover:bg-transparent hover:text-teal-600'><Download size={18} /> Export All</Button>
+                            <Button size={'lg'} className='flex-1'><Link href="/dashboard/care-plans/new" className='flex items-center gap-2'><Plus size={18} /> New Care Plan</Link></Button>
+                        </div>
+                    </div>
+                    <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-6">
+                        {carePlans.map((plan, index) => (
+                            <CarePlan key={index} carePlan={plan} starred={starred_plans.some(starred => starred._id === plan._id)} />
+                        ))}
+                    </div>
+                </>
             ) : (
                 <div className="flex flex-col justify-center items-center py-8">
                     <Stethoscope size={36} className="text-gray-500" />

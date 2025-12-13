@@ -15,36 +15,32 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
             return NextResponse.json({ success: false, message: "User not authenticated!" }, { status: 401 });
         }
 
-        const updateTest = await User.updateMany(
-            { starredPlans: { $exists: false } },
-            { $set: { starredPlans: [] } }
-        );
-        console.log("udpate test:", updateTest)
-
         const userId = (session.user as { id: string }).id;
         const user = await User.findById(userId);
         console.log("user:", user)
         const { id } = await params;
-        const objectId = new mongoose.Types.ObjectId(id);
+        // const objectId = new mongoose.Types.ObjectId(id);
 
-        const alreadyStarred = user.starredPlans.some((p: mongoose.Types.ObjectId) => p.toString() === id);
+        // const alreadyStarred = user.starredPlans.some((p: mongoose.Types.ObjectId) => p.toString() === id);
+        const alreadyStarred = user.starredPlans.includes(id);
+
 
         let updated;
 
         if (alreadyStarred) {
             updated = await User.findByIdAndUpdate(
                 userId,
-                { $pull: { starredPlans: objectId } },
+                { $pull: { starredPlans: id } },
                 { new: true }
             );
         } else {
             updated = await User.findByIdAndUpdate(
                 userId,
-                { $addToSet: { starredPlans: objectId } },
+                { $addToSet: { starredPlans: id } },
                 { new: true }
             );
         }
-
+        console.log("updated:", updated)
         return NextResponse.json({
             success: true,
             action: alreadyStarred ? "removed" : "added",
@@ -52,10 +48,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
         });
 
     } catch (error) {
+        console.log(error)
         return handleApiError(error);
     }
 }
-function updateMany(arg0: { starredPlans: { $exists: boolean; }; }, arg1: { $set: { starredPlans: never[]; }; }) {
-    throw new Error("Function not implemented.");
-}
-

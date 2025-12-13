@@ -67,7 +67,7 @@ const QuickInsights = () => {
     };
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
             {insights.map((insight, index) => {
                 const Icon = insight.icon;
                 const colors = colorMap[insight.color];
@@ -88,7 +88,7 @@ const QuickInsights = () => {
                                 <h2 className="font-semibold text-sm opacity-90">
                                     {insight.title}
                                 </h2>
-                                <h1 className="font-bold text-2xl">{insight.value}{index === 0 && '%'}</h1>
+                                <h1 className="font-bold text-2xl">{insight.value}</h1>
                             </div>
                         </div>
 

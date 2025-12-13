@@ -21,7 +21,7 @@ interface DashboardProps {
 export const Dashboard = ({ user }: DashboardProps) => {
     const today = new Date();
     return (
-        <div className='space-y-8 max-sm:space-y-4'>
+        <div className='space-y-5 max-sm:space-y-3'>
             <div className='max-md:mb-5 rounded-md w-full flex max-md:flex-col max-md:gap-3 md:items-center justify-between'>
                 <div>
                     <h1 className='font-semibold text-2xl max-sm:text-xl text-gray-800 mb-2'>Welcome back, {user?.name}!</h1>
@@ -30,19 +30,19 @@ export const Dashboard = ({ user }: DashboardProps) => {
                 <div className='max-md:hidden text-white bg-gradient-to-b bg-green-500 to-10% flex items-center gap-3 rounded-md text-xs px-3 py-2 font-medium'><Zap size={16} /> Pro Trial - 14 days remaining</div>
             </div>
             <QuickInsights />
-            <div className='md:grid grid-cols-3 gap-6 max-sm:gap-3'>
-                <div className='col-span-2 space-y-6'>
+            <div className='md:grid grid-cols-3 gap-5 max-sm:space-y-5'>
+                <div className='col-span-2 space-y-5'>
                     <Features />
                     <NclexPerformance />
-                    <div className='grid md:grid-cols-2 gap-6'>
+                    <div className='grid md:grid-cols-2 gap-5'>
                         <AvgTimeChart />
                         <QuestionsDifficultyPie />
                     </div>
                 </div>
-                <div className='col-span-1 space-y-6'>
+                <div className='col-span-1 space-y-5'>
                     <StrengthsRadar />
-                    <AISuggestions />
                     <WeekInsight />
+                    <AISuggestions />
                 </div>
             </div>
         </div>

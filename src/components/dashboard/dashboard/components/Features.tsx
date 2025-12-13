@@ -3,7 +3,7 @@ import React from 'react';
 
 const Features = () => {
     return (
-        <div className='col-span-2 max-md:col-span-full grid sm:grid-cols-2 gap-6 max-sm:gap-3 '>
+        <div className='col-span-2 max-md:col-span-full grid sm:grid-cols-2 gap-5 max-sm:gap-5'>
             <div className='cursor-pointer bg-white border border-gray-200/30 hover:border-blue-600/50 duration-200 p-4 rounded-lg group'>
                 <div className='bg-blue-600/10 rounded-lg p-3 inline-block'>
                     <Stethoscope size={20} className='text-blue-600' />

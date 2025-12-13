@@ -20,8 +20,8 @@ export const NewSession = () => {
     useEffect(() => {
         const categorizedQuestions = category === 'mixed personalized' ?
             [...nclexQuestions].sort(() => Math.random() - 0.5) :
-            [...nclexQuestions].filter(question => question.category.toLowerCase() === category?.toLowerCase());
-        setSessionQuestions(categorizedQuestions.slice(0, 10));
+            [...nclexQuestions].filter(question => question.category.toLowerCase() === category?.toLowerCase()).slice(0, 10);
+        setSessionQuestions(categorizedQuestions);
     }, [category]);
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);

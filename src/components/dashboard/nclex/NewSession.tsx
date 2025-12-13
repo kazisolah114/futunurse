@@ -38,6 +38,7 @@ export const NewSession = () => {
             setCurrentQuestionIndex((prev) => prev + 1);
         } else {
             setSessionResult({
+                category: category,
                 totalQuestions: sessionQuestions.length,
                 correctAnswers: sessionScores,
                 score: Math.round((sessionScores / sessionQuestions.length) * 100),
@@ -54,7 +55,6 @@ export const NewSession = () => {
         setSessionResult(null);
         setSessionScores(0);
         setSessionQuestions(
-            // [...nclexQuestions].sort(() => Math.random() - 0.5).slice(0, 10)
             category === 'mixed personalized' ?
             [...nclexQuestions].sort(() => Math.random() - 0.5) :
             [...nclexQuestions].filter(question => question.category.toLowerCase() === category?.toLowerCase()).slice(0, 10)
@@ -74,7 +74,7 @@ export const NewSession = () => {
             <SessionProgress progress={progress} />
             <Question currentQuestion={currentQuestion} onNextQuestion={handleNextQuestion} currentQuestionIndex={currentQuestionIndex} sessionScores={sessionScores} setSessionScores={setSessionScores} questionsLength={sessionQuestions.length} />
 
-            {sessionResult && <SessionResultModal result={sessionResult} onSetSessionResult={setSessionResult} onResetSession={resetSession} />}
+            {sessionResult && <SessionResultModal result={sessionResult} onResetSession={resetSession} />}
         </div>
     );
 };

@@ -19,6 +19,7 @@ export type NCLEXCategory = {
 }
 
 export interface ISessionResult {
+    category: string | null;
     totalQuestions: number;
     correctAnswers: number;
     score: number;

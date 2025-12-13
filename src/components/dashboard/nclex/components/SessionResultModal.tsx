@@ -4,16 +4,15 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Progress } from '@/components/ui/progress';
 import { Download, Goal } from 'lucide-react';
 import { redirect } from 'next/navigation';
-import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import axios from 'axios';
 
 interface SessionResultModalProps {
     result: ISessionResult | null;
-    onSetSessionResult: Dispatch<SetStateAction<ISessionResult | null>>;
     onResetSession: () => void;
 }
 
-const SessionResultModal = ({ result, onSetSessionResult, onResetSession }: SessionResultModalProps) => {
+const SessionResultModal = ({ result, onResetSession }: SessionResultModalProps) => {
     console.log("Result:", result);
     const hasSaved = useRef(false);
     const isOpen = Boolean(result);
@@ -28,7 +27,7 @@ const SessionResultModal = ({ result, onSetSessionResult, onResetSession }: Sess
             try {
                 const res = await axios.post(
                     `${process.env.NEXT_PUBLIC_API_BASE}/api/nclex/save-session`,
-                    { ...result, category: "mixed" }
+                    { ...result, category: result.category }
                 );
                 console.log("Saved session:", res);
             } catch (err) {

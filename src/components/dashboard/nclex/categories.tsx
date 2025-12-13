@@ -56,14 +56,11 @@ export const Categories = () => {
                 (
                     <div>
                         <div className="mb-7 space-y-3">
-                            <Skeleton className='h-10 w-60' />
-                            <Skeleton className='h-7 w-96' />
+                            <Skeleton className='h-10 w-60 max-sm:w-48' />
+                            <Skeleton className='h-6 w-96' />
                         </div>
                         <div className='space-y-3'>
-                            <Skeleton className='h-70' />
-                            <Skeleton className='h-70' />
-                            <Skeleton className='h-70' />
-                            <Skeleton className='h-70' />
+                            {Array.from({ length: 4 }).map((_, idx) => <Skeleton key={idx} className='h-70' />)}
                         </div>
                     </div>
                 )
@@ -89,7 +86,6 @@ export const Categories = () => {
                                 {
                                     performance_categorized.map((i, idx) => {
                                         const isThis = i.category.toLowerCase() === category.name.toLowerCase();
-                                        console.log(isThis)
                                         return (
                                             <div key={idx}>
                                                 {isThis &&

@@ -42,24 +42,24 @@ export const CarePlans = () => {
                 <>
                     <div className='flex items-start md:justify-between max-md:flex-col gap-8'>
                         <div className='w-full'>
-                            <Skeleton className='w-72 h-10 bg-gray-900/10 mb-2' />
-                            <Skeleton className='w-full h-5 bg-gray-900/10' />
+                            <Skeleton className='w-72 h-10 mb-2' />
+                            <Skeleton className='w-120 h-5' />
                             <div className='flex items-center gap-4 mt-4'>
-                                <Skeleton className='w-32 h-6 bg-gray-900/10' />
-                                <Skeleton className='w-32 h-6 bg-gray-900/10' />
+                                <Skeleton className='w-28 h-6' />
+                                <Skeleton className='w-28 h-6 ' />
                             </div>
                         </div>
-                        <div className='flex max-md:items-center gap-2'>
-                            <Skeleton className='w-40 h-11 bg-gray-900/10' />
-                            <Skeleton className='w-40 h-11 bg-gray-900/10' />
+                        <div className='flex items-center gap-2'>
+                            <Skeleton className='w-40 h-11' />
+                            <Skeleton className='w-40 h-11 ' />
                         </div>
                     </div>
                     <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-6">
                         {
-                            Array.from({ length: 2 }).map((_, index) => (
+                            Array.from({ length: 6 }).map((_, index) => (
                                 <Skeleton
                                     key={index}
-                                    className="bg-gray-900/10 h-52 w-full rounded-md"
+                                    className="h-44"
                                 />
                             ))
                         }

@@ -19,7 +19,7 @@ export const NewSession = () => {
 
     useEffect(() => {
         const categorizedQuestions = category === 'mixed personalized' ?
-            [...nclexQuestions].sort(() => Math.random() - 0.5) :
+            [...nclexQuestions].sort(() => Math.random() - 0.5).slice(0, 10) :
             [...nclexQuestions].filter(question => question.category.toLowerCase() === category?.toLowerCase()).slice(0, 10);
         setSessionQuestions(categorizedQuestions);
     }, [category]);
@@ -56,7 +56,7 @@ export const NewSession = () => {
         setSessionScores(0);
         setSessionQuestions(
             category === 'mixed personalized' ?
-            [...nclexQuestions].sort(() => Math.random() - 0.5) :
+            [...nclexQuestions].sort(() => Math.random() - 0.5).slice(0, 10) :
             [...nclexQuestions].filter(question => question.category.toLowerCase() === category?.toLowerCase()).slice(0, 10)
         );
         setCurrentQuestion(null);

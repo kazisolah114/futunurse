@@ -18,6 +18,12 @@ export type NCLEXCategory = {
     subcategories: string[]
 }
 
+export type PerformanceCategorized = {
+    category: string;
+    totalQuestions: number;
+    accuracy: number;
+}
+
 export interface ISessionResult {
     category: string | null;
     totalQuestions: number;

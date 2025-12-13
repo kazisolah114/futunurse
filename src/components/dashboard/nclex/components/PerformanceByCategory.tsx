@@ -1,17 +1,12 @@
 import { Progress } from '@/components/ui/progress';
 import { Skeleton } from '@/components/ui/skeleton';
+import { PerformanceCategorized } from '@/types/NCLEX';
 import axios from 'axios';
 import { BarChart3 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
-type PerformanceByCategory = {
-    category: string;
-    totalQuestions: number;
-    accuracy: number;
-}
-
 const PerformanceByCategory = () => {
-    const [performance_categorized, set_performance_categorized] = useState<PerformanceByCategory[]>([]);
+    const [performance_categorized, set_performance_categorized] = useState<PerformanceCategorized[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     useEffect(() => {
         const handleGetCategorizedPerformance = async () => {
@@ -30,7 +25,6 @@ const PerformanceByCategory = () => {
         }
         handleGetCategorizedPerformance();
     }, []);
-
     return (
         <>
             {loading ?

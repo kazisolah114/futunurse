@@ -13,6 +13,11 @@ export interface INCLEXQuestion {
     tags: string[]
 }
 
+export type NCLEXCategory = {
+    name: string;
+    subcategories: string[]
+}
+
 export interface ISessionResult {
     totalQuestions: number;
     correctAnswers: number;

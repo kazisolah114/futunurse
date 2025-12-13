@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { BookOpen, Brain, LucideIcon, Play } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 
 type Options = {
@@ -12,6 +12,7 @@ type Options = {
 
 const SessionOptions = () => {
     const router = useRouter();
+    const pathname = usePathname();
     const options: Options[] = [
         {
             icon: Brain,
@@ -37,10 +38,10 @@ const SessionOptions = () => {
                             <p className='text-gray-500 mb-5 mt-1 text-sm'>{option.label}</p>
                             <p className='text-gray-600 mb-5 text-sm'>{option.description}</p>
                             {index === 0 ?
-                            <Button onClick={() => router.push("/dashboard/nclex/new-session")} size={'lg'} className='w-full'><Play /> Start Adaptive Session</Button>
+                            <Button onClick={() => router.push(`${pathname}/new-session`)} size={'lg'} className='w-full'><Play /> Start Adaptive Session</Button>
                             :
                             index === 1 ?
-                            <Button size={'lg'} className='w-full bg-blue-600/90 hover:bg-blue-600 duration-200'><BookOpen /> Choose Category</Button>
+                            <Button size={'lg'} onClick={() => router.push(`${pathname}/categories`)} className='w-full bg-blue-600/90 hover:bg-blue-600 duration-200'><BookOpen /> Choose Category</Button>
                             :
                             null
                             }

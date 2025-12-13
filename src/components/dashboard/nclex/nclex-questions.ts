@@ -926,31 +926,3 @@ export const nclexQuestions: INCLEXQuestion[] = [
         tags: ["ventilator care", "pneumonia prevention", "aspiration prevention"],
     },
 ]
-
-export const nclexCategories = [
-    {
-        name: "Safe and Effective Care Environment",
-        subcategories: ["Management of Care", "Safety and Infection Control"],
-        color: "bg-blue-100 text-blue-800",
-    },
-    {
-        name: "Health Promotion and Maintenance",
-        subcategories: ["Growth and Development", "Health Screening", "Ante/Intra/Postpartum Care"],
-        color: "bg-green-100 text-green-800",
-    },
-    {
-        name: "Psychosocial Integrity",
-        subcategories: ["Mental Health Concepts", "Therapeutic Communication", "Coping and Adaptation", "End-of-Life Care"],
-        color: "bg-purple-100 text-purple-800",
-    },
-    {
-        name: "Physiological Integrity",
-        subcategories: [
-            "Basic Care and Comfort",
-            "Pharmacological Therapies",
-            "Reduction of Risk Potential",
-            "Physiological Adaptation",
-        ],
-        color: "bg-orange-100 text-orange-800",
-    },
-]

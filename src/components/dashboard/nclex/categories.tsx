@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { NCLEXCategory } from '@/types/NCLEX';
 import { BookA, PlayIcon, Stethoscope } from 'lucide-react';
+import Link from 'next/link';
 import React from 'react';
 
 export const Categories = () => {
@@ -20,12 +21,7 @@ export const Categories = () => {
         },
         {
             name: "Physiological Integrity",
-            subcategories: [
-                "Basic Care and Comfort",
-                "Pharmacological Therapies",
-                "Reduction of Risk Potential",
-                "Physiological Adaptation",
-            ],
+            subcategories: ["Basic Care and Comfort", "Pharmacological Therapies", "Reduction of Risk Potential", "Physiological Adaptation"],
         },
     ]
     return (
@@ -61,7 +57,14 @@ export const Categories = () => {
                             </ul>
                         </div>
                         <div className='mt-5 flex gap-4'>
-                            <Button size={'lg'} className='sm:flex-1 w-6/12'><PlayIcon /> Start Session</Button>
+                            <Link href={{
+                                pathname: `/dashboard/nclex/new-session`,
+                                query: {
+                                    category: category.name.toLowerCase()
+                                }
+                            }} className='w-full'>
+                                <Button size={'lg'} className='w-full'><PlayIcon /> Start Session</Button>
+                            </Link>
                             <Button size={'lg'} variant={'secondary'} className='w-44 max-sm:w-fit'><BookA /> Study Guide</Button>
                         </div>
                     </div>

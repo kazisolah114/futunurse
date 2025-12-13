@@ -12,7 +12,6 @@ const RecentPracticeSessions = () => {
             try {
                 setLoading(true);
                 const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE}/api/nclex/recent-sessions`);
-                console.log("response:", res);
                 if (res.status === 200) {
                     setRecentPracticeSessions(res.data?.recentSessions);
                 }

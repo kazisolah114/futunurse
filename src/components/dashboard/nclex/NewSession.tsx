@@ -7,17 +7,22 @@ import { nclexQuestions } from './nclex-questions';
 import { Skeleton } from '@/components/ui/skeleton';
 import { INCLEXQuestion, ISessionResult } from '@/types/NCLEX';
 import SessionResultModal from './components/SessionResultModal';
+import { useSearchParams } from 'next/navigation';
 
 export const NewSession = () => {
+    const searchParams = useSearchParams();
+    const category = searchParams.get('category');
 
     const [sessionResult, setSessionResult] = useState<ISessionResult | null>(null);
     const [sessionScores, setSessionScores] = useState<number>(0);
     const [sessionQuestions, setSessionQuestions] = useState<INCLEXQuestion[]>([]);
 
     useEffect(() => {
-        const questions = [...nclexQuestions].sort(() => Math.random() - 0.5);
-        setSessionQuestions(questions.slice(0, 10));
-    }, []);
+        const categorizedQuestions = category === 'mixed personalized' ?
+            [...nclexQuestions].sort(() => Math.random() - 0.5) :
+            [...nclexQuestions].filter(question => question.category.toLowerCase() === category?.toLowerCase());
+        setSessionQuestions(categorizedQuestions.slice(0, 10));
+    }, [category]);
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
     const [currentQuestion, setCurrentQuestion] = useState<INCLEXQuestion | null>(null);
@@ -49,7 +54,10 @@ export const NewSession = () => {
         setSessionResult(null);
         setSessionScores(0);
         setSessionQuestions(
-            [...nclexQuestions].sort(() => Math.random() - 0.5).slice(0, 5)
+            // [...nclexQuestions].sort(() => Math.random() - 0.5).slice(0, 10)
+            category === 'mixed personalized' ?
+            [...nclexQuestions].sort(() => Math.random() - 0.5) :
+            [...nclexQuestions].filter(question => question.category.toLowerCase() === category?.toLowerCase()).slice(0, 10)
         );
         setCurrentQuestion(null);
         setCurrentQuestionIndex(0);

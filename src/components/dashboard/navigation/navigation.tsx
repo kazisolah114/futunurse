@@ -41,8 +41,10 @@ const Navigation = ({ responsiveMenu, setResponsiveMenu }: NavigationProps) => {
                 <div className='flex items-center justify-between pb-5 mb-5 border-b border-teal-500/50'>
                     <>
                         <Link href="/dashboard" className='flex items-center gap-2 text-white'>
-                            <Stethoscope size={27} className='relative top-0.5' />
-                            <h2 className='font-semibold text-3xl'>Futunurse</h2>
+                            <div className='bg-teal-700/50 w-10 h-10 rounded-sm flex items-center justify-center'>
+                                <Stethoscope size={24} className=' text-white' />
+                            </div>
+                            <h2 className='font-bold text-2xl'>Futunurse</h2>
                         </Link>
                     </>
                     <button onClick={() => setResponsiveMenu(false)} className='lg:hidden text-white relative top-1'><X size={35} /></button>

@@ -37,11 +37,11 @@ const features = [
 const FeaturesSection = () => {
     return (
         <section id={'features'} className="py-28 bg-gray-50">
-            <div className="lg:px-32 max-sm:p-3">
-                <p className="mb-10 font-semibold text-lg text-teal-600 uppercase flex items-center gap-3">
+            <div className="lg:px-32 max-sm:p-5">
+                {/* <p className="mb-10 font-semibold text-lg text-teal-600 uppercase flex items-center gap-3">
                     <span className="w-3 h-3 rounded-full bg-teal-600 animate-pulse-dot"></span>
                     Futunurse Features
-                </p>
+                </p> */}
 
                 <div className="grid grid-cols-3 gap-8 max-lg:grid-cols-2 max-md:grid-cols-1">
                     {features.map((f, i) => (

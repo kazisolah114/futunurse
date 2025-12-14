@@ -14,17 +14,17 @@ const AboutUsSection = () => {
         {
             icon: <Check size={15} />,
             title: 'AI Care Plans',
-            description: 'Generate accurate NANDA care plans instantly with AI.'
+            description: 'Generate accurate NANDA care plans instantly with AI'
         },
         {
             icon: <CheckCircle size={15} />,
             title: 'NCLEX Coach',
-            description: 'Smart, personalized NCLEX prep with adaptive quizzes.'
+            description: 'Smart, personalized NCLEX prep with adaptive quizzes'
         },
         {
             icon: <Stethoscope size={15} />,
             title: 'Clinical Scenarios',
-            description: 'Practice real patient cases to build clinical confidence.'
+            description: 'Practice real patient cases to build clinical confidence'
         },
     ];
     const bgColor = (index: number) => {
@@ -41,14 +41,14 @@ const AboutUsSection = () => {
     }
     return (
         <section id={'about'} className="py-28">
-            <div className="lg:px-32 max-sm:p-3 grid grid-cols-2 items-center justify-between gap-5 max-md:grid-cols-1 max-md:gap-8">
+            <div className="lg:px-32 max-sm:p-5 grid grid-cols-2 items-center justify-between gap-5 max-md:grid-cols-1 max-md:gap-8">
 
                 <Image
                     src="/images/nurse-tablet.jpg"
                     alt="Futunurse About Image"
                     width={500}
                     height={500}
-                    className="max-md:order-2 rounded-full w-120 h-120 max-sm:h-100 object-cover border-4 border-teal-600"
+                    className="max-md:order-2 rounded-3xl w-120 h-120 max-sm:h-100 object-cover "
                 />
 
                 <div className="max-md:order-1">
@@ -70,12 +70,12 @@ const AboutUsSection = () => {
 
                     <ul className="space-y-3">
                         {features.map((feature, index) => (
-                            <li key={index} className="flex items-start gap-3">
-                                <div className={`w-6 h-6 rounded ${bgColor(index + 1)} flex items-center justify-center text-white`}>
+                            <li key={index} className="flex items-center max-sm:items-start gap-3">
+                                <div className={`w-8 h-8 rounded ${bgColor(index + 1)} flex items-center justify-center text-white`}>
                                     {feature.icon}
                                 </div>
                                 <div>
-                                    <p className="font-semibold text-gray-900 mb-0">{feature.title}</p>
+                                    <p className="font-bold text-sm text-gray-800 mb-0">{feature.title}</p>
                                     <p className="text-sm text-gray-600">{feature.description}</p>
                                 </div>
                             </li>

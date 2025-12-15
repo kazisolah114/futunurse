@@ -14,8 +14,8 @@ export async function POST(req: NextRequest) {
         }
         const body = await req.json();
         const { category, totalQuestions, correctAnswers, score, date, performanceAnalysis, studyRecommendations } = body || {};
-        if (!category || !totalQuestions || !correctAnswers) {
-            return NextResponse.json({ success: false, message: "Fields required" }, { status: 404 });
+        if (!category || !totalQuestions) {
+            return NextResponse.json({ success: false, message: "Fields required" }, { status: 400 });
         }
         const newSession = await RecentSession.create({
             user: (session.user as { id: string }).id,

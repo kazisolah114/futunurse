@@ -65,17 +65,17 @@ const CarePlan = ({ carePlan, starred }: CarePlanProps) => {
                         specialty: patient.specialty?.toLowerCase()
                     }
                 }} className='max-sm:flex-1'>
-                    <Button className='w-full'><Stethoscope size={18} /> View Details</Button>
+                    <Button className='w-full rounded-md'><Stethoscope size={18} /> View Details</Button>
                 </Link>
-                <Button variant={'outline'} className='max-sm:hidden'><PencilLine size={18} /> Edit Plan</Button>
-                <Button onClick={() => typeof _id === 'string' && handleStartCarePlan(_id)} className='bg-transparent max-md:border border-yellow-500/30 text-gray-700 hover:text-yellow-500 hover:bg-yellow-500/20'>
+                <Button variant={'outline'} className='max-sm:hidden rounded-md'><PencilLine size={18} /> Edit Plan</Button>
+                <Button onClick={() => typeof _id === 'string' && handleStartCarePlan(_id)} className='bg-transparent max-md:border border-yellow-500/30 text-gray-700 hover:text-yellow-500 hover:bg-yellow-500/20 rounded-md'>
                     {starred ?
                         <StarOff size={18} className='text-yellow-500' />
                         :
                         <Star size={18} className='text-yellow-500/80' />
                     }
                 </Button>
-                <Button onClick={handleDeletePlan} className='bg-transparent max-md:border border-red-500/30 text-red-500/80 hover:text-red-500 hover:bg-red-500/20'><Trash size={18} /></Button>
+                <Button onClick={handleDeletePlan} className='rounded-md bg-transparent max-md:border border-red-500/30 text-red-500/80 hover:text-red-500 hover:bg-red-500/20'><Trash size={18} /></Button>
             </div>
         </div>
     );

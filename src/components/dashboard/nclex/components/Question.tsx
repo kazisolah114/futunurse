@@ -35,97 +35,159 @@ const Question = ({ currentQuestion, onNextQuestion, currentQuestionIndex, sessi
     }
     if (!currentQuestion) return <div>Thinking...</div>
     return (
-        <div className='border border-gray-900/10 bg-white/50 backdrop-blur-lg p-5 rounded-md'>
-            <h6 className='font-medium text-lg text-gray-900'>{currentQuestion.question}</h6>
-            <ul className='space-y-3 mt-6'>
-                {
-                    currentQuestion.options.map((option, index) => {
-                        const isCorrect = index === currentQuestion.correctAnswer;
-                        const isSelected = index === submittedAnswer;
+        <div className="border border-gray-200 bg-white shadow-sm rounded-xl p-6 sm:p-7">
 
-                        let className =
-                            "flex items-center gap-3 border px-3 py-2 rounded-md hover:bg-gray-100/50 duration-150 cursor-pointer";
+            <h6 className="text-lg sm:text-xl font-semibold text-gray-900 leading-relaxed">
+                {currentQuestion.question}
+            </h6>
 
-                        if (showResult) {
-                            if (submittedAnswer === currentQuestion.correctAnswer) {
-                                if (isCorrect)
-                                    className += " bg-green-600/20 text-gray-900 hover:bg-green-600/20";
-                            } else {
-                                if (isSelected)
-                                    className += " bg-red-600/20 text-gray-900 cursor-not-allowed";
-                                if (isCorrect)
-                                    className += " bg-green-600/20 text-gray-900 cursor-not-allowed";
-                            }
+            <ul className="mt-7 space-y-3">
+                {currentQuestion.options.map((option, index) => {
+                    const isCorrect = index === currentQuestion.correctAnswer;
+                    const isSelected = index === submittedAnswer;
+
+                    let className =
+                        "flex items-start gap-3 border px-4 py-3 rounded-lg transition-all duration-150 cursor-pointer text-sm sm:text-base";
+
+                    if (showResult) {
+                        if (submittedAnswer === currentQuestion.correctAnswer) {
+                            if (isCorrect)
+                                className +=
+                                    " bg-green-500/15 border-green-500/30";
                         } else {
-                            if (selectedAnswer === index)
-                                className += " bg-teal-600 text-white hover:bg-teal-600/90";
+                            if (isSelected)
+                                className +=
+                                    " bg-red-500/15 border-red-500/30 cursor-not-allowed";
+                            if (isCorrect)
+                                className +=
+                                    " bg-green-500/15 border-green-500/30";
                         }
-
-                        return (
-                            <li
-                                key={index}
-                                onClick={() => !showResult && setSelectedAnswer(index)} // disable clicks after submit
-                                className={className}
-                            >
-                                {/* Correct and selected */}
-                                {showResult &&
-                                    isSelected &&
-                                    submittedAnswer === currentQuestion.correctAnswer && (
-                                        <CheckCircle2 size={18} className="text-green-500" />
-                                    )}
-
-                                {/* Selected wrong answer */}
-                                {showResult &&
-                                    isSelected &&
-                                    submittedAnswer !== currentQuestion.correctAnswer && (
-                                        <XCircle size={18} className="text-red-500" />
-                                    )}
-
-                                {/* Show correct icon when user chose wrong answer */}
-                                {showResult &&
-                                    submittedAnswer !== currentQuestion.correctAnswer &&
-                                    isCorrect && <CheckCircle2 size={18} className="text-green-500" />}
-
-                                <span>
-                                    {index === 0
-                                        ? "A."
-                                        : index === 1
-                                            ? "B."
-                                            : index === 2
-                                                ? "C."
-                                                : "D."}
-                                </span>{" "}
-                                {option}
-                            </li>
-                        );
-                    })
-                }
-            </ul>
-            {showResult &&
-                <div className={`${submittedAnswer === currentQuestion.correctAnswer ? 'border-green-500/20 bg-green-500/10' : 'border-red-500/20 bg-red-500/10'} border rounded-md p-4 mt-7 space-y-2`}>
-                    {submittedAnswer === currentQuestion.correctAnswer ?
-                        <h5 className='font-semibold flex items-center gap-2 text-green-500'>
-                            <CheckCircle2 size={18} className='text-green-500' /> Correct
-                        </h5>
-                        :
-                        <h5 className='font-semibold flex items-center gap-2 text-red-500'>
-                            <XCircle size={18} className='text-red-500' /> Incorrect
-                        </h5>
+                    } else {
+                        if (selectedAnswer === index)
+                            className +=
+                                " bg-teal-600 text-white border-teal-600";
+                        else
+                            className +=
+                                " hover:bg-gray-50";
                     }
-                    <span className='text-xs font-medium text-gray-800 uppercase'>Reason</span>
-                    <p className='text-gray-900 text-sm'>{currentQuestion.explanation}</p>
-                    <span className='text-xs font-medium text-gray-800 uppercase'>Rationale</span>
-                    <p className='text-gray-900 text-sm'>{currentQuestion.rationale}</p>
+
+                    return (
+                        <li
+                            key={index}
+                            onClick={() =>
+                                !showResult && setSelectedAnswer(index)
+                            }
+                            className={className}
+                        >
+
+                            {showResult && isSelected &&
+                                submittedAnswer === currentQuestion.correctAnswer && (
+                                    <CheckCircle2
+                                        size={18}
+                                        className="text-green-500 mt-0.5"
+                                    />
+                                )}
+
+                            {showResult && isSelected &&
+                                submittedAnswer !== currentQuestion.correctAnswer && (
+                                    <XCircle
+                                        size={18}
+                                        className="text-red-500 mt-0.5"
+                                    />
+                                )}
+
+                            {showResult &&
+                                submittedAnswer !== currentQuestion.correctAnswer &&
+                                isCorrect && (
+                                    <CheckCircle2
+                                        size={18}
+                                        className="text-green-500 mt-0.5"
+                                    />
+                                )}
+
+                            <span className="font-medium">
+                                {String.fromCharCode(65 + index)}.
+                            </span>
+
+                            <span className="flex-1">{option}</span>
+                        </li>
+                    );
+                })}
+            </ul>
+
+            {showResult && (
+                <div
+                    className={`mt-8 border rounded-xl p-5 space-y-3 ${submittedAnswer === currentQuestion.correctAnswer
+                        ? 'border-green-500/30 bg-green-500/10'
+                        : 'border-red-500/30 bg-red-500/10'
+                        }`}
+                >
+                    <h5
+                        className={`font-semibold flex items-center gap-2 text-sm uppercase tracking-wide ${submittedAnswer === currentQuestion.correctAnswer
+                            ? 'text-green-600'
+                            : 'text-red-600'
+                            }`}
+                    >
+                        {submittedAnswer === currentQuestion.correctAnswer ? (
+                            <>
+                                <CheckCircle2 size={18} /> Correct
+                            </>
+                        ) : (
+                            <>
+                                <XCircle size={18} /> Incorrect
+                            </>
+                        )}
+                    </h5>
+
+                    <div>
+                        <p className="text-xs font-semibold uppercase text-gray-600">
+                            Reason
+                        </p>
+                        <p className="text-sm text-gray-900">
+                            {currentQuestion.explanation}
+                        </p>
+                    </div>
+
+                    <div>
+                        <p className="text-xs font-semibold uppercase text-gray-600">
+                            Rationale
+                        </p>
+                        <p className="text-sm text-gray-900">
+                            {currentQuestion.rationale}
+                        </p>
+                    </div>
                 </div>
-            }
-            <div className='mt-7 flex justify-between sm:items-center max-sm:flex-col max-sm:gap-3 max-sm:space-y-3'>
-                <p className='text-gray-700 max-sm:hidden'>Score: {sessionScores}/{currentQuestionIndex}</p>
-                <p className='text-gray-700 flex items-center justify-between sm:hidden'><span>Score</span><span>{sessionScores}/{currentQuestionIndex}</span></p>
-                {!showResult ?
-                    <Button size={'lg'} className={`rounded-full ${selectedAnswer === null ? 'cursor-not-allowed opacity-50' : ''}`} onClick={handleSubmitAnswer}>Submit Answer</Button>
-                    :
-                    <Button size={'lg'} onClick={onNextQuestion}>{currentQuestionIndex === questionsLength - 1 ? 'Finish Session' : 'Next Question'} <ArrowRight /></Button>
-                }
+            )}
+
+            <div className="mt-7 flex justify-between sm:items-center max-sm:flex-col max-sm:gap-6">
+                <p className="text-sm text-gray-700 font-medium max-sm:hidden">
+                    Score: {sessionScores}/{currentQuestionIndex}
+                </p>
+                <p className='text-sm text-gray-700 font-medium flex items-center justify-between sm:hidden'><span>Score</span><span>{sessionScores}/{currentQuestionIndex}</span></p>
+
+                {!showResult ? (
+                    <Button
+                        size="lg"
+                        className={`rounded-full px-8 ${selectedAnswer === null
+                            ? 'opacity-50 cursor-not-allowed'
+                            : ''
+                            }`}
+                        onClick={handleSubmitAnswer}
+                    >
+                        Submit Answer
+                    </Button>
+                ) : (
+                    <Button
+                        size="lg"
+                        className="rounded-full px-8"
+                        onClick={onNextQuestion}
+                    >
+                        {currentQuestionIndex === questionsLength - 1
+                            ? 'Finish Session'
+                            : 'Next Question'}
+                        <ArrowRight className="ml-2" />
+                    </Button>
+                )}
             </div>
         </div>
     );

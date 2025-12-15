@@ -35,22 +35,47 @@ const PerformanceByCategory = () => {
                 (
                     <div className='bg-white border border-gray-200/30 rounded-lg p-5'>
                         <h2 className='text-gray-900 font-medium text-lg flex items-center gap-2'><BarChart3 size={20} className='text-green-600/90' /> Performance by Category</h2>
-                        <ul className='space-y-3 mt-5'>
-                            {
-                                performance_categorized.map((item, index) => (
-                                    <li key={index} className='space-y-2.5'>
-                                        <div className='flex items-end justify-between'>
-                                            <div>
-                                                <h5 className='font-medium text-gray-900 capitalize'>{item.category}</h5>
-                                                <p className='text-gray-600'>{item.totalQuestions} questions completed</p>
+                        {performance_categorized.length > 0 ?
+                            <ul className='space-y-4 mt-5'>
+                                {
+                                    performance_categorized.map((item, index) => (
+                                        <li key={index} className='space-y-2'>
+                                            <div className='flex items-end justify-between'>
+                                                <div>
+                                                    <h5 className='font-medium text-gray-900 capitalize'>{item.category}</h5>
+                                                    <p className='text-gray-600'>{item.totalQuestions} questions completed</p>
+                                                </div>
+                                                <p className={`text-sm font-medium w-16 py-0.5 text-center rounded-full ${item.accuracy >= 70 ? 'bg-green-500/20 text-green-700' : item.accuracy >= 40 ? 'bg-yellow-500/20 text-yellow-700' : 'bg-red-100 text-red-500'}`}>{item.accuracy.toFixed(2)}%</p>
                                             </div>
-                                            <p className={`text-sm font-medium w-16 py-0.5 text-center rounded-full ${item.accuracy >= 70 ? 'bg-green-500/20 text-green-700' : item.accuracy >= 40 ? 'bg-yellow-500/20 text-yellow-700' : 'bg-red-100 text-red-500'}`}>{item.accuracy.toFixed(2)}%</p>
-                                        </div>
-                                        <Progress value={item.accuracy} className='' />
-                                    </li>
-                                ))
-                            }
-                        </ul>
+                                            <Progress value={item.accuracy} className='' />
+                                        </li>
+                                    ))
+                                }
+                            </ul>
+                            :
+                            <div className="mt-6 relative flex flex-col items-center justify-center text-center rounded-lg border border-dashed border-gray-200 bg-gray-50/60 p-8 overflow-hidden">
+                                <span className="absolute inset-0 rounded-lg animate-pulse bg-green-500/5" />
+
+                                <div className="relative flex items-center justify-center w-12 h-12 rounded-full bg-green-100 mb-4">
+                                    <BarChart3 className="text-green-600" size={22} />
+                                </div>
+
+                                <h3 className="relative text-gray-900 font-semibold text-lg">
+                                    No Performance Data Yet
+                                </h3>
+
+                                <p className="relative text-gray-600 text-sm mt-1 max-w-sm">
+                                    Complete practice questions to see your accuracy and progress broken down by NCLEX categories.
+                                </p>
+
+                                <button
+                                    className="relative mt-5 inline-flex items-center gap-2 rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 transition"
+                                >
+                                    Start Practicing
+                                </button>
+                            </div>
+
+                        }
                     </div>
                 )
             }

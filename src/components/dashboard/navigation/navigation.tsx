@@ -60,7 +60,7 @@ const Navigation = ({ responsiveMenu, setResponsiveMenu }: NavigationProps) => {
                     })}
                 </ul>
             </div>
-            <Button onClick={() => signOut({ callbackUrl: '/' })} className='w-full flex items-center justify-start bg-teal-700/50 hover:bg-teal-700/60 duration-150 ease-in-out h-12'><LogOut className='relative top-0.5' /> Sign Out</Button>
+            <Button onClick={() => signOut({ callbackUrl: '/' })} className='w-full flex items-center justify-start bg-teal-700/50 hover:bg-teal-700/60 duration-150 ease-in-out h-12 rounded-lg'><LogOut className='' /> Sign Out</Button>
         </nav>
     );
 };

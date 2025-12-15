@@ -49,19 +49,23 @@ export const CarePlan = ({ slug }: CarePlanProps) => {
                 :
                 (
                     <div>
-                        <div className='flex items-start justify-between max-md:flex-col max-md:gap-3'>
+                        <div className='flex items-start justify-between max-md:flex-col gap-3'>
                             <div>
-                                <h3 className='mb-1 font-bold text-3xl text-gray-700 flex items-center gap-3'>{carePlan?.patient.name}
+                                <h3 className='mb-1 font-bold text-3xl text-gray-800 flex items-center gap-3'>{carePlan?.patient.name}
                                 </h3>
-                                <p className='text-gray-600'>{carePlan?.patient.primaryDiagnoses} and {carePlan?.patient.secondaryDiagnoses} with the physical findings of {carePlan?.patient.physicalFindings?.slice(0, 50) || 'N/A'}...</p>
+                                <p className='text-gray-600'>{carePlan?.patient.primaryDiagnoses} with the physical findings of {carePlan?.patient.physicalFindings?.slice(0, 25) || 'N/A'}...</p>
                             </div>
                             <div className='space-x-2 max-sm:w-full max-sm:grid max-sm:grid-cols-2 max-sm:gap-2'>
-                                <Button size={'lg'} variant={'outline'} className='max-sm:w-full border-teal-600 text-teal-600 hover:bg-transparent hover:text-teal-600'><Download size={18} /> Export Plan</Button>
-                                <Button size={'lg'} className='max-sm:w-full sm:!w-40'><PencilLine size={20} /> Edit Plan</Button>
+                                <Button size={'lg'} variant={'outline'} className='max-sm:w-full border-teal-600 text-teal-600 hover:bg-transparent hover:text-teal-600'><Download size={18} /> Export Now</Button>
+                                <Button size={'lg'} className='max-sm:w-full sm:!w-40'><PencilLine size={20} /> Edit Care Plan</Button>
                             </div>
                         </div>
                         {carePlan?.patient && <PatientInformation patient={carePlan.patient} />}
-                        <Diagnoses diagnoses={carePlan?.diagnoses ?? []} />
+                        <div>
+                            <h2 className='font-bold text-2xl text-gray-800'>AI-Powered Diagnoses</h2>
+                            <p className='text-gray-700 mb-5'>Students are encouraged to review and edit the care plan as needed</p>
+                            <Diagnoses diagnoses={carePlan?.diagnoses ?? []} />
+                        </div>
                     </div>
                 )
             }

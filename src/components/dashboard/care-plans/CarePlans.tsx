@@ -38,6 +38,7 @@ export const CarePlans = () => {
     }, []);
     return (
         <div className='space-y-8'>
+            
             {plansLoading ? (
                 <>
                     <div className='flex items-start md:justify-between max-md:flex-col gap-8'>
@@ -88,13 +89,29 @@ export const CarePlans = () => {
                     </div>
                 </>
             ) : (
-                <div className="flex flex-col justify-center items-center py-8">
-                    <Stethoscope size={36} className="text-gray-500" />
-                    <h3 className="font-bold text-xl text-gray-700 mt-4">No Care Plan in the Library</h3>
-                    <p className="text-gray-600">
-                        You have no care plans made. Create a new care plan to get started
-                    </p>
-                </div>
+                <>
+                    <div className='flex md:justify-between max-md:flex-col max-md:gap-8'>
+                        <div>
+                            <h2 className='font-bold text-3xl text-gray-800 mb-1'>Care Plans Library</h2>
+                            <p className='text-gray-700 mb-3'>AI-powered nursing care plans with evidence-based practice and NANDA/NIC/NOC integration</p>
+                            <div className='flex items-center gap-4'>
+                                <p className='flex items-center gap-1 text-gray-500 text-sm'><Stethoscope size={16} /> {carePlans.length} total plans</p>
+                                <p className='flex items-center gap-1 text-gray-500 text-sm'><Star size={16} />{starred_plans.length} starred</p>
+                            </div>
+                        </div>
+                        <div className='flex max-md:items-center gap-2'>
+                            <Button size={'lg'} variant={'outline'} className='flex-1 border-teal-600 text-teal-600 hover:bg-transparent hover:text-teal-600'><Download size={18} /> Export All</Button>
+                            <Button size={'lg'} className='flex-1'><Link href="/dashboard/care-plans/new" className='flex items-center gap-2'><Plus size={18} /> New Care Plan</Link></Button>
+                        </div>
+                    </div>
+                    <div className="flex flex-col justify-center items-center py-8">
+                        <Stethoscope size={96} className="text-gray-600" />
+                        <h3 className="font-bold text-xl text-gray-800 mt-6">No Care Plan in the Library</h3>
+                        <p className="text-gray-600">
+                            You have no care plans made. Create a new care plan to get started
+                        </p>
+                    </div>
+                </>
             )}
         </div>
     );

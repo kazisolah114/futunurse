@@ -8,11 +8,13 @@ interface SessionProgressProps {
 const SessionProgress = ({ progress }: SessionProgressProps) => {
     return (
         <div>
-            <div className='flex justify-between items-center mb-3'>
-                <p className='text-gray-800 text-sm'>Progress</p>
-                <p className='text-grya-800 text-sm'>{progress || 0}%</p>
+            <div className="flex justify-between items-center mb-2">
+                <p className="text-gray-700 text-sm font-medium">Progress</p>
+                <p className="text-gray-700 text-sm font-semibold">
+                    {progress || 0}%
+                </p>
             </div>
-            <Progress value={progress || 0} />
+            <Progress value={progress || 0} className="h-2" />
         </div>
     );
 };

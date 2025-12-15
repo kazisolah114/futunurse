@@ -163,7 +163,7 @@ export async function POST(req: NextRequest) {
             care_plan = extractJson(rawContent);
         } catch (err) {
             console.error("Failed to parse care plan JSON:", err);
-            return NextResponse.json({ success: false, error: "Invalid JSON from AI" }, { status: 500 });
+            return NextResponse.json({ success: false, error: "Invalid JSON from AI" }, { status: 422 });
         }
         console.log("Care Plan Object:", care_plan);
         return NextResponse.json({ success: true, care_plan })

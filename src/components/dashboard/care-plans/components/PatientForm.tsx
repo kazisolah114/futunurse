@@ -21,23 +21,49 @@ const PatientForm = ({ currentStage, setCurrentStage, patientData, setPatientDat
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setCurrentStage(2);
+
         try {
             const response = await axios.post(
                 `${process.env.NEXT_PUBLIC_API_BASE}/api/care-plan/create-care-plan`,
                 patientData
             );
+
             if (response.status === 200) {
                 setDiagnoses(response.data?.care_plan?.diagnoses || []);
                 setCurrentStage(3);
             } else {
-                setCurrentStage(1)
+                // unexpected success status
+                console.warn("Unexpected response status:", response.status);
+                toast.error("Something went wrong! Please try again.");
+                setCurrentStage(1);
             }
         } catch (err) {
-            console.error(err);
-            toast.error("Failed to generate care plan! Please try again");
-            setCurrentStage(1)
+            if (axios.isAxiosError(err) && err.response) {
+                // Server responded
+                if (err.response.status === 422) {
+                    // Soft warning toast, no stage reset
+                    toast("Care plan generation failed. Give it another try!");
+                    setCurrentStage(1);
+                } else {
+                    // Other server errors
+                    console.error("Server Error:", err.response.data);
+                    toast.error("Server error occurred. Please try again later.");
+                    setCurrentStage(1);
+                }
+            } else if (axios.isAxiosError(err) && err.request) {
+                // Network error
+                console.error("No response received:", err.request);
+                toast.error("Network error. Please check your connection and try again.");
+                setCurrentStage(1);
+            } else {
+                // Other unexpected errors
+                console.error("Unexpected error:", err);
+                toast.error("Failed to generate care plan. Please try again.");
+                setCurrentStage(1);
+            }
         }
     };
+
 
     return (
         <form onSubmit={handleSubmit} className=' border-gray-900/10 bg-white/50 backdrop-blur-lg rounded-md p-6 w-full'>

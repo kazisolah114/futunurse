@@ -7,6 +7,7 @@ import { FileText, AlertCircle, TrendingUp, Target, Stethoscope, CheckCircle2, G
 import { Dispatch, SetStateAction, useState } from "react"
 import { toast } from "react-toastify"
 import Diagnoses from "./Diagnoses"
+import { useRouter } from "next/navigation"
 
 interface ReviewAndEditPlanProps {
     patientData: IPatient;
@@ -16,7 +17,7 @@ interface ReviewAndEditPlanProps {
 }
 
 const ReviewAndEditPlan = ({ patientData, setPatientData, diagnoses, setCurrentStage }: ReviewAndEditPlanProps) => {
-
+    const router = useRouter();
     const [saveLoading, setSaveLoading] = useState<boolean>(false);
     const handleSavePlan = async () => {
         try {
@@ -28,7 +29,8 @@ const ReviewAndEditPlan = ({ patientData, setPatientData, diagnoses, setCurrentS
             console.log(response);
             if (response.status === 201) {
                 toast.success("Care plan saved!");
-                setCurrentStage(1);
+                // setCurrentStage(1);
+                router.push("/dashboard/care-plans")
                 setPatientData({
                     // Patient Demographics
                     name: null,
@@ -58,6 +60,32 @@ const ReviewAndEditPlan = ({ patientData, setPatientData, diagnoses, setCurrentS
             setSaveLoading(false);
             toast.error("Failed to save care plan!");
         }
+    }
+    const handleCreateNewPlan = () => {
+        setCurrentStage(1);
+        setPatientData({
+            // Patient Demographics
+            name: null,
+            age: null,
+            gender: null,
+            specialty: null,
+            mrn: null,
+            primaryDiagnoses: null,
+            secondaryDiagnoses: null,
+            // Patient Vitals & Assesment
+            vitals: {
+                temperature: null,
+                bloodPressure: null,
+                heartRate: null,
+                respiratoryRate: null,
+                oxygenSaturation: null,
+                painLevel: null
+            },
+            labResults: null,
+            physicalFindings: null,
+            currentMedications: null,
+            allergies: null
+        })
     }
 
     return (
@@ -91,7 +119,7 @@ const ReviewAndEditPlan = ({ patientData, setPatientData, diagnoses, setCurrentS
 
             <div className="mt-5 flex items-center gap-4">
                 <Button onClick={() => handleSavePlan()} className="flex-1 rounded-full" size={'lg'}>{saveLoading ? 'Loading...' : 'Save care plan'}</Button>
-                <Button onClick={() => setCurrentStage(1)} variant={'outline'} size={'lg'} className="rounded-full">Create new plan</Button>
+                <Button onClick={handleCreateNewPlan} variant={'outline'} size={'lg'} className="rounded-full">Create new plan</Button>
                 <Button variant={'outline'} size={'lg'} className="rounded-full">Download as PDF</Button>
             </div>
         </div>

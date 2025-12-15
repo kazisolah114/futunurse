@@ -30,7 +30,7 @@ const NewPlanStage = ({ currentStage }: StageProps) => {
               className={`w-8 h-8 rounded-full ${
                 isCurrent || isCompleted
                   ? 'bg-teal-600 text-white'
-                  : 'bg-gray-200 text-gray-500'
+                  : 'bg-gray-300/50 text-gray-500'
               } font-medium flex items-center justify-center mr-2`}
             >
               {isCompleted ? <Check size={18} /> : stage.id}
@@ -49,14 +49,14 @@ const NewPlanStage = ({ currentStage }: StageProps) => {
                 {/* Desktop horizontal connector */}
                 <div
                   className={`hidden md:block flex-1 h-1 mx-3 ${
-                    isCompleted ? 'bg-teal-600' : 'bg-gray-200'
+                    isCompleted ? 'bg-teal-600' : 'bg-gray-300/50'
                   }`}
                 ></div>
 
                 {/* Mobile vertical connector */}
                 <div
                   className={`md:hidden absolute left-4 top-8 w-1 h-6 ${
-                    isCompleted ? 'bg-teal-600' : 'bg-gray-200'
+                    isCompleted ? 'bg-teal-600' : 'bg-gray-300/50'
                   }`}
                 ></div>
               </>

@@ -1,21 +1,60 @@
 "use client";
-import React from 'react';
-import Link from 'next/link';
+import React, { Dispatch, SetStateAction } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
-const Navbar = () => {
+interface NavbarProps {
+    mobileOpen?: boolean;
+    onMobileOpen?: Dispatch<SetStateAction<object>>
+    onGetStarted?: Dispatch<SetStateAction<object>>
+}
+
+const Navbar = ({ mobileOpen, onMobileOpen, onGetStarted }: NavbarProps) => {
     return (
-        <nav className='flex items-center gap-5 z-20'>
-            <ul className='flex items-center gap-1 max-md:hidden'>
+        <nav
+            className={`
+                flex items-center gap-5 z-20
+                max-md:absolute max-md:top-full max-md:left-1/2 max-md:-translate-x-1/2
+                max-md:w-[calc(100%-2.5rem)]
+                max-md:bg-white
+                max-md:rounded-3xl
+                max-md:overflow-hidden
+                max-md:transition-all max-md:duration-300 max-md:ease-out
+                max-md:flex-col
+                ${mobileOpen
+                    ? "max-md:opacity-100 max-md:translate-y-0 max-md:h-[calc(100vh-7rem)]"
+                    : "max-md:opacity-0 max-md:-translate-y-3 max-md:max-h-0 pointer-events-none"}
+            `}
+        >
+            <ul className="flex items-center gap-1 max-md:flex-col max-md:w-full max-md:py-4">
                 {[
-                    { label: 'Features', href: '#features' },
-                    { label: 'Pricing', href: '#pricing' },
-                    { label: 'About', href: '#about' },
+                    { label: "Features", href: "#features" },
+                    { label: "Pricing", href: "#pricing" },
+                    { label: "About", href: "#about" },
                 ].map((item, index) => (
-                    <li key={index} className='text-base font-medium text-gray-700 hover:text-gray-800 hover:bg-gray-500/5 duration-200 text-center rounded-full h-9 leading-9'>
-                        <Link href={item.href} className='px-5'>{item.label}</Link>
+                    <li key={index} onClick={onMobileOpen} className="max-md:w-full cursor-pointer">
+                        <Link
+                            href={item.href}
+                            className="
+                                block px-5 h-11 leading-[44px]
+                                text-base font-medium text-gray-700
+                                rounded-full text-center
+                                hover:bg-teal-50 hover:text-teal-700
+                                transition-colors
+                            "
+                        >
+                            {item.label}
+                        </Link>
                     </li>
                 ))}
             </ul>
+            <Button
+                onClick={onGetStarted}
+                size="lg"
+                className="rounded-full w-[calc(100%-28px)] h-13 text-lg mt-auto mb-7 md:hidden"
+            >
+                Get Started
+            </Button>
         </nav>
     );
 };

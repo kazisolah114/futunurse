@@ -1,9 +1,11 @@
 import { NewSession } from '@/components/dashboard/nclex';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 const NewSessionPage = () => {
     return (
-        <NewSession />
+        <Suspense>
+            <NewSession />
+        </Suspense>
     );
 };
 

@@ -1,3 +1,4 @@
+"use client";
 import { Calendar, Zap } from 'lucide-react';
 import React from 'react';
 import QuickInsights from './components/QuickInsights';
@@ -8,6 +9,7 @@ import AISuggestions from './components/AISuggestions';
 import StrengthsRadar from './components/StrengthsRadar';
 import AvgTimeChart from './components/AvgTimeChart';
 import QuestionsDifficultyPie from './components/QuestionsDifficultyPie';
+import { useGetDashboard } from '@/hooks/useGetDashboard';
 
 interface DashboardProps {
     user?: {
@@ -20,6 +22,8 @@ interface DashboardProps {
 
 export const Dashboard = ({ user }: DashboardProps) => {
     const today = new Date();
+    const dashboard = useGetDashboard();
+    console.log(dashboard);
     return (
         <div className='space-y-5 max-sm:space-y-3'>
             <div className='max-md:mb-5 rounded-md w-full flex max-md:flex-col max-md:gap-3 md:items-center justify-between'>

@@ -43,10 +43,10 @@ const Header = () => {
                 "
             >
                 <Link href="/" className="flex items-center gap-2 text-teal-600 pl-4">
-                    <div className="bg-teal-600 w-8 h-8 rounded-sm flex items-center justify-center">
-                        <Stethoscope size={18} className="text-white" />
+                    <div className="md:bg-teal-600 md:w-8 md:h-8 rounded-sm flex items-center justify-center">
+                        <Stethoscope size={18} className="text-white max-md:text-teal-600" />
                     </div>
-                    <h2 className="font-semibold text-[26px]">Futunurse</h2>
+                    <h2 className="font-semibold text-[26px] max-sm:text-xl">Futunurse</h2>
                 </Link>
 
                 {/* Desktop nav unchanged */}

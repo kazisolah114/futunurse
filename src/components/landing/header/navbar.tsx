@@ -22,7 +22,7 @@ const Navbar = ({ mobileOpen, onMobileOpen, onGetStarted }: NavbarProps) => {
                 max-md:transition-all max-md:duration-300 max-md:ease-out
                 max-md:flex-col
                 ${mobileOpen
-                    ? "max-md:opacity-100 max-md:translate-y-0 max-md:h-[calc(100vh-7rem)]"
+                    ? "max-md:opacity-100 max-md:translate-y-0 max-md:h-[calc(100vh-8rem)]"
                     : "max-md:opacity-0 max-md:-translate-y-3 max-md:max-h-0 pointer-events-none"}
             `}
         >
@@ -35,13 +35,11 @@ const Navbar = ({ mobileOpen, onMobileOpen, onGetStarted }: NavbarProps) => {
                     <li key={index} onClick={onMobileOpen} className="max-md:w-full cursor-pointer">
                         <Link
                             href={item.href}
-                            className="
-                                block px-5 h-11 leading-[44px]
+                            className=" block px-5 h-11 leading-[44px]
                                 text-base font-medium text-gray-700
                                 rounded-full text-center
                                 hover:bg-teal-50 hover:text-teal-700
-                                transition-colors
-                            "
+                                transition-colors max-md:text-3xl max-md:uppercase max-md:font-mono"
                         >
                             {item.label}
                         </Link>

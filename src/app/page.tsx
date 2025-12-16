@@ -5,14 +5,13 @@ import FeaturesSection from "@/components/landing/features-section/features-sect
 import Footer from "@/components/landing/footer/footer";
 import StudyEfficiency from "@/components/landing/study-efficiency/study-efficiency";
 import ProgressTracking from "@/components/landing/progress-tracking/progress-tracking";
-import IntelligentLearning from "@/components/landing/intelligent-learning/intelligent-learning";
 import LearningProgress from "@/components/landing/learning-progress/learning-progress";
 
 export default function Home() {
   return (
     <>
       <Header />
-      <main className="">
+      <main>
         <div className="p-6 max-sm:p-3">
           <Hero />
         </div>
@@ -20,7 +19,6 @@ export default function Home() {
         <FeaturesSection />
         <StudyEfficiency />
         <ProgressTracking />
-        {/* <IntelligentLearning /> */}
         <LearningProgress />
       </main>
       <div className="p-6 max-sm:p-3">

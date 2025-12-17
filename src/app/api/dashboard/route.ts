@@ -23,8 +23,8 @@ export async function GET(req: NextRequest) {
             const date = new Date(i.updatedAt ?? i.createdAt);
             return date >= sevenDaysPrior;
         });
-        const carePlan = { number_of_care_plans: all_care_plans.length, number_of_week_care_plans: week_care_plans.length }
-        console.log("care plan:", carePlan);
+        const carePlans = { number_of_care_plans: all_care_plans.length, number_of_week_care_plans: week_care_plans.length }
+        console.log("care plan:", carePlans);
 
         // NCLEX Insights
         const all_questions_completed = await RecentSession.find({ user: userId }).select("totalQuestions correctAnswers score date");
@@ -37,13 +37,13 @@ export async function GET(req: NextRequest) {
         const week_completed_questions = week_questions_completed.reduce((sum, i) => sum + i.totalQuestions, 0);
         const overall_score = all_questions_completed.reduce((sum, i) => sum + i.score, 0) / all_questions_completed.length;
 
-        const nclex_insights = { total_completed_questions, week_completed_questions, overall_score };
+        const nclexInsights = { total_completed_questions, week_completed_questions, overall_score };
 
         return NextResponse.json({
             success: true, message: "Hello world",
             dashboard: {
-                carePlan,
-                nclex_insights
+                carePlans,
+                nclexInsights
             }
         }, { status: 200 })
     } catch (error) {

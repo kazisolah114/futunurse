@@ -22,8 +22,8 @@ interface DashboardProps {
 
 export const Dashboard = ({ user }: DashboardProps) => {
     const today = new Date();
-    const dashboard = useGetDashboard();
-    console.log(dashboard);
+    const {dashboardData, loading } = useGetDashboard();
+    if(loading || !dashboardData) return <div>Loading...</div>;
     return (
         <div className='space-y-5 max-sm:space-y-3'>
             <div className='max-md:mb-5 rounded-md w-full flex max-md:flex-col max-md:gap-3 md:items-center justify-between'>
@@ -33,7 +33,7 @@ export const Dashboard = ({ user }: DashboardProps) => {
                 </div>
                 <div className='max-md:hidden text-white bg-gradient-to-b bg-green-500 to-10% flex items-center gap-3 rounded-md text-xs px-3 py-2 font-medium'><Zap size={16} /> Pro Trial - 14 days remaining</div>
             </div>
-            <QuickInsights />
+            <QuickInsights quickInsights={dashboardData} />
             <div className='md:grid grid-cols-3 gap-5 max-sm:space-y-5'>
                 <div className='col-span-2 space-y-5'>
                     <Features />

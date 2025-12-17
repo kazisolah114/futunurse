@@ -12,26 +12,42 @@ type Insight = {
     icon: LucideIcon;
 };
 
-const QuickInsights = () => {
+type QuickInsights = {
+    quickInsights: {
+        carePlans: {
+            number_of_care_plans: number;
+            number_of_week_care_plans: number;
+        },
+        nclexInsights: {
+            total_completed_questions: number;
+            week_completed_questions: number;
+            overall_score: number;
+        }
+    }
+};
+
+const QuickInsights = ({ quickInsights }: QuickInsights) => {
+
+    const { carePlans, nclexInsights } = quickInsights;
+
     const insights: Insight[] = [
         {
             title: "Care Plans Created",
-            value: 20,
-            this_week: 3,
+            value: carePlans.number_of_care_plans,
+            this_week: carePlans.number_of_week_care_plans,
             color: "blue",
             icon: Stethoscope
         },
         {
             title: "Questions Completed",
-            value: 1293,
-            this_week: 102,
+            value: nclexInsights.total_completed_questions,
+            this_week: nclexInsights.week_completed_questions,
             color: "purple",
             icon: CheckCircle,
         },
         {
             title: "Overall Score",
-            value: "78%",
-            pass_probability: "High",
+            value: nclexInsights.overall_score.toFixed(1),
             color: "pink",
             icon: Brain,
         },
@@ -57,14 +73,22 @@ const QuickInsights = () => {
             accent: "bg-purple-500",
         },
         pink: {
-            bg: "bg-pink-600",
-            accent: "bg-pink-500"
+            bg: "bg-green-600",
+            accent: "bg-green-500"
         },
         green: {
-            bg: "bg-green-600",
-            accent: "bg-green-500",
+            bg: "bg-pink-600",
+            accent: "bg-pink-500",
         },
     };
+
+    const getPassProbability = (value: number) => {
+        if (value <= 20) return "Critical";
+        if (value <= 40) return "Low";
+        if (value <= 60) return "Needs improvement";
+        if (value <= 80) return "On track";
+        return "Excellent";
+    }
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6">
@@ -75,7 +99,7 @@ const QuickInsights = () => {
                 return (
                     <div
                         key={index}
-                        className={`${colors.bg} text-white p-5 rounded-xl shadow-md hover:shadow-lg transition-all duration-200`}
+                        className={`${colors.bg} text-white p-5 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 flex flex-col`}
                     >
 
                         <div className="flex items-center gap-4">
@@ -88,20 +112,22 @@ const QuickInsights = () => {
                                 <h2 className="font-semibold text-sm opacity-90">
                                     {insight.title}
                                 </h2>
-                                <h1 className="font-bold text-2xl">{insight.value}</h1>
+                                <h1 className="font-bold text-2xl">{insight.value}{insight.title == "Overall Score" && '%'}</h1>
                             </div>
                         </div>
 
-                        <div className="mt-6 space-y-2 text-sm opacity-90">
-                            {insight.pass_probability && (
-                                <div>
-                                    {/* <Progress
+                        <div className="space-y-2 text-sm opacity-90 mt-auto">
+                            {insight.title == "Overall Score" && (
+                                <div className="mt-5">
+                                    <Progress
                                         value={Number(insight.value)}
                                         className="bg-white/30"
-                                    /> */}
+                                    />
                                     <div className="flex justify-between items-center mt-3">
                                         <p>NCLEX pass probability</p>
-                                        <p className="font-medium">{insight.pass_probability}</p>
+                                        <p className="font-medium">
+                                            {getPassProbability(Number(insight.value))}
+                                        </p>
                                     </div>
                                 </div>
                             )}

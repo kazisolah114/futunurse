@@ -6,6 +6,13 @@ import { authOptions } from "../auth/[...nextauth]/route";
 import { CarePlan } from "@/models/PatientCarePlan/PatientCarePlanModel";
 import { RecentSession } from "@/models/NCLEX/RecentSessionModel";
 
+type CompletedSession = {
+    totalQuestions: number;
+    correctAnswers: number;
+    score: number;
+    date: Date | string;
+};
+
 export async function GET(req: NextRequest) {
     try {
         await connectDB();
@@ -24,7 +31,7 @@ export async function GET(req: NextRequest) {
             return date >= sevenDaysPrior;
         });
         const carePlans = { number_of_care_plans: all_care_plans.length, number_of_week_care_plans: week_care_plans.length }
-        console.log("care plan:", carePlans);
+        // console.log("care plan:", carePlans);
 
         // NCLEX Insights
         const all_questions_completed = await RecentSession.find({ user: userId }).select("totalQuestions correctAnswers score date");
@@ -39,11 +46,49 @@ export async function GET(req: NextRequest) {
 
         const nclexInsights = { total_completed_questions, week_completed_questions, overall_score };
 
+        // NCLEX Trend Score
+        const getDayKey = (date: Date | string) =>
+            new Date(date).toISOString().split("T")[0];
+
+        const groupByDay = (sessions: CompletedSession[]) => {
+            const grouped = sessions.reduce((acc, session) => {
+                const day = getDayKey(session.date);
+
+                if (!acc[day]) {
+                    acc[day] = {
+                        date: day,
+                        totalQuestions: 0,
+                        correctAnswers: 0,
+                    };
+                }
+
+                acc[day].totalQuestions += session.totalQuestions;
+                acc[day].correctAnswers += session.correctAnswers;
+
+                return acc;
+            }, {} as Record<
+                string,
+                { date: string; totalQuestions: number; correctAnswers: number }
+            >);
+
+            return Object.values(grouped).map(day => ({
+                ...day,
+                score: Math.round(
+                    (day.correctAnswers / day.totalQuestions) * 100
+                ),
+            }));
+        };
+
+        const dailyNclexPerformance = groupByDay(all_questions_completed);
+        // console.log("daily performance:", dailyNclexPerformance)
+
+
         return NextResponse.json({
             success: true, message: "Hello world",
             dashboard: {
                 carePlans,
-                nclexInsights
+                nclexInsights,
+                nclexTrend: dailyNclexPerformance
             }
         }, { status: 200 })
     } catch (error) {

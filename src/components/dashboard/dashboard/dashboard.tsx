@@ -37,7 +37,7 @@ export const Dashboard = ({ user }: DashboardProps) => {
             <div className='md:grid grid-cols-3 gap-5 max-sm:space-y-5'>
                 <div className='col-span-2 space-y-5'>
                     <Features />
-                    <NclexPerformance />
+                    <NclexPerformance nclexTrend={dashboardData?.nclexTrend} />
                     <div className='grid md:grid-cols-2 gap-5'>
                         <AvgTimeChart />
                         <QuestionsDifficultyPie />

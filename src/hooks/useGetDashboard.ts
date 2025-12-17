@@ -11,6 +11,12 @@ type Dashboard = {
         total_completed_questions: number;
         week_completed_questions: number;
         overall_score: number;
+    },
+    nclexTrend: {
+        date: string;
+        totalQuestions?: number;
+        correctAnswers?: number;
+        score: number;
     }
 };
 

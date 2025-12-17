@@ -116,7 +116,7 @@ const QuickInsights = ({ quickInsights }: QuickInsights) => {
                             </div>
                         </div>
 
-                        <div className="space-y-2 text-sm opacity-90 mt-auto">
+                        <div className="space-y-2 text-sm opacity-90 mt-auto max-sm:mt-8">
                             {insight.title == "Overall Score" && (
                                 <div className="mt-5">
                                     <Progress

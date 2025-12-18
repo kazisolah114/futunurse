@@ -29,7 +29,7 @@ type QuickInsights = {
 const QuickInsights = ({ quickInsights }: QuickInsights) => {
 
     const { carePlans, nclexInsights } = quickInsights;
-
+    console.log(nclexInsights)
     const insights: Insight[] = [
         {
             title: "Care Plans Created",
@@ -131,13 +131,14 @@ const QuickInsights = ({ quickInsights }: QuickInsights) => {
                                     </div>
                                 </div>
                             )}
+                            <div className="flex justify-between items-center">
+                                {insight.title === "Questions Completed" && <p>This week</p>}
+                                {insight.title === "Care Plans Created" && <p>This week</p>}
+                                {insight.this_week && (
 
-                            {insight.this_week && (
-                                <div className="flex justify-between items-center">
-                                    <p>This week</p>
                                     <p className="font-medium">{insight.this_week}</p>
-                                </div>
-                            )}
+                                )}
+                            </div>
 
                             {insight.timeline && (
                                 <div className="flex justify-between items-center">

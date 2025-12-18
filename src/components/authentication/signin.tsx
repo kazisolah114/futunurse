@@ -59,6 +59,11 @@ const SignIn = ({ signUpInstead, onClose }: SignInProps) => {
                 <Image src={GoogleIcon || null} alt={"google-icon"} priority width={30} height={30} />
                 Sign in with Google
             </Button>
+            <div className="flex items-center mb-5">
+                <hr className="flex-grow border-t border-gray-300" />
+                <span className="mx-2 text-gray-500 font-medium text-sm">OR</span>
+                <hr className="flex-grow border-t border-gray-300" />
+            </div>
             <form onSubmit={handleSubmit} className=' space-y-4'>
                 <div className='space-y-2.5'>
                     <Label htmlFor='email'>Email</Label>
@@ -74,7 +79,7 @@ const SignIn = ({ signUpInstead, onClose }: SignInProps) => {
                         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                     />
                     <Button onClick={() => setShowPassword(!showPasswor)} variant={'ghost'} size={'icon'} className='absolute top-6.5 right-0.5' type='button'>
-                        {showPasswor ? <Eye /> : <LucideEyeOff /> }
+                        {showPasswor ? <Eye /> : <LucideEyeOff />}
                     </Button>
                 </div>
                 <Button type='submit' size={'lg'} className='w-full mt-4 rounded-full'>{loading ? 'Loading...' : 'Sign In'}</Button>

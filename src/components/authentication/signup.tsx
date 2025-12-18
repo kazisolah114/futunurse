@@ -78,7 +78,11 @@ const SignUp = ({ signInInstead, onClose }: SignUpProps) => {
                 <Image src={GoogleIcon || null} alt={"google-icon"} priority width={30} height={30} />
                 Continue with Google
             </Button>
-
+            <div className="flex items-center mb-5">
+                <hr className="flex-grow border-t border-gray-300" />
+                <span className="mx-2 text-gray-500 font-medium text-sm">OR</span>
+                <hr className="flex-grow border-t border-gray-300" />
+            </div>
             <form onSubmit={handleSubmit} className='space-y-4'>
                 <div className='space-y-2.5'>
                     <Label htmlFor='name'>Full name</Label>

@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
         // console.log("care plan:", carePlans);
 
         // NCLEX Insights
-        const all_questions_completed = await RecentSession.find({ user: userId }).select("totalQuestions correctAnswers score date");
+        const all_questions_completed = await RecentSession.find({ user: userId }).select("category totalQuestions correctAnswers score date");
         const week_questions_completed = all_questions_completed.filter(i => {
             const date = new Date(i.date);
             return date >= sevenDaysPrior;
@@ -83,12 +83,42 @@ export async function GET(req: NextRequest) {
         // console.log("daily performance:", dailyNclexPerformance)
 
 
+        // Strenth & Weakness
+        const performanceByCategory = await RecentSession.aggregate([
+            {
+                $group: {
+                    _id: "$category",
+                    totalCorrect: { $sum: "$correctAnswers" },
+                    totalQuestions: { $sum: "$totalQuestions" }
+                }
+            },
+            {
+                $project: {
+                    category: "$_id",
+                    averageScore: {
+                        $multiply: [
+                            { $divide: ["$totalCorrect", "$totalQuestions"] },
+                            100
+                        ]
+                    },
+                    _id: 0,
+                }
+            },
+            {
+                $sort: {
+                    averageScore: -1
+                }
+            }
+        ])
+        console.log("Strenth Weakness:", performanceByCategory)
+
         return NextResponse.json({
             success: true, message: "Hello world",
             dashboard: {
                 carePlans,
                 nclexInsights,
-                nclexTrend: dailyNclexPerformance
+                nclexTrend: dailyNclexPerformance,
+                performanceByCategory
             }
         }, { status: 200 })
     } catch (error) {

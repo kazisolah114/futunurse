@@ -4,7 +4,7 @@ import React from 'react';
 const LoadingDashboard = () => {
     return (
         <div className='space-y-5'>
-            <div className='space-y-3'>
+            <div className='space-y-3 mb-10 max-sm:mb-10'>
                 <Skeleton className='w-80 h-10' />
                 <Skeleton className='w-60 !md:w-28 h-5' />
             </div>
@@ -33,8 +33,7 @@ const LoadingDashboard = () => {
                 </div>
                 <div className='col-span-1 space-y-5'>
                     <Skeleton className='h-80' />
-                    <Skeleton className='h-44' />
-                    <Skeleton className='h-72' />
+                    <Skeleton className='h-40' />
                 </div>
             </div>
         </div>

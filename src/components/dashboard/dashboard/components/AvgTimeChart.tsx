@@ -3,7 +3,7 @@ import React from 'react';
 import { BarChart, Bar, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { Clock } from 'lucide-react';
 
-const AvgTimeChart = ({ avg = { correct: 55, incorrect: 92 } }: { avg?: { correct: number; incorrect: number } }) => {
+const AvgTimeChart = ({ avg = { correct: 28, incorrect: 43 } }: { avg?: { correct: number; incorrect: number } }) => {
     const data = [
         { label: "Correct", seconds: Math.round(avg.correct) },
         { label: "Incorrect", seconds: Math.round(avg.incorrect) },
@@ -22,7 +22,7 @@ const AvgTimeChart = ({ avg = { correct: 55, incorrect: 92 } }: { avg?: { correc
                 <p className='text-sm text-gray-500'>Measure your decision speed</p>
             </div>
 
-            <div style={{ height: 220 }}>
+            <div style={{ height: 200 }}>
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
@@ -34,9 +34,9 @@ const AvgTimeChart = ({ avg = { correct: 55, incorrect: 92 } }: { avg?: { correc
                 </ResponsiveContainer>
             </div>
 
-            {/* <div className="mt-3 text-xs text-slate-500">
+            <div className="mt-2 text-xs text-slate-500">
                 Tip: faster correct answers often indicate mastery — slow and incorrect answers point to concepts to review.
-            </div> */}
+            </div>
         </div>
     );
 };

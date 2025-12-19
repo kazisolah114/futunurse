@@ -17,6 +17,10 @@ type Dashboard = {
         totalQuestions?: number;
         correctAnswers?: number;
         score: number;
+    },
+    performanceByCategory: {
+        category: string;
+        averageScore: number;
     }
 };
 

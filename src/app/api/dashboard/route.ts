@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { CarePlan } from "@/models/PatientCarePlan/PatientCarePlanModel";
 import { RecentSession } from "@/models/NCLEX/RecentSessionModel";
+import { generateAISuggestions } from "@/lib/generateAISuggestions";
 
 type CompletedSession = {
     totalQuestions: number;
@@ -110,7 +111,10 @@ export async function GET(req: NextRequest) {
                 }
             }
         ])
-        console.log("Strenth Weakness:", performanceByCategory)
+        // console.log("Strenth Weakness:", performanceByCategory)
+
+        const suggestions = generateAISuggestions(performanceByCategory);
+        console.log("suggestions:", suggestions);
 
         return NextResponse.json({
             success: true, message: "Hello world",
@@ -118,7 +122,8 @@ export async function GET(req: NextRequest) {
                 carePlans,
                 nclexInsights,
                 nclexTrend: dailyNclexPerformance,
-                performanceByCategory
+                performanceByCategory,
+                suggestions
             }
         }, { status: 200 })
     } catch (error) {

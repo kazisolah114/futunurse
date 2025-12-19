@@ -21,6 +21,12 @@ type Dashboard = {
     performanceByCategory: {
         category: string;
         averageScore: number;
+    },
+    suggestions: {
+        title: string;
+        score?: number;
+        description: string;
+        type: "weakness" | "strength" | "pattern";
     }
 };
 

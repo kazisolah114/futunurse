@@ -114,7 +114,7 @@ export async function GET(req: NextRequest) {
         // console.log("Strenth Weakness:", performanceByCategory)
 
         const suggestions = generateAISuggestions(performanceByCategory);
-        console.log("suggestions:", suggestions);
+        // console.log("suggestions:", suggestions);
 
         return NextResponse.json({
             success: true, message: "Hello world",

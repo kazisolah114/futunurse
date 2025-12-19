@@ -2,6 +2,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
 
+type AISuggestion = {
+    title: string;
+    score?: number;
+    description: string;
+    type: "weakness" | "strength" | "pattern";
+}
+
 type Dashboard = {
     carePlans: {
         number_of_care_plans: number;
@@ -22,12 +29,7 @@ type Dashboard = {
         category: string;
         averageScore: number;
     },
-    suggestions: {
-        title: string;
-        score?: number;
-        description: string;
-        type: "weakness" | "strength" | "pattern";
-    }
+    suggestions: AISuggestion[]
 };
 
 

@@ -10,11 +10,11 @@ type AISuggestion = {
 }
 
 interface SuggestionsProps {
-    suggestions: AISuggestion[]
+    ai_suggestions: AISuggestion[]
 }
 
-const AISuggestions = ({ suggestions }: SuggestionsProps) => {
-    console.log("sugggestions:", suggestions);
+const AISuggestions = ({ ai_suggestions }: SuggestionsProps) => {
+    console.log("ai_sugggestions:", ai_suggestions);
     const [openSections, setOpenSections] = useState<{ [key: number]: boolean }>({
         0: true
     });
@@ -75,7 +75,7 @@ const AISuggestions = ({ suggestions }: SuggestionsProps) => {
 
             <div className="space-y-4">
                 {
-                    suggestions.map((item, index) => {
+                    ai_suggestions.map((item, index) => {
                         const styles = getTypeStyles(item.type);
                         const Icon = styles.icon;
                         const isOpen = openSections[index];
@@ -94,7 +94,7 @@ const AISuggestions = ({ suggestions }: SuggestionsProps) => {
                                 >
                                     <div className="flex items-center gap-4 flex-1">
                                         <div className={`p-2 rounded-xl bg-white/80 ${isHovered ? 'scale-110' : ''} transition-transform duration-300`}>
-                                            <Icon className={`w-3 h-3 ${styles.iconColor}`} />
+                                            <Icon className={`w-3.5 h-3.5 ${styles.iconColor}`} />
                                         </div>
 
                                         <div className="flex-1 text-left">
@@ -130,7 +130,7 @@ const AISuggestions = ({ suggestions }: SuggestionsProps) => {
             </div >
 
             {
-                suggestions.length === 0 && (
+                ai_suggestions.length === 0 && (
                     <div className="text-center py-12 text-gray-500">
                         <Brain className="w-12 h-12 mx-auto mb-3 opacity-50" />
                         <p>No suggestions available yet</p>

@@ -44,7 +44,7 @@ export const Dashboard = ({ user }: DashboardProps) => {
                     </div>
                 </div>
                 <div className='col-span-1 space-y-5'>
-                    <AISuggestions suggestions={dashboardData?.suggestions} />
+                    <AISuggestions ai_suggestions={dashboardData?.suggestions} />
                     <WeekInsight />
                 </div>
             </div>

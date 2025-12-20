@@ -23,6 +23,7 @@ interface DashboardProps {
 export const Dashboard = ({ user }: DashboardProps) => {
     const today = new Date();
     const { dashboardData, loading } = useGetDashboard();
+    console.log(dashboardData);
     if (loading || !dashboardData) return <LoadingDashboard />;
     return (
         <div className='space-y-5 max-sm:space-y-3'>
@@ -45,7 +46,7 @@ export const Dashboard = ({ user }: DashboardProps) => {
                 </div>
                 <div className='col-span-1 space-y-5'>
                     <AISuggestions ai_suggestions={dashboardData?.suggestions} />
-                    <WeekInsight />
+                    <WeekInsight weekInsight={{ carePlans: dashboardData?.carePlans?.number_of_week_care_plans, completedQuestions: dashboardData?.nclexInsights?.week_completed_questions }} />
                 </div>
             </div>
         </div>

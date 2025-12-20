@@ -3,17 +3,25 @@ import { Stethoscope } from 'lucide-react';
 import React from 'react';
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer } from 'recharts';
 
-type StrengthItem = { subject: string; score: number };
+// type StrengthItem = { category: string; averageScore: number };
 
-const StrengthsRadar = () => {
-    const data: StrengthItem[] = [
-        { subject: "Pharmacology", score: 78 },
-        { subject: "Maternal", score: 62 },
-        { subject: "Psychosocial", score: 84 },
-        { subject: "Management of Care", score: 55 },
-        { subject: "Safety & Infection", score: 70 },
-        { subject: "Health Promotion", score: 68 },
-    ];
+interface StrenthProps {
+    strength: {
+        category: string;
+        averageScore: number;
+    }
+}
+
+const StrengthsRadar = ({ strength }: StrenthProps) => {
+    // const data: StrengthItem[] = [
+    //     { category: "Pharmacology", averageScore: 78 },
+    //     { category: "Maternal", averageScore: 62 },
+    //     { category: "Psychosocial", averageScore: 84 },
+    //     { category: "Management of Care", averageScore: 55 },
+    //     { category: "Safety & Infection", averageScore: 70 },
+    //     { category: "Health Promotion", averageScore: 68 },
+    // ];
+    const data = Array.isArray(strength) ? strength : [strength];
 
     const COLORS = {
         primary: "#0ea5a4",
@@ -33,9 +41,18 @@ const StrengthsRadar = () => {
                 <ResponsiveContainer width="100%" height="100%">
                     <RadarChart cx="50%" cy="50%" outerRadius={80} data={data}>
                         <PolarGrid />
-                        <PolarAngleAxis dataKey="subject" tick={{ fontSize: 12 }} />
+                        <PolarAngleAxis
+                            dataKey="category"
+                            tick={{ fontSize: 12 }}
+                            tickFormatter={(value) =>
+                                value
+                                    .split(" ")
+                                    .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+                                    .join(" ")
+                            }
+                        />
                         <PolarRadiusAxis angle={30} domain={[0, 100]} tickCount={5} />
-                        <Radar name="Score" dataKey="score" stroke={COLORS.accent} fill={COLORS.accent} fillOpacity={0.15} />
+                        <Radar name="averageScore" dataKey="averageScore" stroke={COLORS.accent} fill={COLORS.accent} fillOpacity={0.15} />
                     </RadarChart>
                 </ResponsiveContainer>
             </div>
